@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/live"
+        android:icon="@drawable/live_match"
+        android:title="Live"
+        android:checkable="true"/>
+
+    <item
+        android:id="@+id/upcoming"
+        android:icon="@drawable/upcoming"
+        android:title="Upcoming"
+        android:checkable="true"/>
+
+    <item
+        android:id="@+id/completed"
+        android:icon="@drawable/completed"
+        android:title="Completed"
+        android:checkable="true"/>
+
+</menu>

@@ -1,0 +1,65 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/schedule_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabTextColor="#FFFFFF"
+        app:tabIndicatorHeight="3dp"
+        app:tabTextAppearance="@style/NavigationTheme"
+        app:tabSelectedTextColor="@android:color/white"
+        android:background="@color/colorPrimary"
+        app:tabIndicatorColor="@color/green_text"/>
+
+    <RelativeLayout
+        android:id="@+id/selection_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/dept_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/schedule_switch_filter"
+            android:nestedScrollingEnabled="false"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/sport_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:visibility="gone"
+            android:layout_toStartOf="@+id/schedule_switch_filter"
+            android:nestedScrollingEnabled="false"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+
+        <ImageView
+            android:id="@+id/schedule_switch_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/ic_filter_switch"
+            android:layout_marginTop="10dp"/>
+
+
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/schedule_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

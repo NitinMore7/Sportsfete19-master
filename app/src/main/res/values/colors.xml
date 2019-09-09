@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#16282a</color>
+    <color name="colorPrimaryDark">#274649</color>
+    <color name="colorTabtext">#404f50</color>
+    <color name="green_text">#4ab556</color>
+    <color name="dept_box_background">#4ab556</color>
+    <color name="colorAccent">#89430d</color>
+    <color name="splashColor">#FFFFFF</color>
+    <color name="selectedTextColor">#5c5c5c</color>
+    <color name="green_theme">#cddc29</color>
+    <color name="blue_theme">#5295a6</color>
+    <color name="fixtureElement">#e5a5e9</color>
+    <color name="fixtureElementText">#434242</color>
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+
+    <color name="blue">#1565c0</color>
+    <color name="bluedark">#003c8f</color>
+    <color name="bluelight">#5e92f3</color>
+
+    <color name="main_background">#607D8B</color>
+</resources>

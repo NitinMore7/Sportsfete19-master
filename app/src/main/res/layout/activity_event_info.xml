@@ -1,0 +1,420 @@
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sliding_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    app:umanoPanelHeight="250dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/upper_bound_height"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/lower_bound_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <android.support.design.widget.AppBarLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/AppTheme.AppBarOverlay">
+
+                    <android.support.v7.widget.Toolbar
+                        android:id="@+id/event_info_toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="?attr/colorPrimary"
+                        app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+                </android.support.design.widget.AppBarLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/scene_transition"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:transitionName="scene_transition">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/info_event_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="event_name"
+                                android:textAllCaps="true"
+                                android:textColor="@color/colorTabtext"
+                                android:textSize="25sp"
+                                android:transitionName="event_name" />
+
+                            <TextView
+                                android:id="@+id/info_event_round"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="2dp"
+                                android:background="@color/cardview_light_background"
+                                android:padding="5dp"
+                                android:text="Round"
+                                android:textColor="@color/green_text"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:transitionName="event_round" />
+
+                            <LinearLayout
+                                android:id="@+id/versus_event"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginTop="7dp"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:orientation="horizontal"
+                                android:transitionName="versus_event"
+                                android:visibility="visible">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:id="@+id/info_undecided_match1"
+                                            android:layout_width="60dp"
+                                            android:layout_height="60dp"
+                                            android:layout_margin="5dp"
+                                            android:background="@drawable/circular_border_winner"
+                                            android:gravity="center_vertical"
+                                            android:text="WM1"
+                                            android:textAlignment="center"
+                                            android:textSize="16sp"
+                                            android:visibility="gone" />
+
+                                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                                            android:id="@+id/info_department1_icon"
+                                            android:layout_width="60dp"
+                                            android:layout_height="60dp"
+                                            android:layout_margin="5dp"
+                                            app:civ_border_color="#8f8e8e"
+                                            app:civ_border_width="0dp" />
+
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:id="@+id/info_team_1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:ellipsize="marquee"
+                                        android:fadingEdge="horizontal"
+                                        android:gravity="center"
+                                        android:marqueeRepeatLimit="marquee_forever"
+                                        android:scrollHorizontally="true"
+                                        android:singleLine="true"
+                                        android:text="team_1"
+                                        android:textColor="@color/colorTabtext"
+                                        android:textSize="18sp" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/info_score"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginBottom="10dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/info_score1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:paddingLeft="5dp"
+                                        android:text="0"
+                                        android:textColor="@color/colorTabtext"
+                                        android:textSize="18sp"
+                                        android:textStyle="" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="5dp"
+                                        android:layout_marginRight="5dp"
+                                        android:fontFamily="sans-serif-condensed"
+                                        android:gravity="center"
+                                        android:text="-"
+                                        android:textColor="#000000"
+                                        android:textSize="18sp"
+                                        android:textStyle="" />
+
+                                    <TextView
+                                        android:id="@+id/info_score2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:paddingRight="5dp"
+                                        android:text="0"
+                                        android:textColor="@color/colorTabtext"
+                                        android:textSize="18sp"
+                                        android:textStyle="" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:id="@+id/info_undecided_match2"
+                                            android:layout_width="60dp"
+                                            android:layout_height="60dp"
+                                            android:layout_margin="5dp"
+                                            android:background="@drawable/circular_border_winner"
+                                            android:gravity="center_vertical"
+                                            android:text="WM1"
+                                            android:textAlignment="center"
+                                            android:textSize="16sp"
+                                            android:visibility="gone" />
+
+                                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                                            android:id="@+id/info_department2_icon"
+                                            android:layout_width="60dp"
+                                            android:layout_height="60dp"
+                                            android:layout_margin="5dp"
+                                            app:civ_border_color="#8f8e8e"
+                                            app:civ_border_width="0dp" />
+
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:id="@+id/info_team_2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="16"
+                                        android:ellipsize="marquee"
+                                        android:fadingEdge="horizontal"
+                                        android:gravity="center"
+                                        android:marqueeRepeatLimit="marquee_forever"
+                                        android:scrollHorizontally="true"
+                                        android:singleLine="true"
+                                        android:text="team_2"
+                                        android:textColor="@color/colorTabtext"
+                                        android:textSize="18sp" />
+
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/non_versus_event"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center_vertical"
+                                android:transitionName="non_versus_event">
+
+                                <TextView
+                                    android:id="@+id/info_non_versus_event_participants"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginTop="10dp"
+                                    android:ellipsize="marquee"
+                                    android:gravity="center"
+                                    android:marqueeRepeatLimit="marquee_forever"
+                                    android:scrollHorizontally="true"
+                                    android:singleLine="true"
+                                    android:text="Participants"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/selectedTextColor"
+                                    android:textSize="20sp" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/info_event_hint"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="event_hint"
+                                android:textColor="@color/fixtureElementText"
+                                android:visibility="visible" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:visibility="gone">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/info_event_status"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:maxLines="1"
+                                        android:text="status" />
+
+                                    <TextView
+                                        android:id="@+id/info_event_venue"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:text="event_venue"
+                                        android:textColor="@color/fixtureElementText" />
+
+
+                                    <TextView
+                                        android:id="@+id/info_event_timestamp"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:text="Timestamp"
+                                        android:textAlignment="textEnd" />
+
+                                </LinearLayout>
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/last_updated_timestamp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="Last updated at:"
+                                android:textColor="@color/colorTabtext" />
+
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|top">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/commentary_enter_transition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/commentory_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Commentary"
+                    android:textColor="#f5f5f5"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <pl.droidsonroids.gif.GifTextView
+                    android:id="@+id/loader"
+                    android:layout_width="190dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/loadingicon14"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/no_comments_prompt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="No commments for this event yet!"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="italic"
+                    android:visibility="gone" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/commentary_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"></android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>

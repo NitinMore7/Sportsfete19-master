@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <group android:checkableBehavior="single"
+            android:id="@+id/group3">
+
+                <item
+            android:id="@+id/nav_home"
+            android:icon="@mipmap/ic_live"
+            android:title="Live"
+            />
+
+                <item
+            android:id="@+id/nav_leaderboard"
+            android:icon="@mipmap/ic_leaderboard"
+            android:title="LeaderBoard" />
+
+                <item
+            android:id="@+id/nav_schedule"
+            android:icon="@mipmap/ic_schedule"
+            android:title="Schedule" />
+
+                <item
+            android:id="@+id/nav_following"
+            android:icon="@mipmap/ic_following"
+            android:title="Following" />
+
+                <item
+            android:id="@+id/nav_events"
+            android:icon="@mipmap/ic_sports"
+            android:title="Sports" />
+
+                <item
+            android:id="@+id/nav_registration"
+            android:icon="@mipmap/ic_marathonregistration"
+            android:title="Marathon Registration" />
+        </group>
+
+</menu>

@@ -1,0 +1,1480 @@
+<resources>
+    <string name="app_name">SportsFete</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="dialog_title">Select Department</string>
+
+    <string-array name="department_array">
+        <item>ALL</item>
+        <item>ARCHI</item>
+        <item>CHEM</item>
+        <item>CIVIL</item>
+        <item>CSE</item>
+        <item>DOMS</item>
+        <item>ECE</item>
+        <item>EEE</item>
+        <item>ICE</item>
+        <item>MECH</item>
+        <item>META</item>
+        <item>CA</item>
+        <item>M.TECH</item>
+        <item>PhD/MSc/MS</item>
+        <item>PROD</item>
+    </string-array>
+
+    <string-array name="departments_array">
+
+        <item>Department</item>
+        <item>CSE</item>
+        <item>ECE</item>
+        <item>EEE</item>
+        <item>MECH</item>
+        <item>PROD</item>
+        <item>ICE</item>
+        <item>CHEM</item>
+        <item>CIVIL</item>
+        <item>META</item>
+        <item>ARCHI</item>
+        <item>PhD/MSc/MS</item>
+        <item>M.DOMS</item>
+        <item>CA</item>
+        <item>MTECH</item>
+
+
+    </string-array>
+
+    <string-array name="filter_department_array">
+        <item>ALL</item>
+        <item>ARCHI</item>
+        <item>CHEM</item>
+        <item>CIVIL</item>
+        <item>CSE</item>
+        <item>DOMS</item>
+        <item>ECE</item>
+        <item>EEE</item>
+        <item>ICE</item>
+        <item>CA</item>
+        <item>MECH</item>
+        <item>META</item>
+        <item>M_TECH</item>
+        <item>PhD_MSc_MS</item>
+        <item>PROD</item>
+    </string-array>
+
+    <string-array name="sport_array">
+        <item>Athletics</item>
+        <item>Badminton(Mixed)</item>
+        <item>Basketball(Boys)</item>
+        <item>Basketball(Girls)</item>
+        <item>Carrom</item>
+        <item>Chess</item>
+        <item>Cricket(Boys)</item>
+        <item>Cricket(Girls)</item>
+        <item>Football(Boys)</item>
+        <item>Handball(Boys)</item>
+        <item>Handball(Girls)</item>
+        <item>Hockey(Boys)</item>
+        <item>Kabbadi</item>
+        <item>Kho Kho(Boys)</item>
+        <item>Kho Kho(Girls)</item>
+        <item>Marathon</item>
+        <item>Powerlifting</item>
+        <item>Swimming</item>
+        <item>Table Tennis(Mixed)</item>
+        <item>Tennis(Boys)</item>
+        <item>Throwball(Girls)</item>
+        <item>Volleyball(Boys)</item>
+        <item>Volleyball(Girls)</item>
+        <item>SportsQuiz</item>
+    </string-array>
+
+    <string-array name="filter_sport_array">
+        <item>ALL</item>
+        <item>ATH</item>
+        <item>BD</item>
+        <item>BKM</item>
+        <item>BG</item>
+        <item>CM</item>
+        <item>CHS</item>
+        <item>CK</item>
+        <item>CG</item>
+        <item>FB</item>
+        <item>FG</item>
+        <item>HB</item>
+        <item>HG</item>
+        <item>HK</item>
+        <item>KB</item>
+        <item>KM</item>
+        <item>KG</item>
+        <item>MRH</item>
+        <item>PL</item>
+        <item>SWM</item>
+        <item>TTB</item>
+        <item>TTG</item>
+        <item>TB</item>
+        <item>TG</item>
+        <item>TBG</item>
+        <item>VB</item>
+        <item>VG</item>
+        <item>WP</item>
+        <item>WL</item>
+        <item>SPZ</item><!--changed id for carrom filtering-->
+    </string-array>
+
+    <string-array name="short_sport_array">
+        <item>ALL</item>
+        <item>ATHL</item>
+        <item>BDM(M)</item>
+        <item>BSKT(B)</item>
+        <item>BSKT(G)</item>
+        <item>CARROM</item>
+        <item>CHESS</item>
+        <item>CKT(B)</item>
+        <item>CKT(G)</item>
+        <item>FTB(B)</item>
+        <item>FTB(G)</item>
+        <item>HNDB(B)</item>
+        <item>HNDB(G)</item>
+        <item>HKY(B)</item>
+        <item>KBD</item>
+        <item>KHOKHO(B)</item>
+        <item>KHOKHO(G)</item>
+        <item>MARATHON</item>
+        <item>PWR LFTNG</item>
+        <item>SWIMMING</item>
+        <item>TT(B)</item>
+        <item>TT(G)</item>
+        <item>TENNIS(B)</item>
+        <item>TENNIS(G)</item>
+        <item>THRB</item>
+        <item>VLB(B)</item>
+        <item>VLB(G)</item>
+        <item>WTR POLO</item>
+        <item>WT LFTNG(B)</item>
+        <item>SPQZ</item>
+    </string-array>
+
+    <string-array name="department_array_shared_preference">
+        <item>ARCHI</item>
+        <item>CHEM</item>
+        <item>CIVIL</item>
+        <item>CSE</item>
+        <item>DOMS</item>
+        <item>ECE</item>
+        <item>EEE</item>
+        <item>ICE</item>
+        <item>CA</item>
+        <item>MECH</item>
+        <item>META</item>
+        <item>M_TECH</item>
+        <item>PHD_MSC_MS</item>
+        <item>PROD</item>
+    </string-array>
+
+    <string name="Athletics">
+        <![CDATA[
+ <b>
+            <p>INDIVIDUAL:- <br>
+                            &emsp;&emsp;&emsp;1st place - 5 points<br>
+                            &emsp;&emsp;&emsp;2nd place - 3 points<br>
+                            &emsp;&emsp;&emsp;3rd place - 1 point<br>
+            </p>
+            <p>
+                            RELAY:-
+                            <br>&emsp;&emsp;&emsp;1st place - 10 points
+                            <br>&emsp;&emsp;&emsp;2nd- 6 points
+                            <br>&emsp;&emsp;&emsp;3rd- 4 points</b>
+            </p>
+
+
+            <p>MEN’S EVENTS-<br>100m, 200m, 400m, 800m, 1500m, 5000m, 4*100 relay, 4*400 relay.
+            Long Jump, High Jump, Triple Jump, Shotput, Discuss Throw, Javelin
+            Throw and Mixed Relay.</p>
+
+            <p>GIRL’S EVENTS-
+            100m, 200m, 400m, 800m, 1500m, 4*100 relay, 4 *400 relay
+            Long Jump, High Jump, Shotput and Discuss Throw and Mixed Relay.:</p>
+            <p>Rules:
+                <ul class="rules">
+                <li>For each event, only 2 participants can take part from each department.</li>
+                <li>A minimum of 5 different departments must be there for each event to take place.</li>
+                <li>A participant can take part in maximum of 4 events excluding relay (maximum of 2 field and 2 track events or vice versa).</li>
+                <li>Call for all events will start 15 min before the start time of the events.</li>
+                <li>In case of any dispute, decision made by the event coordinators & the captain of the team will be final.</li>
+                <li>Standard IAAF rules apply.</li>
+
+
+                </ul>
+            </p>
+            <p>CONTACT :
+                   <p>T L Vaishnavi: 9791263945</p>
+                   <p>Sruthi Vijayakumar: 9789210972</p>
+                   <p>Prashant Kumar: 7541954346</p>
+
+
+            </p>
+    ]]>
+
+    </string>
+
+    <string name="Badminton">
+    <![CDATA[
+<b>
+            <p>POINTS:-
+               <br>&emsp;&emsp;&emsp;1st place - 20 points
+               <br>&emsp;&emsp;&emsp;2nd place - 12 points
+               <br>&emsp;&emsp;&emsp;3rd place - 8 points</b>
+            </p>
+
+
+
+
+            <p>Rules:
+                <ul class="rules">
+                <li>Only 1 team per department.</li>
+                <li>Each team should have minimum of 2 boys and 2 girls and maximum of 4 boys and 4 girls.</li>
+                <li>The tournament is conducted on a knockout basis.</li>
+                <li>The order of play for each match will be:<br>
+                    i) Boys Singles  <br>
+                    ii) Girls Singles <br>
+                    iii) Mixed Doubles <br>
+                    iv) Girls Doubles <br>
+                    v) Boys Doubles <br>
+                    Team should secure 3 out of 5 games to win the match.</li>
+
+               <li>The order of play can be changed only if both the departments are willing to change.</li>
+                <li>Each game will be played for best for 3 sets and each set will be played for 15 points. Semi-finals and finals will be best of 3 sets for 21 points. </li>
+                <li>All rounds will be played in plastic shuttles. </li>
+                <li>Umpire’s decision is final in any dispute (point, line judgement, faults etc....).</li>
+                <li>Standard BWF rules apply.</li>
+
+                </ul>
+            </p>
+            <p>CONTACT :
+                   <p>Pavan kalyan challa: 7981085863 </p>
+
+            </p>
+
+           ]]>
+
+    </string>
+
+    <string name="Basketball">
+            <![CDATA[
+
+            <h3>Basketball(Boys)</h3>
+            <p>
+                POINTS:-<br><b>
+                &emsp;&emsp;&emsp;1st place - 20 points<br>
+               &emsp;&emsp;&emsp;2nd place - 12 points<br>
+               &emsp;&emsp;&emsp;3rd place - 8 points</b>
+            </p>
+            <p>
+                GAME TIME:<br>
+
+                &emsp;4 Quarters of 10 minutes each.<br>
+                &emsp;1 Timeout per quarter till third quarter, 2 Timeouts in the fourth quarter for each team<br>
+                &emsp;Side change is mandatory after the first half.<br>
+            </p>
+            <p>Rules:
+            <ul class="rules">
+                <li>Each round is knockout based.</li>
+                <li>A team can have a maximum of 12 players.</li>
+                <li>A maximum of 5 personal fouls per player will be allowed per game.</li>
+                <li>A player receiving 2 technical fouls shall be replaced immediately and will not be allowed to take part any further in that tie.</li>
+                <li>Every foul after 5 team fouls in a quarter will results in 2 free throws.</li>
+                <li>A technical foul will result in one free throw to the opposite team and they retain possession of the ball.</li>
+                <li>All the violations will be judged according to FIBA rules and regulations.</li>
+                <li>Referee’s decision is final.</li>
+
+
+
+            </ul>
+
+            </p>
+
+            <p>CONTACT :
+                   <p>Prahlad: 9791146845 </p>
+                   <p>Prasanna: 9629846890</p>
+
+            </p><br>
+
+
+   ]]>
+    </string>
+
+    <string name="Basketball_Girls">
+
+        <![CDATA[
+
+        <h3>Basketball(girls)</h3>
+
+             <p>
+                POINTS:- <b>
+                <br>&emsp;&emsp;&emsp;1st place - 12 points
+               <br>&emsp;&emsp;&emsp;2nd place - 8 points
+               <br>&emsp;&emsp;&emsp;3rd place - 5 points</b>
+
+            </p>
+            <p>
+                GAME TIME:<br>
+
+                League matches - 8 minute per half, half break – 2 mins<br>
+                Quarters, Semis and Final matches – 6 min per quarter, half break – 3 mins<br>
+                Each team is allowed one 45 second time out per quarter/ half.
+            </p>
+            <p>Rules:
+            <ul class="rules">
+                <li>Each round is knockout based.</li>
+                <li>Size 6 basketball will be used.</li>
+                <li>3 main players and 2 substitute players are allowed per team.</li>
+                <li>There will be no jump ball.</li>
+                <li>No free throws on fouling; the ball is awarded to the fouled team.</li>
+                <li>Each team will be given 5 team fouls before free throw attempts are awarded. Upon the 6th team foul, the fouled player will shoot one free throw.</li>
+                <li>Each player will be given 3 personal fouls before she is made to leave court. That player is not allowed to participate in the game. A substitute may be called on.</li>
+                <li>All the violations will be judged according to FIBA rules and regulations.</li>
+                <li>Referee’s decision is final.</li>
+                <li>NOTE: All the matches will be conducted in half court only.</li>
+
+            </ul>
+
+            </p>
+            <p>General Rules:
+            <ul class="rules">
+                <li>Baskets are scored in 2’s and 3’s</li>
+                <li>Winner’s ball after every conversion. The ball must be either passed or brought in after clearing from half court line.</li>
+                <li>After ANY change of possession, the ball should be cleared past the 3 point line Instead of side line passes; a player may also bring the ball in herself after checking it with the opposing team.</li>
+                <li>After each free throw attempt, make or miss, the non-shooting team will receive the ball at the half court line.</li>
+                <li>A ball out of bounds will be taken out from the half court line by the opposite team. </li>
+                <li>5 second rule: A player must complete a side line pass within 5 seconds. Else ball possession is awarded to opposite team.</li>
+
+
+            </ul>
+
+            </p>
+             <p>CONTACT :
+                   <p>Prahlad: 9791146845 </p>
+                   <p>Prasanna: 9629846890</p>
+
+            </p>
+
+        ]]>
+    </string>
+
+    <string name="Carrom">
+            <![CDATA[
+    <p>
+                POINTS:-<b>
+                <br>&emsp;&emsp;&emsp;1st place - 15 points
+                <br>&emsp;&emsp;&emsp;2nd place - 10 points
+                <br>&emsp;&emsp;&emsp;3rd place - 6 points</b>
+            </p>
+
+            <p>Rules:
+            <ul class="rules">
+                <li>Thumbing is allowed.</li>
+                <li>National carrom rules will be followed.</li>
+                <li>Each department will consist of one pair of girls’ team and two pairs of boys’ team. (Total – 4 boys, 2 girls).</li>
+                <li>Each pair will play best of three matches. If two of the three pairs win,
+                    then that department will win that tie.</li>
+                <li>Strikers and coins will be provided. Each player is also allowed to bring his own striker.</li>
+                <li>Referee’s decision is final.</li>
+            </ul>
+
+            </p>
+            <p>Game Format:
+            <ul class="rules">
+                <li>First round will be of knock out. The winners of the knock out round will advance to the double elimination format.</li>
+                <li>Only finals will be of points format. Each team from a department will play for 21 points. Red/queen value is 3 points. The team which reaches 21 points first wins that round.</li>
+                <li>NOTE: For each strike, 30-sec time limit for positioning the striker.</li>
+
+            </ul>
+
+            </p>
+            <p>CONTACT :
+                   <p>Chethan: 9515938949</p>
+
+            </p>
+
+   ]]>
+    </string>
+
+    <string name="Chess">
+            <![CDATA[
+    <p>
+                POINTS:-<b>
+                <br>&emsp;&emsp;&emsp;1st place- 15 points
+                <br>&emsp;&emsp;&emsp;2nd place- 10 points
+                <br>&emsp;&emsp;&emsp;3rd place- 6 points </b>
+            </p>
+
+            <p>Rules:
+            <ul class="rules">
+                <li>Tournament will be conducted on a Swiss - System format for Team Tournaments</li>
+                <li>Each team comprises of five players. (Boys/Girls).<br> (Minimum of 2 girls per team)</li>
+                <li>Time Control: 20 min for each player for the full game.</li>
+                <li>Walk over time 15 min. Inform the arbiter and opposing captain beforehand if a player will arrive late for the game.</li>
+                <li>Players are requested to BRING THEIR OWN CHESS SETS.</li>
+                <li>All FIDE rules will be followed.</li>
+                <li>Event Manager decision is final.</li>
+
+            </ul>
+
+            </p>
+            <p>CONTACT :
+                   <p>Aswin Babu J: 8610303924</p>
+
+            </p>
+
+   ]]>
+    </string>
+
+    <string name="Cricket">
+            <![CDATA[
+
+            <h3>Cricket(Boys)</h3>
+  <p>
+                POINTS:- <b>
+                <br>&emsp;&emsp;&emsp;1st place - 25 points
+                <br>&emsp;&emsp;&emsp;2nd place - 18 points
+                <br>&emsp;&emsp;&emsp;3rd place - 12 points </b>
+            </p>
+
+            <p>Rules:
+            <ul class="rules">
+                <li>All ICC rules to be followed.</li>
+                <li>Tournament is conducted on Knockout basis.</li>
+                <li>Each team should consist of 11 players (+4 sub). Each innings is of
+12 overs (Only 2 bowlers can bowl a maximum of three overs). 3rd
+place and Finals will be a 20 over game (A bowler can bowl a
+maximum of four overs).</li>
+                <li>Matches will be played with a cricket ball (leather ball) and will be a
+new ball or semi new ball(one side will have complete shine and
+other side will be with partly shine) for a match based on availability.</li>
+                <li>Compulsory whites (white tee and white track) to be worn by all players including substitutes.</li>
+                <li>All standard international rules apply (example decisions regarding lbw and no-ball are there).</li>
+                <li>1st 3 overs-mandatory power play. NO SUBSEQUENT POWERPLAYS. Only two fielders allowed outside the ring during power play. <b>For the 3rd place and finals the first six overs will be power play.</b></li>
+                <li>No-ball to be awarded if any player of the fielding team speaks or cheers during ball being bowled.</li>
+                <li><b>Umpire’s decision is final.</b></li>
+                <li>Penalty of runs or reducing the number of overs to be bowled for
+                    exceeding time limit.</li>
+            </ul>
+        </p>
+        <p>
+
+            <b>Note for all the captains:-</b><br>
+            <ul class="rules">
+                <li>The decision of the umpire will be final and any form of violation in terms of arguments with the umpire will eventually lead to the disqualification of the team.</li>
+                <li>Teams should report at the given time on the field, failing to do so will lead to the disqualification of the team.</li>
+                <li>All cricket equipment need to be used with care. Damaging of equipment will be dealt with serious consequences.</li>
+                <li>Any other queries can be made with the event coordinator and only them. Information regarding fixtures and groups cannot be questioned.</li>
+                <li>The schedule of their respective games shall be informed in advance and hence all players from the respective teams must arrive at least half an hour prior to each game.</li>
+                <li>Matches should be played in the spirit of the game.</li>
+
+            </ul>
+
+        </p>
+        <p>CONTACT :
+                   <p>Mit surati: 9597216627</p>
+
+
+            </p><br>
+
+   ]]>
+    </string>
+
+
+    <string name="Cricket_Girls">
+            <![CDATA[
+
+            <h3>Cricket(Girls)</h3>
+            <p>
+                <b>POINTS:-
+                <br>&emsp;&emsp;&emsp;1st place - 15 points
+                <br>&emsp;&emsp;&emsp;2nd place - 8 points
+                <br>&emsp;&emsp;&emsp;3rd place - 4 points</b>
+            </p>
+
+            <p>Rules:
+            <ul class="rules">
+                <li>Tournament is conducted on Knockout basis.</li>
+                <li>6 girls per side (+1 sub). Sub allowed only when any player is injured.
+                6 overs per innings.</li>
+                <li>In 6 overs match minimum of 3 bowlers to be used.</li>
+                <li>Final alone would be of 8 over where minimum 4 bowlers to be used.</li>
+                <li>1 run for wide and no ball. Extras only for wide and no-balls. Overthrow is there.</li>
+                <li>Free hit for the ball delivered after no ball (overstepping).</li>
+                <li>You can either chuck the ball or bowl. No under arm bowling.</li>
+                <li>Full toss above the waist is a no ball.</li>
+                <li>2 runs for boundary behind the stumps.</li>
+                <li>No runs for leg-bye, bye. No lbw dismissals.</li>
+                <li>No fielder allowed to stand behind the bowler before the ball is delivered.</li>
+                <li>Cosco ball would be used.</li>
+                <li>Penalty of runs for exceeding time limit.</li>
+            </ul>
+        </p>
+        <p>
+
+            <b>Note for all the captains:-</b><br>
+            <ul class="rules">
+                <li>The decision of the umpire will be final and any form of violation in terms of arguments with the umpire will eventually lead to the disqualification of the team.</li>
+                <li>Teams should report at the given time on the field, failing to do so will lead to the disqualification of the team.</li>
+                <li>If the team didn’t turn up for the match, then it is taken as loss of
+                     match for them and other team will be rewarded the winning points.</li>
+                <li>Except the captains, no other member (maybe a team members or
+                    team management or coach) has the right to have discussion with the
+                    umpire regarding any decision made by the umpire and any violation
+                    of this rule will eventually lead to the disqualification of the team.</li>
+
+            </ul>
+
+        </p>
+        <p>CONTACT :
+                   <p>Mit surati: 9597216627</p>
+
+
+        </p>
+
+   ]]>
+    </string>
+
+
+    <string name="Football">
+            <![CDATA[
+                        <h3>Football(Boys)</h3>
+  <p>
+                <b>POINTS:-
+                <br>&emsp;&emsp;&emsp;1st place - 25 points
+                <br>&emsp;&emsp;&emsp;2nd place - 18 points
+                <br>&emsp;&emsp;&emsp;3rd place - 12 points </b>
+            </p>
+
+            <p>Rules:
+            <ul class="rules">
+                <li>League cum knockout format.</li>
+                <li>Each group match will have a half time of 20 minutes (5 minutes of break during half time).</li>
+                <li>Knockout phase will have a half time of 25 minutes (5 minutes of break during half time).</li>
+                <li>If a group match ends in a draw, the points will be split.</li>
+                <li>Any match deemed a WALKOVER, the winning team will get 3 points and plus 3 goals. (Losing team gets No points and minus 3 goals.)</li>
+                <li>Positions within the Leagues will be calculated by:
+                • Number of points.<br>
+                • Goal difference.<br>
+                • Goals scored.<br>
+                </li>
+                <li>If there is still a tie between two teams then the result will be declared by penalties.</li>
+                <li>If a knockout match ends in a draw, match proceeds to Penalties(No Extra Time).</li>
+                <li>Winners of each group proceed to the knockout stage.</li>
+                <li>Maximum of 16 players per department.</li>
+                <li>Rolling substitutions are allowed.</li>
+                <li>Teams are expected to report 10 minutes before the start of each match.Any team that reports late or not coming without prior information will be
+                   will be awarded negative points.</li>
+                <li>The Referee’s decision is final and abiding. Any argument with officials
+will not be tolerated.</li>
+                <li>Foul language or fighting will not be entertained. Strict action will be
+                    taken against the team involved in any of these acts.</li>
+                <li>All other standard FIFA rules apply.</li>
+
+            </ul>
+
+            </p>
+            <p>CONTACT :
+                   <p>Mohamed Nusri :8754307673</p>
+
+
+            </p><br>
+
+   ]]>
+    </string>
+
+    <string name="Football_Girls">
+            <![CDATA[
+
+            <h3>Football(Girls)</h3>
+            <p>
+                <b>POINTS:-
+                <br>&emsp;&emsp;&emsp;1st place - 15 points
+                <br>&emsp;&emsp;&emsp;2nd place - 8 points
+                <br>&emsp;&emsp;&emsp;3rd place - 4 points</b>
+            </p>
+
+            <p>Rules:
+            <ul class="rules">
+                <li>Each round is knockout based.</li>
+                <li>Matches excluding the finals will have a half-length of 8 mins.</li>
+                <li>The finals will have a half-length of 10 mins.</li>
+                <li>If a knockout match ends in a draw, the match will proceed directly to penalty shootouts. (There will be no extra-time)</li>
+                <li>Each team can have a maximum of 8 players with 5 players taking the field including a goal keeper.</li>
+                <li>Rolling substitutions are allowed.</li>
+                <li>Teams are requested to be there in the ground 10 minutes before the start of their match.Any team that reports late or not coming without
+                    prior information will be awarded negative points.</li>
+                <li>The Referee’s decision is final and abiding.</li>
+                <li>Foul language or fighting will not be entertained. Strict action will be
+                    taken against the team involved in any of these acts.</li>
+                <li>All other standard rules apply.</li>
+
+
+            </ul>
+
+            </p>
+            <p>CONTACT :
+                   <p>Mohamed Nusri :8754307673</p>
+
+
+            </p>
+
+   ]]>
+    </string>
+
+    <string name="Handball_Boys">
+            <![CDATA[
+ <p>
+                <b>POINTS:-
+                <br>&emsp;&emsp;&emsp;1st place - 20 points
+                <br>&emsp;&emsp;&emsp;2nd place - 12 points
+                <br>&emsp;&emsp;&emsp;3rd place - 8 points</b>
+            </p>
+
+            <p>Rules:
+            <ul class="rules">
+                <li>Tournament is conducted on a knock out basis.</li>
+                <li>Number of players = 6+1 (+5 subs)</li>
+                <li>Two halves with each half 15 mins (though final timing decision is in the hands of referee)</li>
+                <li>IHF rules/fouls of double dribble, carry, 3 second hold, walk, line cut applies along with passive play and aggression.</li>
+                <li>Decisions of free throw, 7-meter penalty, corner in and throw in rests on referee.</li>
+                <li>The final decision is made by the field referee which must strictly be adhered to.</li>
+                <li>All the players should wear sports shoes. Being barefoot and wearing boots and spikes are not allowed.</li>
+                <li>All the players must cut their nails properly before the game starts.</li>
+                <li>All the players should wear shorts. Track pants and jeans are not allowed.</li>
+                <li>The Goal Keeper can wear track pants.</li>
+                <li>If the match ends in a tie, 5 minutes’ extra time (maximum twice). If it’s still a tie, the outcome of the match will be decided by penalty shoot-out.</li>
+                <li>Arguing with the referees, fighting with other team players and late
+                  reporting without prior information will lead to disqualification of the
+                    team.</li>
+
+
+            </ul>
+
+            </p>
+            <p>CONTACT :
+                   <p>Harikrishnan:9655841458</p>
+
+
+            </p>
+
+   ]]>
+    </string>
+
+    <string name="Handball_Girls">
+            <![CDATA[
+ <p>
+                <b>POINTS:-
+                <br>&emsp;&emsp;&emsp;1st place - 15 points
+                <br>&emsp;&emsp;&emsp;2nd place - 8 points
+                <br>&emsp;&emsp;&emsp;3rd place - 4 points</b>
+            </p>
+
+            <p>Rules:
+            <ul class="rules">
+                <li>Tournament is conducted on a knock out basis.</li>
+                <li>Number of players = 4+1 (+3 subs)</li>
+                <li>Two halves with each half 7 mins (though final timing decision is in the hands of referee)</li>
+                <li>IHF rules/fouls of double dribble, carry, 3 second hold, walk, line cut applies along with passive play and aggression.</li>
+                <li>Decisions of free throw, 7-meter penalty, corner in and throw in rests on referee.</li>
+                <li>The final decision is made by the field referee which must strictly be adhered to.</li>
+                <li>All the players should wear sports shoes. Being barefoot and wearing boots and spikes are not allowed.</li>
+                <li>All the players should wear shorts or track pants and jeans are notallowed.</li>
+                <li>The Goal Keeper can wear track pants.</li>
+                <li>All the players must cut their nails properly before the game starts.</li>
+                <li>If the match ends in a tie, 5 minutes’ extra time (maximum twice). If it’s still a tie, the outcome of the match will be decided by penalty shoot-out.</li>
+                <li>Arguing with the referees, fighting with other team players and late
+                   reporting without prior information will lead to disqualification of the
+                    team.</li>
+
+
+            </ul>
+
+            </p>
+            <p>CONTACT :
+                   <p>Harikrishnan:9655841458</p>
+
+
+            </p>
+
+   ]]>
+    </string>
+
+    <string name="Hockey">
+            <![CDATA[
+  <p>
+                <b>POINTS:-
+                <br>&emsp;&emsp;&emsp;1st place - 20 points
+                <br>&emsp;&emsp;&emsp;2nd place - 12 points
+                <br>&emsp;&emsp;&emsp;3rd place - 8 points</b>
+            </p>
+
+            <p>
+                TEAM:-<br>
+            A Team consists of maximum 7 players composed of maximum 5
+            players on field and up to 2 substitutes.
+            </p>
+
+            <p>RULES:-
+             <ul class="rules">
+                <li>Match time of 15 mins during the knockout stages for each halves. Half time interval of 5 mins.</li>
+                <li>Match time of 20 mins during the semifinal and final match for each halves.</li>
+                <li>Halftime interval of 8 mins</li>
+                <li>Goals are scored once it clears the goal line and should be inside the “D” line.</li>
+                <li>Centre start at the start of play. And sideline start for foul play.</li>
+                <li>Passes and shots should be strictly either push or tap, other means will be considered as foul.</li>
+                <li>Rolling substitutions are allowed.</li>
+                <li>If a knockout match ends in a draw, match proceeds to Penalties.</li>
+                <li>The Penalty stroke will start from center line.</li>
+            </ul>
+            </p>
+            <p>Fouls and Violations:
+            <ul class="rules">
+                <li>Scoops, Flick and Hit will be considered as foul.</li>
+                <li>Dangerous play can be booked and the player can be seated out up to 2 mins.</li>
+                <li>Other violations in accordance to FIH rules will apply.</li>
+            </ul>
+            </p>
+            <p>Play:
+            <ul class="rules">
+                <li>Matches will be held at Skating Ground behind Tennis Court.</li>
+                <li>Teams are expected to report 10 minutes before the start of each match.</li>
+
+            </ul>
+
+            </p>
+            <p>CONTACT :
+                   <p>A SWAMINATHAN :9677818282</p>
+
+
+            </p>
+   ]]>
+    </string>
+
+    <string name="Kabaddi">
+            <![CDATA[
+  <p>
+                <p> <b>POINTS:-
+            <br>&emsp;&emsp;&emsp;1st place - 20 points
+            <br>&emsp;&emsp;&emsp;2nd place - 12 points
+            <br>&emsp;&emsp;&emsp;3rd place - 8 points </b>
+            </p>
+            <p>RULES:-
+                <ul class="rules">
+                    <li>Tournament is conducted on a knockout basis.</li>
+                    <li>Each team shall consist of maximum of 12 players and 7 Players shall take the ground at a time and the remaining players are substitutes.</li>
+                    <li>Duration of the match: Match shall be two halves of 15 minutes with 5 minutes interval.</li>
+                    <li>The teams will change court after interval.</li>
+                    <li>Semifinals and Finals will be two halves of 20 minutes with 5 minutes interval.</li>
+                    <li>TThe number of players for each team in the court at the start of second half shall remain the same as it was at the end of first half.
+                    </li>
+                    <li>NOTE: The last raid of each half of the match shall be allowed to be completed even after completion of the scheduled time as mentioned above.</li>
+                    <li>Each team shall score one point for every opponent out or put out. The side, which scores a LONA, shall score two extra points</li>
+                </ul>
+            </p>
+            <p>Time out:
+                <ul class="rules">
+                    <li>Each Team shall be allowed to take Two “Time Outs” of 30 Seconds each in each half; such time out shall be called for by the Captain or any playing member of the team with the permission of referee. The time out time shall be added to match time. </li>
+                    <li>During the time out the teams shall not leave the ground, any violation in this; a technical point shall be awarded to the opponent team
+                    </li>
+                </ul>
+            </p>
+            <p>Bonus Point:
+                <ul class="rules">
+                    <li>One point shall be awarded to the raider when he crosses the bonus line. If the raider after crossing the bonus line is caught, the opponent team is awarded one point.</li>
+                    <li>The Bonus line will be applicable when there are minimum 6 players in the court.</li>
+                </ul>
+            </p>
+            <p>Super Tackle
+                <ul class="rules">
+                    <li>Super tackle is specific scenario where a rider from the opponent team has to be tackled or caught by either 3 or less than 3 players of the defending team. In case of super tackle, the defending team will be awarded with two points.</li>
+                    <li>Referee’s decision is final.</li>
+                    <li>NOTE:  Do - or - Die raids applicable, all other standard rules apply.</li>
+                </ul>
+            </p>
+            <p>CONTACT :
+                   <p>Naveen A :9629889445</p>
+            </p>
+   ]]>
+    </string>
+
+    <string name="KhoKho">
+            <![CDATA[
+
+                       <h3>Kho-Kho(Boys)</h3>
+  <p><b>POINTS:-
+            <br>&emsp;&emsp;&emsp;1st place - 20 points
+            <br>&emsp;&emsp;&emsp;2nd place - 12 points
+            <br>&emsp;&emsp;&emsp;3rd place - 8 points </b>
+
+            <p>RULES:-
+                <ul class="rules">
+                    <li>Each team consists of 12 players, 9 players take the field, 3 substitutes.</li>
+                    <li>A match consists of two innings. An innings consists of chasing and
+                        running turns of 6 minutes each for league stages and 7 minutes each
+                        for semifinals and finals.</li>
+                    <li>5 minutes break for each innings. </li>
+                    <li>1 team sits/kneels in the middle of the court, in a row, with adjacent members facing opposite directions.</li>
+                    <li>To give “Kho”, following rules must be followed:</li>
+                    <ol>
+                        <li>To give KHO, an Attacker should touch the Chaser by hand from behind him and then utter the word “Kho” loudly and distinctly.</li>
+                        <li>If the action of uttering the word “Kho” precedes the action of touching by hand, then it shall be deemed as a foul.</li>
+                        <li>If an Attacker utters any word other than the word “KHO” it will be deemed as a foul.</li>
+                        <li>The seated chaser shall not get up without getting “Kho”.</li>
+                        <li>Active chaser can touch their team chasers who are sitting in field except chasers near to post. If active chaser touches inactive chaser near to post, he must give “Kho” there itself otherwise it will be given as foul.</li>
+                    </ol>
+                    <li>The chasers end in the shortest time possible.<li>
+                    <li>Chaser should not the cross the center line, if so it is considered as a foul.</li>
+                    <li>After touching runner, chaser should not turn back and appeal for out.</li>
+                    <li>The team that takes the shortest time to tag/tap all the opponents in the field wins.</li>
+                    <li>Any team that reports late by half an hour or more without prior information will be disqualified and opponent will be judged as winners.</li>
+                    <li>Umpires decision is final in any dispute (faults, point, judgements). One should not argue with umpires.</li>
+                    <li>Runners shouldn’t touch chasers(Intentionally). Warning will be given for two times. If runner repeats, he will be given out.</li>
+                    <li>In case of walkover, opponent team will be declared as winners with 9 points difference.</li>
+                </ul>
+            </p>
+            <p>CONTACT :
+                    <p>Krishna Naik Nenavath : 9629919515</p>
+            </p><br>
+
+   ]]>
+    </string>
+
+    <string name="KhoKho_Girls">
+            <![CDATA[
+
+            <h3>Kho-Kho(Girls)</h3>
+            <p><b>POINTS:-
+            <br>&emsp;&emsp;&emsp;1st place - 15 points
+            <br>&emsp;&emsp;&emsp;2nd place - 10 points
+            <br>&emsp;&emsp;&emsp;3rd place - 6 points</b>
+            </p>
+            <p>RULES:-
+                <ul class="rules">
+                    <li>Each team consists of 12 players, 9 players take the field, 3 substitutes.</li>
+                    <li>A match consists of two innings. An innings consists of chasing and
+                        running turns of 6 minutes each for league stages and 7 minutes each
+                        for semifinals and finals.</li>
+                    <li>5 minutes break for each innings. </li>
+                    <li>1 team sits/kneels in the middle of the court, in a row, with adjacent members facing opposite directions.</li>
+                    <li>To give “Kho”, following rules must be followed:</li>
+                    <ol>
+                        <li>To give KHO, an Attacker should touch the Chaser by hand from behind him and then utter the word “Kho” loudly and distinctly.</li>
+                        <li>If the action of uttering the word “Kho” precedes the action of touching by hand, then it shall be deemed as a foul.</li>
+                        <li>If an Attacker utters any word other than the word “KHO” it will be deemed as a foul.</li>
+                        <li>The seated chaser shall not get up without getting “Kho”.</li>
+                        <li>Active chaser can touch their team chasers who are sitting in field except chasers near to post. If active chaser touches inactive chaser near to post, he must give “Kho” there itself otherwise it will be given as foul.</li>
+                    </ol>
+                    <li>The chasers end in the shortest time possible.<li>
+                    <li>Chaser should not the cross the center line, if so it is considered as a foul.</li>
+                    <li>After touching runner, chaser should not turn back and appeal for out.</li>
+                    <li>The team that takes the shortest time to tag/tap all the opponents in the field wins.</li>
+                    <li>Any team that reports late by half an hour or more without prior information will be disqualified and opponent will be judged as winners.</li>
+                    <li>Umpires decision is final in any dispute (faults, point, judgements). One should not argue with umpires.</li>
+                    <li>Runners shouldn’t touch chasers(Intentionally). Warning will be given for two times. If runner repeats, he will be given out.</li>
+                    <li>In case of walkover, opponent team will be declared as winners with 9 points difference.</li>
+                </ul>
+            </p>
+            <p>CONTACT :
+                    <p> Juvvanapudi Harika: 9092581162</p>
+            </p>
+   ]]>
+    </string>
+
+    <string name="Marathon">
+            <![CDATA[
+  <p><b>POINTS (Men):-
+                <br>&emsp;&emsp;&emsp;1st place - 12 points
+                <br>&emsp;&emsp;&emsp;2nd place - 8 points
+                <br>&emsp;&emsp;&emsp;3rd place - 5 points </b>
+                </p>
+                <p><b>POINTS (Women):-
+                <br>&emsp;&emsp;&emsp;1st place - 10 points
+                <br>&emsp;&emsp;&emsp;2nd place - 6 points
+                <br>&emsp;&emsp;&emsp;3rd place - 4 points</b>
+                </p>
+                <p>RULES:-
+                    <ul class="rules">
+                        <li>Girls need to complete 3 rounds i.e., about 6 km and within a time limit of 1.5 times the first girl who completes and will be awarded 1 point.</li>
+                        <li>Boys need to complete 3 rounds i.e., about 10 km and within a time limit of 1.5 times the first boy who completes and will be awarded 1 point.</li>
+                    </ul>
+                </p>
+                <p>CIRCUIT: -
+                   <p> BOYS-</p>
+                    <p>PD OFFICE – LIBRARY – HOSPITAL – ZIRCON – CHENNAI
+BAKERY BACKSIDE – MEGA MESS 2 – GARNET – ORION –
+CHEMICAL DEPT – PD OFFICE.</p>
+
+                    <p>GIRLS-</p>
+                    <p>PD OFFICE - LIBRARY- SHOPPING COMPLEX - BERY HOSTEL - AGATE HOSTEL – ORION - CHEMICAL DEPT – PD OFFICE
+
+                </p>
+
+   ]]>
+    </string>
+
+    <string name="PowerLifting">
+            <![CDATA[
+   <p><b>POINTS:-
+                <br>&emsp;&emsp;&emsp;1st place - 7 points
+                <br>&emsp;&emsp;&emsp;2nd place - 5 points
+                <br>&emsp;&emsp;&emsp;3rd place - 3 point</b>
+                </p>
+                <p>Six body weight categories :<br>
+                    <ul class="rules">
+                        <li>under 56 kg</li>
+                        <li>56-62 kg</li>
+                        <li>62-69 kg</li>
+                        <li>69-77 kg</li>
+                        <li>77-85 kg</li>
+                        <li>85+ kg</li>
+                    </ul>
+                </p>
+                <p>RULES:-
+                <p>The competition will be held as per the International Powerlifting
+                    Federation Rules unless otherwise modified.</p>
+                <p>The participants are required to register and give their weigh-ins 6 hours prior to the main event.</p>
+                <p>Athletes in the sport are divided in six weight classes and placing is
+                    based on the total weight lifted on the three main lifts:</p>
+                <p>&emsp;&emsp;&emsp;A. Squats</p>
+                <p>&emsp;&emsp;&emsp;B. Bench Press</p>
+                <p>&emsp;&emsp;&emsp;C. Deadlift</p>
+
+                <p><b>Six bodyweight categories</b></p>
+                <table>
+                    <tr>
+                        <th>Weight Categories</th>
+                        <th>Male(in kg)</th>
+                    </tr>
+                    <tr>
+                        <th>I</th>
+                        <th>Under 56</th>
+                    </tr>
+                    <tr>
+                        <th>II</th>
+                        <th>56-62</th>
+                    </tr>
+                    <tr>
+                        <th>III</th>
+                        <th>62-69</th>
+                    </tr>
+                    <tr>
+                        <th>IV</th>
+                        <th>69-77</th>
+                    </tr>
+                    <tr>
+                        <th>V</th>
+                        <th>77-85</th>
+                    </tr>
+                    <tr>
+                        <th>VI</th>
+                        <th>Above 85</th>
+                    </tr>
+                </table>
+                <ul class="rules">
+                    <li>From each Department Only 2 participants would be allowed per
+                         category.</li>
+                    <li>For an event to take place, minimum 5 different Departments should
+                        register the event.</li>
+                    <li>During the weighing of athlete, he must mention his first lift for squat
+                      (minimum 50kg), bench-press(minimum 40kg) and deadlift(minimum
+                       70kg) to referee.</li>
+                    <li>Each competitor is allowed three attempts on each lift. The lifter’s best
+                        valid attempt on each lift counts toward his competition total.</li>
+                    <li>Once the highest value has been collected for each lift, the total weight
+                       lifted in squat, bench press and deadlift added up. The lifter with the
+                       highest combined weight lifted becomes the champion. In the case of a
+                       tie, the lifter whose body weight is less becomes the champion.</li>
+                    <li>Player must come with proper kit during competition and Gloves are not
+                         allowed.</li>
+                    <li>A player can participate in only one category.</li>
+                    <li>In case of any controversy during competition and weighing, judge’s
+                           decision will consider as final decision.</li>
+                </ul>
+            </p>
+            <p>General Rules for Squats:</p>
+            <p>The lifter must Squat down until their hip joint is lower than their knee joint,failure to which, will lead to disqualification of that lift.</p>
+            <p>General Rules for Bench Press:</p>
+            <p>The bar is to be lowered to the chest area until it touches the chest and then raised, failure of which will lead to disqualification.</p>
+            <p>General Rules for Deadlift:</p>
+            <p>As soon as you lift the bar, set your shoulders back and ensure your kneesare locked out. Any downward movement of the bar before it reaches thefinal position will lead to disqualification.</p>
+            <p>CONTACT :
+                <p>MERVIN MOSES : 7358435207</p>
+            </p>
+   ]]>
+    </string>
+
+    <string name="SportsQuiz">
+        <![CDATA[
+
+        <p><b>POINTS:-
+                <br>&emsp;&emsp;&emsp;1st place - 5 points
+                <br>&emsp;&emsp;&emsp;2nd place - 3 points
+                <br>&emsp;&emsp;&emsp;3rd place - 1 point</b>
+                </p>
+                <p>RULES :- <br>
+                <ul class="rules">
+                    <li>Maximum of 3 members per department can be in a team.</li>
+                    <li>Team composition: 2 boys and 1 girl (compulsory).</li>
+                    <li>There will be a written eliminative prelim followed by a final.</li>
+                    <li>6 team will qualify for the finals. There will be a separate round for girls
+in the finals.</li>
+                <li>All questions will be related to sports in some or the other way.</li>
+                <li>Quiz masters decision will be final. Using nefarious means when
+attempting the quiz will lead to disqualification of the whole department
+from the quiz.</li>
+                </ul>
+                </p>
+
+
+        ]]>
+    </string>
+
+    <string name="Swimming">
+            <![CDATA[
+  <p>POINTS:-
+                <p><b>INDIVIDUAL:
+                      <br>&emsp;&emsp;&emsp;1st place - 5 points
+                      <br>&emsp;&emsp;&emsp;2nd place - 3 points
+                      <br>&emsp;&emsp;&emsp;3rd place - 1 point
+                <br>RELAY:
+                      <br>&emsp;&emsp;&emsp;1st place - 10 points
+                      <br>&emsp;&emsp;&emsp;2nd place - 6 points
+                      <br>&emsp;&emsp;&emsp;3rd place - 4 points
+                <br>INDIVIDUAL (for 25m individual events only):
+                      <br>&emsp;&emsp;&emsp;1st place – 2.5 points
+                      <br>&emsp;&emsp;&emsp;2nd place – 1.5 points
+                      <br>&emsp;&emsp;&emsp;3rd place – 0.5 point
+                <br>RELAY (for 4x25m freestyle relay only):
+                      <br>&emsp;&emsp;&emsp;1st place - 5 points
+                      <br>&emsp;&emsp;&emsp;2nd place - 3 points
+                      <br>&emsp;&emsp;&emsp;3rd place - 1 points </b></p>
+                <p>MEN’S EVENTS:-</p>
+                   <p>&emsp;&emsp;&emsp;Freestyle: 50m, 100m, 200m.</p>
+                    <p>&emsp;&emsp;&emsp;Back stroke: 50m, 100m.</p>
+                    <p>&emsp;&emsp;&emsp;Breast stroke: 50m, 100m.</p>
+                    <p>&emsp;&emsp;&emsp;Butterfly: 25m, 50m.</p>
+                    <p>&emsp;&emsp;&emsp;Individual Medley: 100m.</p>
+                   <p> &emsp;&emsp;&emsp;Relay: 4*50m freestyle, 4*25m medley relay.</p>
+                <p>WOMEN\S EVENTS:-</p>
+                    <p>&emsp;&emsp;&emsp;Freestyle: 25m, 50m, 100m.</p>
+                    <p>&emsp;&emsp;&emsp;Back stroke: 25m, 50m</p>
+                    <p>&emsp;&emsp;&emsp;Breast stroke: 25m, 50m.</p>
+                    <p>&emsp;&emsp;&emsp;Butterfly: 25m, 50m.</p>
+                    <p>&emsp;&emsp;&emsp;Individual Medley: 100m.</p>
+                    <p>&emsp;&emsp;&emsp;Relay: 4*25m freestyle, 4*50m freestyle, 4*25m medley relay</p>
+                </p>
+                <p>RULES:-
+                    <ul class="rules">
+                        <li>For each event, at most 2 participants can take part from each department.</li>
+                        <li>Participants from a minimum of
+                        <br>a) 5 different departments for men’s events
+                        <br>b) 4 different departments for women’s events must be there for each event to take place, else event to be scrapped.</li>
+                        <li>A participant can take part in a maximum of 3 events excluding Individual Medley and relays.</li>
+                        <li>All events will be conducted on a time trial basis only. (NO heats and finals process)</li>
+                        <li>All participants shall bring their own swimming gear. The Swimming gear will not be provided to them by the organizers.</li>
+                        <li>Participants should report to the venue on time. The events will happen as scheduled and late comers will not be given a second chance to participate in the events they had missed.</li>
+                        <li>Events will be conducted only once.</li>
+                        <li>Standard FINA rules apply.</li>
+                    </ul>
+                </p>
+                <p>CONTACT :
+                    <p>Esha Reddy  : 7358728732 (Girls)</p>
+                    <p>Darshan : 9787788569 (Boys)</p>
+                </p>
+   ]]>
+    </string>
+
+
+    <string name="TableTennis">
+            <![CDATA[
+  <p><b>POINTS:-
+                <br>&emsp;&emsp;&emsp;1st place - 15 points
+                <br>&emsp;&emsp;&emsp;2nd place - 10 points
+                <br>&emsp;&emsp;&emsp;3rd place - 7 points</b>
+                </p>
+                <p>RULES:-
+                    <ul class="rules">
+                         <li>The first round matches will be for Best of 3.</li>
+                         <li>From quarters, the matches will be for Best of 5.</li>
+                        <li>All matches will be decided on best of 5 sets.</li>
+                        <li>Match order:
+                        <br>1. Boys Singles
+                        <br>2. Girls Singles
+                        <br>3. Mixed Doubles
+                        <br>4. Boys Doubles
+                        <br>5. Girls Doubles</li>
+                        <li>Each player can play maximum 2 matches (i.e., one singles and one doubles but not two singles).</li>
+                        <li>All ITTF rules are applicable.</li>
+                        <li>Umpire decision will be final.</li>
+                        <li>Report 15 minutes prior to the scheduled time.</li>
+                        <li>If the respective team does not report for its match as per the schedule the opponent team will get a walk-over.</li>
+                        <li>All the participants are requested to bring their own bats but the balls will be provided by the organizers for all the matches.</li>
+                        <li>Participants are allowed to play with either non-marking shoes or bare foot.</li>
+                    </ul>
+                </p>
+                <p>CONTACT :
+                    <p>Shankar Ravi Iyer : 9901444433</p>
+                    <p>Charumathi M S : 9489872216</p>
+                </p>
+   ]]>
+    </string>
+
+    <string name="Tennis">
+            <![CDATA[
+                            <h3>Tennis (MEN)</h3>
+  <p><b>POINTS:-
+                <br>&emsp;&emsp;&emsp;1st place - 12 points
+                <br>&emsp;&emsp;&emsp;2nd place - 8 points
+                <br>&emsp;&emsp;&emsp;3rd place - 5 points</b>
+                </p>
+                <p>RULES:-
+                    <ul class="rules">
+                        <li>Maximum of two teams can register per department.</li>
+                        <li>Minimum of two players and maximum of four players per team. </li>
+                        <li>Three matches will be played in the order of 1st singles, doubles, 2nd
+                            singles. </li>
+                        <li>The team which wins two matches qualifies to the next round.</li>
+                        <li>A player can play a maximum of two matches (a singles and a doubles).</li>
+                        <li>All matches will be conducted on knockout basis. </li>
+                        <li>All matches till (including) quarter-finals will be played best of 13 games (6-all, tiebreak). </li>
+                        <li>Semi-finals for boys will be best of 17 games (8-all tie breaker).</li>
+                        <li>Final: best 19 games (9-all tie breaker).</li>
+                        <li>The team which wins two matches first will be the winner of that round.</li>
+                        <li>Standard International Tennis Federation (ITF) rules apply.</li>
+                        <li>The referee’s decision will be final. Teams not adhering to the rules and regulations will be disqualified from the event.</li>
+                        <li>Tennis balls will be provided. The players are requested to bring their own accessories and equipment.</li>
+                    </ul>
+                </p>
+                <p>CONTACT :
+                    <p>A V Shriram Babu: 9677003815</p>
+                </p><br>
+
+   ]]>
+    </string>
+
+    <string name="Tennis_Girls">
+            <![CDATA[
+
+                 <h3>Tennis (WOMEN)</h3>
+                <p><b>POINTS:-
+                <br>&emsp;&emsp;&emsp;1st place - 10 points
+                <br>&emsp;&emsp;&emsp;2nd place - 6 points
+                <br>&emsp;&emsp;&emsp;3rd place - 4 points</b>
+                </p>
+                <p>RULES:-
+                    <ul class="rules">
+                        <li>Only singles will be conducted. The team which wins the match qualifiesto the next round.</li>
+                        <li>A maximum of two teams from a department is allowed in a team.</li>
+                        <liAll matches conducted will be conducted on knockout basis.</li>
+                        <li>All Matches will be played best of 15 games (7-all tiebreak).</li>
+                        <li>Standard International Tennis Federation (ITF)  rules apply. </li>
+                        <li>The referee’s decision will be final. Teams not adhering to the rules and regulations will be disqualified from the event. </li>
+                        <li>Tennis balls will be provided. The players have to bring their own accessories and equipment.</li>
+                    </ul>
+                </p>
+                <p>CONTACT :
+                    <p>Hariharan Jayakumar: 9003103462</p>
+                    <p>Kousik R: 9710097997</p>
+                </p><br>
+   ]]>
+    </string>
+
+    <string name="Throwball">
+            <![CDATA[
+ <p><b>POINTS:-
+                <br>&emsp;&emsp;&emsp;1st place - 15 points
+                <br>&emsp;&emsp;&emsp;2nd place - 10 points
+                <br>&emsp;&emsp;&emsp;3rd place - 6 points </b>
+                </p>
+                <p>RULES:-
+                    <ul class="rules">
+                        <li>The tournament will be conducted on a knockout basis.</li>
+                        <li>Each team will consist of 6 active players and 4 substitutes.</li>
+                        <li>Rotation is mandatory.</li>
+                        <li>Any ball after catching should be released within 3 seconds.</li>
+                        <li>During the service, the ball cannot touch the net.</li>
+                        <li>Service must be done within 8 seconds of referee’s whistle, or else the serve will be passed, and point will be awarded to the opponent.</li>
+                        <li>Service should cross the front line of the other team.</li>
+                        <li>Players cannot touch the net during the play but the ball can touch the net.</li>
+                        <li>During catching or releasing, the ball should not touch any part of the body except the palm.</li>
+                        <li>2 players cannot catch the ball at the same time.</li>
+                        <li>Shifting the ball from right to left or left to right or deliberately pushing is not permitted.</li>
+                        <li>Jump and throw is allowed but jump and catch is not allowed.</li>
+                        <li>Double touch (juggling the ball in both hands) is not allowed while receiving the service ball.</li>
+                        <li>Timeouts 2 per match and 30 seconds duration for each.</li>
+                        <li>First two sets 25 points each and last set 15 points.</li>
+                        <li>Teams can substitute only when it is their turn to serve; only exception is if a player gets injured. Only 1 person can be substituted at a time up to a maximum of 3 substitutes per set.</li>
+                        <li>Referee’s decision is final and any appeal or argument against it will not be entertained.</li>
+                    </ul>
+                </p>
+                <p>CONTACT :
+                    <p>Glomika : 7448335999</p>
+                </p>
+   ]]>
+    </string>
+
+    <string name="Volleyball">
+            <![CDATA[
+                            <h3>VolleyBall (Boys)</h3>
+  <p><b>POINTS:-
+                <br>&emsp;&emsp;&emsp;1st place - 20 points
+                <br>&emsp;&emsp;&emsp;2nd place - 12 points
+                <br>&emsp;&emsp;&emsp;3rd place - 8 points</b>
+                </p>
+                <p>RULES:-
+                    <ul class="rules">
+                        <li>The tournament will be conducted on a knockout basis.</li>
+                        <li>A team may consist of minimum six players and maximum twelve players.</li>
+                        <li>Each game will be minimum of 3 sets except the semi-final and final of 5 sets.</li>
+                        <li>Each set will be of 25 points and the deciding set of 15 points.</li>
+                        <li>Rotation is not mandatory. Players can switch places amongst themselves any time they want.</li>
+                        <li>Time outs – 2 per set and 30 sec duration for each.</li>
+                        <li>At least 2 people from a team should serve and the same player cannot continue serving once it is broken.</li>
+                        <li>Service must be done within 8 seconds of referee’s whistle, or else the serve will be passed, and point will be awarded to the opponent.</li>
+                        <li>All other standard rules of volleyball as per FIVB are to be followed.</li>
+                        <li>Referee’s decision is final and any appeal or argument against it will not be entertained.</li>
+                        <li>Report at the venue 15 minutes prior to the scheduled time.</li>
+                    </ul>
+                </p>
+                <p>CONTACT :
+                   <p>Yadhu Balakrishna L : 9445673574</p>
+                </p><br>
+
+
+   ]]>
+    </string>
+
+
+    <string name="Volleyball_Girls">
+            <![CDATA[
+
+                 <h3>VolleyBall (Girls)</h3>
+                <p><b>POINTS:-
+                <br>&emsp;&emsp;&emsp;1st place - 15 points
+                <br>&emsp;&emsp;&emsp;2nd place - 10 points
+                <br>&emsp;&emsp;&emsp;3rd place - 6 points</b>
+                </p>
+                <p>RULES:-
+                    <ul class="rules">
+                        <li>The tournament will be conducted on a knockout basis.</l>
+                        <li>A team may consist of minimum six players and maximum twelve players.</li>
+                        <li>No more than 2 substitutions in a single set.</li>
+                        <li>Rotation is not mandatory. Players can switch places amongst themselves any time they want.</li>
+                        <li>Time outs – 2 per match and 30 sec duration for each.</li>
+                        <li>All the matches will be best of three sets.</li>
+                        <li>First two sets 25 points each and last set 15 points.</li>
+                        <li>At least 3 people from a team should serve and the same player cannot continue serving once it is broken.</li>
+                        <li>Service must be done within 8 seconds of referee’s whistle, or else the serve will be passed, and one point is awarded to the opponent.</li>
+                        <li>Net touch and center line cross will be considered as foul.</li>
+                        <li>Referee’s decision is final and any appeal or argument against it will not be entertained.</li>
+                    </ul>
+                </p>
+                <p>CONTACT :
+                    <p>Preksha Priyadarshini : 8851681053/p>
+                </p>
+   ]]>
+    </string>
+
+    <string name="WaterPolo">
+            <![CDATA[
+   <p><b>POINTS:-
+                 <br>&emsp;&emsp;&emsp;1st place - 20 points
+                 <br>&emsp;&emsp;&emsp;2nd place - 12 points
+                 <br>&emsp;&emsp;&emsp;3rd place - 8 points</b>
+                </p>
+
+                <p><u>1. Length of game :-</u><br>
+                <ul class="rules">
+                    <li>There will be 4 quarters of length 6 minutes each.</li>
+                    <li>There will be 1 minute between quarters and 2 minutes between halves.</li>
+                </ul>
+                </p>
+
+                <p><u>2. Commencement rules :-</u><br>
+                <ul class="rules">
+                    <li>At the commencement of the game, the team must provide a list of not
+more than 13 players. Of these, a maximum of 5 may be in the pool at
+any time.</li>
+                    <li>There will be a toss at the commencement of the game with the captains
+of both teams. The winning captain chooses a side. At half time, the
+teams will have to change sides.</li>
+                    <li>At the start of play, all the players should line up on the respective walls.
+At the blow of the whistle, the time will start and the ball will be released
+into the center line. Only upon the whistle blow can the sprinter from
+each team leave the wall. If this rule is violated by one team, the ball is
+turned over to the other for a half line free pass. If both teams violate,
+then play and time are restarted. The possession of the ball is
+established at the end of the sprint.</li>
+                    <li>The ball is given to the loser of the initial sprint at the start of quarters
+2&3. The ball is given to the winner of the initial sprint in quarter 4.</li>
+                </ul>
+                </p>
+
+                <p><u>3. Goalkeeper privileges :-</u><br>
+                <ul class="rules">
+                    <li>The goalkeeper is the only player in the pool who may throw with two
+hands.</li>
+                    <li>He must throw within 10 seconds of catching the ball. Failure to do so
+will result in a turnover.</li>
+                    <li>If the ball goes out after being hit by the goalkeeper, the ball is given to
+the goalkeeper for a pass. This applies only if an attempt on the goal is
+made by an opposing player and was blocked by the goalkeeper.</li>
+                    </ul>
+                    </p>
+
+                   <p><ul>4. Fouls :-</u><br>
+                <ul class="rules">
+                    <li>A holding foul is called when an offensive or defensive player grabs
+another player physically, either using one or two hands. This can be on
+ball or off ball and includes jumping onto another player and locking him
+in the water by placing a(both) hand(s) over the shoulder.</li>
+                    <li>A contact foul is called when a defensive player strikes an offensive
+player while passing or shooting. If inside the 2 m line, a penalty is
+awarded and the clock is paused. Otherwise, a turnover results.</li>
+                    <li>An offensive foul is called when an offensive player pushes a defender
+away while swimming in order to retain possession of the ball. This foul
+does not result in a turnover. The offensive team starts from the half line
+with no free pass.</li>
+                    <li>If a goal is scored but a foul was called on the offensive player just
+before he shot, the goal is not counted and the ball is turned over to the
+goalkeeper.</li>
+                    <li><b><u>Note:</u></b> Pushes that occur when neither player is swimming are legal and
+will not be called as fouls unless deemed to be unusually violent. Placing
+of an armbar on the defender’s chest by the offensive player is also legal
+and will not be called unless elbowing is seen.</li>
+                     </ul>
+                    </p>
+
+                    <p><u>5. Ejection Fouls :-</u><br>
+                    An ejection foul is called in three situations :
+                <ul class="rules">
+                    <li>If there is a violent strike on to an opposing team player with clear
+intent to injure;</li>
+                    <li>If there is sustained/repeated argument with the official by any player,
+within or outside the pool;</li>
+                    <li>If there are 5 fouls on any single player.</li>
+                    </ul><br>
+                   In the first two cases, a penalty shot is awarded to the opposing team. In
+the third case, no penalty shot is awarded.<br>
+
+                In all three cases, the ball is turned over for a free pass from the half line
+and the player being ejected may not play the remainder of the game.
+<b>If the intent is unusually violent or the player expresses pride in
+said violence, the referee may eject him for the remainder of the
+tournament.</b> The team must play without substituting for the ejected
+player for 3 minutes or the remainder of the quarter, whichever is
+shorter.
+                </p>
+
+                <p><u>6. Turnovers :-</u><br>
+                <ul class="rules">
+                    <li>Upon lifting the ball from the surface, the player must pass or shoot
+within 5 seconds. Failing to do so or lowering the ball back to the surface
+results in a turnover.</li>
+                    <li>The ball must be thrown for shooting or passing by one hand only.
+Lifting with two hands is not legal unless one hand falls away with the
+motion of the lift. Passing or shooting with two hands results in a
+turnover. Any goals scored through shots with two hands are null.</li>
+                    <li>Dunking the ball under the water results in a turnover.</li>
+                    <li>If a turnover occurs, time is paused. The ball must be handed over to one
+of the line referees, who will then hand it over to the respective team at the
+half line.</li>
+
+                </ul></p>
+
+                <p><u>7. Timeouts :-</u><br>
+                <ul class="rules">
+                    <li>Each team is allowed two 1 minute time-outs per quarter.</li>
+                    <li>Time-outs may only be called by a team if they have clear possession of
+the ball within their half of the pool.</li>
+                    <li>At the end of the time-out, no additional time for players’ recovery will be
+given. The ball will be handed over to the goalkeeper of the team that
+called the time-out and play will be signaled to commence.</li> </ul></p>
+
+                <p><u>8. Substitutions :-</u><br>
+                <ul class="rules">
+                    <li>Players may be substituted for at any time in the game from the team’s
+own goal end.</li>
+                    <li>During time-outs or between quarters, substitutions can be made at any
+location in the pool.</li>
+                    <li>Any substitutions made must be informed to the referee and the player
+coming in may only enter where the player being substituted for leaves
+the pool.</li>
+                    <li>If, at any point, there is found to be more than 5 players from one team
+in the pool, gameplay is halted and the ball is given to the opposing
+team at the half line.</li>
+                    <li>Ejected players may not be substituted for, either for 3 minutes or the
+remainder of the quarter, whichever is shorter.</li>
+                    <li>A goalkeeper who has been replaced by the substitute goalkeeper may
+not play in any position other than goalkeeper.</li> </ul></p> <br>
+
+            <p>9. Referees’ calls are final and binding. Argument with the referees may
+lead to ejection fouls. </p><br>
+
+            <p>10. The tournament is conducted on a knockout basis.</p><br>
+             <p>11. If a tie exists at the end of 24 minutes of play, the teams shall shoot
+penalty shots to determine which team won. Each team shall nominate
+five players and a goalkeeper who will participate in the penalty shootout.
+The team shall shoot five penalty shots at the goal of the other
+team, alternating shots.</p><br>
+
+        <p>12. If a tie exists after each team has taken five shots, then the teams
+shall take sets of alternate shots until one team scores and the other
+does not.</p>
+                <p>CONTACT :
+                    <p>Esun Selvam: 9940222566</p>
+                </p>
+   ]]>
+    </string>
+
+    <string name="Weightlifting_Boys">
+            <![CDATA[
+   <p><b>POINTS:-
+                 <br>&emsp;&emsp;&emsp;1st place - 7 points
+                 <br>&emsp;&emsp;&emsp;2nd place - 5 points
+                 <br>&emsp;&emsp;&emsp;3rd place - 3 points</b>
+                </p>
+                <p>RULES:-
+                    <ul class="rules">
+                    <li>The competition will be held as per The International Weightlifting Federation Rules unless otherwise modified.</li>
+                    <li>Athletes in the sport are divided in six weight classes and placing is based on the total weight lifted on the two main lifts:
+                        <ol>
+                        <li>The Snatch</li>
+                        <li>The Clean and Jerk</li>
+                        </ol>
+                    </li>
+                    <li>Four body weight categories : Below 62 kg., 62-69 kg., 69-77 kg., Above 77 kg.</li>
+                    <li>From each Department Only 2 participants would be allowed percategory.</li>
+                    <li>During the weighing of athlete, he must mention his first lift for snatch and, Clean and Jerk to referee.</li>
+                    <li>Each competitor is allowed three attempts on each lift. The lifter’s best valid attempt on each lift counts toward his competition total.</li>
+                    <li>Once the highest value has been collected for each lift, the total weight lifted in Snatch and, Clean and jerk is added up. The lifter with the highest combined weight lifted becomes the champion. In the case of a tie, the lifter whose body weight is less becomes the champion.</li>
+                    <li>Player must come with proper kit during competition and Gloves are not allowed.</li>
+                    <li>A player can participate in only one category.</li>
+                    <li>In case of any controversy during competition and weighing, judge’s decision will consider as final decision.</li>
+                    <li><b>Snatch:</b> The barbell is pulled in a single movement from the platform to the full extent of both arms above the head, while either splitting or bending the legs. <br> The weight, which has been lifted, must be maintained in the final motionless position, arms and legs extended, the feet on the same line, until the referees give the signal to replace the barbell on the platform.</li>
+                    <li><b>Clean and Jerk :</b><br><u>The first part, the Clean:</u>The barbell is pulled in a single movement
+from the platform to the shoulders, while either splitting or bending the
+legs. The feet return to the same line, legs straight before performing the
+Jerk.<br><u>The second part, the Jerk:</u>The athlete bends the legs and extends them
+as well as the arms to bring the barbell to the full stretch of the arms
+vertically extended. He returns the feet to the same line; arms and legs
+fully extended, and waits for the referees signal to replace the barbell on
+the platform.</li>
+                    </ul>
+                </p>
+                <p>CONTACT :
+                    <p>Shiroya Vivek : 9790484626</p>
+                </p>
+
+    ]]>
+    </string>
+
+</resources>
