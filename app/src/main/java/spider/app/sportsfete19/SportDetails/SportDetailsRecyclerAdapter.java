@@ -6,6 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+
+import com.hanks.htextview.HTextViewType;
 
 import rx.Observable;
 import rx.subjects.PublishSubject;
@@ -37,6 +40,8 @@ public class SportDetailsRecyclerAdapter extends RecyclerView.Adapter<SportDetai
     @Override
     public void onBindViewHolder(SportDetailsViewHolder holder, final int position) {
         holder.sportNameTv.setText(sportsList[position]);
+//        holder.sportNameTv.setAnimateType(HTextViewType.EVAPORATE);
+//        holder.sportNameTv.animateText(sportsList[position]);
         holder.sportNameTv.setTypeface(hammersmithOnefont);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +49,7 @@ public class SportDetailsRecyclerAdapter extends RecyclerView.Adapter<SportDetai
                 onClickSubject.onNext(String.valueOf(position));
             }
         });
+        holder.relativeLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition));
     }
 
     @Override
