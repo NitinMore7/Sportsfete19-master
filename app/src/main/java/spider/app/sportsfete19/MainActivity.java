@@ -1,19 +1,16 @@
 package spider.app.sportsfete19;
 
 
-import android.animation.Animator;
-import android.animation.AnimatorInflater;
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -25,7 +22,6 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -41,15 +37,14 @@ import spider.app.sportsfete19.Home.HomeFragment;
 import spider.app.sportsfete19.Leaderboard.LeaderboardFragment;
 import spider.app.sportsfete19.Marathon.MarathonRegistration;
 import spider.app.sportsfete19.Schedule.DeptSelectionRecyclerAdapter;
-import spider.app.sportsfete19.SportDetails.SportDetailsFragment;
 import spider.app.sportsfete19.Schedule.ScheduleFragment;
+import spider.app.sportsfete19.SportDetails.SportDetailsFragment;
 import spider.app.sportsfete19.Tutorial.TutorialHelper;
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
 import uk.co.deanwild.materialshowcaseview.ShowcaseConfig;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,DepartmentUpdateCallback {
 
-    public static MenuItem prevItem = null;
     ArrayList<View> menuItems;
     private DrawerLayout flowingDrawer;
     Menu menu;
@@ -74,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     List<String> deptlist, recycler_deptList, sportList, recycler_sportList;
     DeptSelectionRecyclerAdapter recyclerAdapter, sportAdapter;
 
-    public ImageView switch_filter;
+    //public ImageView switch_filter;
     public String selectedDepartment = "ALL";
     public String selectedSport = "ALL";
     private static final String TAG="MainActivity";
@@ -84,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_menu_white);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
@@ -104,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
 
-       navigationTabBar = (NavigationTabBar) findViewById(R.id.custom_navigation);
+        navigationTabBar = findViewById(R.id.custom_navigation);
 
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
         models.add(
@@ -139,8 +134,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationTabBar.setTypeface(Typeface.createFromAsset(getAssets(),  "fonts/InconsolataBold.ttf"));
         navigationTabBar.setSelected(true);
         navigationTabBar.setModelIndex(0);
-
-
 
 
         navigationTabBar.setOnTabBarSelectedIndexListener(new NavigationTabBar.OnTabBarSelectedIndexListener() {
@@ -209,8 +202,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         view =  findViewById(R.id.view_id);
-        switch_filter = (ImageView)findViewById(R.id.switch_filter);
-        flowingDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        flowingDrawer = findViewById(R.id.drawer_layout);
         View navButton = TutorialHelper.getNavButtonView(toolbar);
 
 
@@ -224,9 +216,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         sequence.addSequenceItem(navigationTabBar,
                 "Switch between Live,Upcoming and Completed events", "NEXT");
 
-        sequence.addSequenceItem(switch_filter,
-                "Switch between Departments and Sports", "NEXT");
-
         sequence.addSequenceItem(navButton,
                 "Touch here to check out other features", "GOT IT");
 
@@ -234,8 +223,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         sequence.start();
 
 
-        scalingll = (LinearLayout) findViewById(R.id.scaling_layout);
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        scalingll = findViewById(R.id.scaling_layout);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
         menu=navigationView.getMenu();
@@ -274,8 +263,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         for ( int i = sportArraySharedPreference.length-1; i >=0; i--)
             recycler_sportList.add(sportArraySharedPreference[i]);
 
-        selection_header = (RelativeLayout) findViewById(R.id.selection_header);
-        dept_recycler = (RecyclerView) findViewById(R.id.main_dept_recycler);
+        selection_header = findViewById(R.id.selection_header);
+        dept_recycler = findViewById(R.id.main_dept_recycler);
         dept_recycler.setHasFixedSize(true);
         dept_recycler.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,true));
         recyclerAdapter = new DeptSelectionRecyclerAdapter(recycler_deptList, "ALL",
@@ -297,7 +286,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //sport header
 
-        sport_recycler = (RecyclerView) findViewById(R.id.main_sport_recycler);
+        sport_recycler = findViewById(R.id.main_sport_recycler);
         sport_recycler.setHasFixedSize(true);
         sport_recycler.setLayoutManager(new LinearLayoutManager(MainActivity.this,LinearLayoutManager.HORIZONTAL,true));
         sportAdapter = new DeptSelectionRecyclerAdapter(recycler_sportList, "ALL", MainActivity.this, new DeptSelectionRecyclerAdapter.MyAdapterListener() {
@@ -324,17 +313,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         },300);
 
-        switch_filter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(dept_recycler.isShown()){
-                    flipAnimation(dept_recycler,sport_recycler);
-                }else if(sport_recycler.isShown()){
-                    flipAnimation(sport_recycler,dept_recycler);
-                }
-            }
-        });
-
     }
 
     public void bounceElement(TextView textView){
@@ -342,35 +320,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ButtonBounce interpolator = new ButtonBounce(0.2, 10);
         myAnim.setInterpolator(interpolator);
         textView.startAnimation(myAnim);
-    }
-
-    public void flipAnimation(final RecyclerView VrecyclerView, final RecyclerView INVrecyclerView){
-        ObjectAnimator anim = (ObjectAnimator) AnimatorInflater.loadAnimator(MainActivity.this, R.animator.flipping);
-        anim.setTarget(VrecyclerView);
-        anim.setDuration(500);
-        anim.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                VrecyclerView.setVisibility(View.GONE);
-                INVrecyclerView.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {
-
-            }
-        });
-        anim.start();
     }
 
     @Override
@@ -410,7 +359,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //fragmentTransaction.commit();
             invalidateOptionsMenu();
             getSupportActionBar().setTitle("Live");
-            selection_header.setVisibility(View.VISIBLE);
             }catch(IllegalStateException ignored){
                 ignored.printStackTrace();
             }
