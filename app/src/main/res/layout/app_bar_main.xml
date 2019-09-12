@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/fab_button"
-                app:backgroundTint="#f1efef" />
+                app:backgroundTint="#ffffff" />
 
         </com.truizlop.fabreveallayout.FABRevealLayout>
 
