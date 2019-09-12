@@ -59,14 +59,10 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/fragment_container"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        </RelativeLayout>
+            android:layout_height="0.5dp"
+            android:background="#9e9c9c" />
 
         <devlight.io.library.ntb.NavigationTabBar
             android:id="@+id/custom_navigation"
@@ -99,10 +95,14 @@
             android:layout_height="0.5dp"
             android:background="#9e9c9c" />
 
-        <View
+        <RelativeLayout
+            android:id="@+id/fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="#9e9c9c" />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
