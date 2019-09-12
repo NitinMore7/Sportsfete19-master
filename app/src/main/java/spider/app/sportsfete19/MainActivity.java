@@ -27,6 +27,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.truizlop.fabreveallayout.FABRevealLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +58,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     RecyclerView dept_recycler, sport_recycler;
     RelativeLayout selection_header;
 
+    FABRevealLayout sportSelection;
+    TextView selectedSportView;
+
     HomeFragment homeFragment;
     LeaderboardFragment leaderboardFragment;
     ScheduleFragment scheduleFragment;
@@ -69,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     List<String> deptlist, recycler_deptList, sportList, recycler_sportList;
     DeptSelectionRecyclerAdapter recyclerAdapter, sportAdapter;
 
-    //public ImageView switch_filter;
     public String selectedDepartment = "ALL";
     public String selectedSport = "ALL";
     private static final String TAG="MainActivity";
@@ -78,6 +81,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sportSelection = findViewById(R.id.fab_reveal_layout);
+        selectedSportView = findViewById(R.id.selected_sport);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -235,9 +241,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setDrawerTypeface();
 
-        //String token = FirebaseInstanceId.getInstance().getToken();
-        //if(token!=null)
-        //Log.d("token",token);
         FirebaseMessaging.getInstance().subscribeToTopic("important");
 
         deptArraySharedPreference=getResources().getStringArray(R.array.filter_department_array);
@@ -300,6 +303,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent.putExtra("selectedSport",""+sportList.get(position).toUpperCase());
                 sendBroadcast(intent);
                 sportAdapter.notifyDataSetChanged();
+                sportSelection.revealMainView();
+                selectedSportView.setText(selectedSport);
             }
         });
 
@@ -545,6 +550,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
+        sportSelection.revealMainView();
         Log.d("lastviewfragment", "" + (lastViewFragment == 0));
         if(flowingDrawer.isDrawerOpen(GravityCompat.START)) {
             flowingDrawer.closeDrawer(GravityCompat.START);
