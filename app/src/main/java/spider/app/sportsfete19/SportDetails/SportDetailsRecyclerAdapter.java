@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 
 import rx.Observable;
 import rx.subjects.PublishSubject;
@@ -44,6 +45,7 @@ public class SportDetailsRecyclerAdapter extends RecyclerView.Adapter<SportDetai
                 onClickSubject.onNext(String.valueOf(position));
             }
         });
+
     }
 
     @Override
@@ -64,4 +66,4 @@ public class SportDetailsRecyclerAdapter extends RecyclerView.Adapter<SportDetai
     public int getItemViewType(int position) {
         return position;
     }
-}
+    }

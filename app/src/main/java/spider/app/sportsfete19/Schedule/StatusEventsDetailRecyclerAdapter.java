@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -104,7 +105,7 @@ public class StatusEventsDetailRecyclerAdapter extends RecyclerView.Adapter<Even
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(final EventViewHolder holder, final int position) {
-
+        holder.getView().setAnimation(AnimationUtils.loadAnimation(context,R.anim.zoom_in));
         if (!eventList.isEmpty()) {
             StatusEventDetailsPOJO event = eventList.get(position);
 
