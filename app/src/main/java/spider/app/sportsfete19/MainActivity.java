@@ -364,6 +364,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //fragmentTransaction.commit();
             invalidateOptionsMenu();
             getSupportActionBar().setTitle("Live");
+            selection_header.setVisibility(View.VISIBLE);
             }catch(IllegalStateException ignored){
                 ignored.printStackTrace();
             }
