@@ -38,7 +38,7 @@ public class HomeScreen extends AppCompatActivity {
     public void onResume(){
         super.onResume();
 
-        Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.maincropped);
+        Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.splash);
         videoview.setVideoURI(uri);
         videoview.setZOrderOnTop(true);
         videoview.start();
