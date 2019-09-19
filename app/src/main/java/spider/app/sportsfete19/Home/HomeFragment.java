@@ -234,7 +234,6 @@ public class HomeFragment extends Fragment implements Callback<List<StatusEventD
         });
 
         recyclerView.setAdapter(eventRecyclerAdapter);
-
         swipeRefreshLayout= (SwipeRefreshLayout) view.findViewById(R.id.home_swipe_to_refresh);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setRefreshing(true);
