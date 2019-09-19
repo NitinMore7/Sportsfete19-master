@@ -98,13 +98,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Log.d("font set","true"+"");
             if(view instanceof TextView) {
                 TextView textView = (TextView) view;
-
                 textView.setTypeface(Typeface.createFromAsset(getAssets(),  "fonts/HammersmithOneRegular.ttf"));
                 Log.d("font set","true"+"");
             }
         }
-
-
         navigationTabBar = findViewById(R.id.custom_navigation);
 
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
