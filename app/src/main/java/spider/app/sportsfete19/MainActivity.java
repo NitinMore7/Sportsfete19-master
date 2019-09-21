@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -266,7 +267,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         selection_header = findViewById(R.id.selection_header);
         dept_recycler = findViewById(R.id.main_dept_recycler);
         dept_recycler.setHasFixedSize(true);
-        dept_recycler.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,true));
+        final LinearLayoutManager layoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        dept_recycler.setLayoutManager(layoutManager);
         recyclerAdapter = new DeptSelectionRecyclerAdapter(recycler_deptList, "ALL",
                 MainActivity.this, new DeptSelectionRecyclerAdapter.MyAdapterListener() {
             @Override
@@ -281,14 +283,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 recyclerAdapter.notifyDataSetChanged();
             }
         });
+        final int duration = 10;
+        final int pixelsToMove = 30;
+        final Handler mHandler = new Handler(Looper.getMainLooper());
+        final Runnable SCROLLING_RUNNABLE = new Runnable() {
+            @Override
+            public void run() {
+                dept_recycler.smoothScrollBy(pixelsToMove, 0);
+                mHandler.postDelayed(this, duration);
+            }
+        };
 
         dept_recycler.setAdapter(recyclerAdapter);
 
+        dept_recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int lastItem = layoutManager.findLastCompletelyVisibleItemPosition();
+                if(lastItem == layoutManager.getItemCount()-1){
+                    mHandler.removeCallbacks(SCROLLING_RUNNABLE);
+                    Handler postHandler = new Handler();
+                    postHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            dept_recycler.setAdapter(null);
+                            dept_recycler.setAdapter(recyclerAdapter);
+                            mHandler.postDelayed(SCROLLING_RUNNABLE, 500);
+                        }
+                    }, 500);
+                }
+            }
+        });
+        mHandler.postDelayed(SCROLLING_RUNNABLE, 2000);
         //sport header
 
         sport_recycler = findViewById(R.id.main_sport_recycler);
         sport_recycler.setHasFixedSize(true);
-        sport_recycler.setLayoutManager(new LinearLayoutManager(MainActivity.this,LinearLayoutManager.HORIZONTAL,true));
+        final LinearLayoutManager layoutManager1=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        sport_recycler.setLayoutManager(layoutManager1);
         sportAdapter = new DeptSelectionRecyclerAdapter(recycler_sportList, "ALL", MainActivity.this, new DeptSelectionRecyclerAdapter.MyAdapterListener() {
             @Override
             public void onItemSelected(int position, View view) {
@@ -304,17 +337,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 selectedSportView.setText(selectedSport);
             }
         });
+        final Handler mHandler1 = new Handler(Looper.getMainLooper());
+        final Runnable SCROLLING_RUNNABLE1 = new Runnable() {
+            @Override
+            public void run() {
+                sport_recycler.smoothScrollBy(pixelsToMove, 0);
+                mHandler1.postDelayed(this, duration);
+            }
+        };
+
 
         sport_recycler.setAdapter(sportAdapter);
 
-        new Handler().postDelayed(new Runnable() {
+        sport_recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int lastItem = layoutManager1.findLastCompletelyVisibleItemPosition();
+                if(lastItem == layoutManager1.getItemCount()-1){
+                    mHandler1.removeCallbacks(SCROLLING_RUNNABLE1);
+                    Handler postHandler = new Handler();
+                    postHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            sport_recycler.setAdapter(null);
+                            sport_recycler.setAdapter(sportAdapter);
+                            mHandler1.postDelayed(SCROLLING_RUNNABLE1, 500);
+                        }
+                    }, 500);
+                }
+            }
+        });
+        mHandler1.postDelayed(SCROLLING_RUNNABLE1, 2000);
+
+      /*  new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 dept_recycler.smoothScrollToPosition(14);
                 sport_recycler.smoothScrollToPosition(0);
             }
         },300);
-
+*/
     }
 
     public void bounceElement(TextView textView){
