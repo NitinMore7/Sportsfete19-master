@@ -9,7 +9,7 @@
     android:background="@drawable/bg2">
 
 
-    <ImageView
+   <!-- <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -109,5 +109,5 @@
 
     </com.github.florent37.shapeofview.shapes.RoundRectView>
 
-
+-->
 </LinearLayout>

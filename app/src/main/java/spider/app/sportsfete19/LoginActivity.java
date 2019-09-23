@@ -5,9 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
-import com.tomlonghurst.expandablehinttext.ExpandableHintText;
+//import com.tomlonghurst.expandablehinttext.ExpandableHintText;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,13 +20,13 @@ import spider.app.sportsfete19.API.LoginData;
 import spider.app.sportsfete19.API.LoginInterface;
 import spider.app.sportsfete19.API.LoginResponse;
 import spider.app.sportsfete19.API.UserDetails;
-import spider.app.sportsfete19.Marathon.MarathonRegistration;
 
 public class LoginActivity extends Activity {
 
     //login page
 
-    private ExpandableHintText rollNo,password;
+    //private ExpandableHintText rollNo,password;
+    private EditText rollNo,password;
     private MyDatabase myDatabase = new MyDatabase(this);
     private LoginResponse loginResponse;
     private LoginInterface loginInterface;
@@ -34,7 +35,7 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_temp);
         rollNo = findViewById(R.id.rollNoEditText);
         password = findViewById(R.id.passwordEditText);
     }
