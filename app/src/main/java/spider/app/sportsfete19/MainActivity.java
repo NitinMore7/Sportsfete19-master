@@ -502,7 +502,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }catch(IllegalStateException ignored){
                 ignored.printStackTrace();
             }
+        }else if(id == R.id.searchBYroll){
+                Intent intent = new Intent(MainActivity.this,UserDetails.class);
+                startActivity(intent);
         }
+
 
                 setDrawerTypeface();
 

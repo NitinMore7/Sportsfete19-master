@@ -4,6 +4,8 @@ package spider.app.sportsfete19.API;
  * Created by srikanth on 21/1/17.
  */
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 import java.util.List;
@@ -17,12 +19,18 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import spider.app.sportsfete19.API.SearchUserByRollNo.SearchByRollNoPOJO;
 
 
 public interface ApiInterface {
+
+    Gson gson = new GsonBuilder()
+            .setLenient()
+            .create();
+
     Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://us-central1-sportsfete-732bf.cloudfunctions.net")
-            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://us-central1-sportsfete19-f7729.cloudfunctions.net")
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build();
 
     @GET("/leaderboard")
@@ -47,4 +55,6 @@ public interface ApiInterface {
     @GET("/positions")
     Call<List<List<String>>> getIndividualStanding(@Query("sport") String sport);
 
+    @GET("/fetch_user")
+    Call<SearchByRollNoPOJO> getUserDetails(@Query("roll") String roll_no);
 }
