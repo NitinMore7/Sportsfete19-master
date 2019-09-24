@@ -1,15 +1,15 @@
 package spider.app.sportsfete19;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-//import com.tomlonghurst.expandablehinttext.ExpandableHintText;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 
@@ -23,6 +23,7 @@ import spider.app.sportsfete19.API.LoginData;
 import spider.app.sportsfete19.API.LoginInterface;
 import spider.app.sportsfete19.API.LoginResponse;
 import spider.app.sportsfete19.API.UserDetails;
+import tyrantgit.explosionfield.ExplosionField;
 
 public class LoginActivity extends Activity {
 
@@ -30,10 +31,11 @@ public class LoginActivity extends Activity {
 
     //private ExpandableHintText rollNo,password;
     private MaterialEditText rollNo,password;
+    private ExplosionField mExplosionField;
     private MyDatabase myDatabase = new MyDatabase(this);
     private LoginResponse loginResponse;
     private LoginInterface loginInterface;
-    private ImageView logo;
+    private ImageView logo,spiderlogo;
     private boolean clicked = false;
 
     @Override
@@ -43,6 +45,49 @@ public class LoginActivity extends Activity {
         rollNo = findViewById(R.id.rollNoEditText);
         password = findViewById(R.id.passwordEditText);
         logo = findViewById(R.id.logo);
+        mExplosionField = ExplosionField.attach2Window(this);
+        spiderlogo = findViewById(R.id.spiderlogo);
+        logo.setClickable(true);
+        logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addListener(findViewById(R.id.root));
+            }
+        });
+
+    }
+
+    private void addListener(View root) {
+        if (root instanceof ViewGroup) {
+            ViewGroup parent = (ViewGroup) root;
+            for (int i = 0; i < parent.getChildCount(); i++) {
+                addListener(parent.getChildAt(i));
+            }
+        } else {
+            root.setClickable(true);
+            root.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mExplosionField.explode(v);
+                    if (v != null) {
+                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    }
+                    if(v.getId()==R.id.passwordEditText||v.getId()==R.id.rollNoEditText){
+                        v.setVisibility(View.GONE);
+                    }
+                    v.setOnClickListener(null);
+                }
+            });
+        }
+        spiderlogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+        });
     }
 
     private boolean entriesGiven(){

@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context="spider.app.sportsfete19.LoginActivity"
     android:orientation="vertical"
-    android:background="@drawable/bg3">
+    android:background="@drawable/bg3"
+    android:id="@+id/root">
 
     <ImageView
         android:layout_width="match_parent"
@@ -80,7 +81,6 @@
                     android:layout_marginBottom="4dp"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:id="@+id/signIn"
                     android:padding="10dp"
                     app:cardCornerRadius="10dp"
                     android:elevation="10dp">
@@ -90,6 +90,7 @@
                         android:layout_height="match_parent"
                         android:text="Sign In"
                         android:onClick="signIn"
+                        android:id="@+id/signIn"
                         android:background="@android:color/white"
                         android:layout_gravity="center"/>
 
