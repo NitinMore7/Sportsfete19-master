@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#16282a</color>
-    <color name="colorPrimaryDark">#274649</color>
+    <color name="colorPrimaryDark">#000</color>
     <color name="colorTabtext">#404f50</color>
     <color name="green_text">#4ab556</color>
     <color name="dept_box_background">#4ab556</color>

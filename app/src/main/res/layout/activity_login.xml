@@ -6,29 +6,24 @@
     android:layout_height="match_parent"
     tools:context="spider.app.sportsfete19.LoginActivity"
     android:orientation="vertical"
-    android:background="@drawable/bg2">
+    android:background="@drawable/bg3">
 
-
-   <!-- <ImageView
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:paddingTop="20dp"
+        android:id="@+id/logo"
         android:elevation="400dp"
         android:src="@drawable/sportsfete_logo"/>
 
-    <com.github.florent37.shapeofview.shapes.RoundRectView
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
         android:elevation="4dp"
         android:layout_margin="20dp"
-        app:shape_roundRect_borderColor="@color/custom_red"
-        app:shape_roundRect_bottomLeftRadius="40dp"
-        app:shape_roundRect_bottomRightRadius="40dp"
-        app:shape_roundRect_topLeftRadius="40dp"
-        app:shape_roundRect_topRightRadius="40dp"
-        app:shape_roundRect_borderWidth="0.5dp">
+        app:cardCornerRadius="30dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -46,59 +41,56 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0dp"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="10dp"
-                    android:id="@+id/login"
-                    android:text="𝙻𝚘𝚐𝚒𝚗"
-                    android:textSize="21sp"
-                    android:textColor="@android:color/white"/>
+                    android:id="@+id/login" />
 
-                <com.tomlonghurst.expandablehinttext.ExpandableHintText
-                    android:layout_marginTop="32dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="   Roll Number"
-                    android:layout_below="@id/login"
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/rollNoEditText"
-                    android:inputType="number"
-                    android:textColor="@color/custom_blue"
-                    app:textBoxColor="@android:color/white"
-                    app:floatingLabelColor="@color/custom_red"
-                    app:imageColor="@color/custom_red"
-                    app:image="@drawable/ic_mail_black_24dp"/>
-
-                <com.tomlonghurst.expandablehinttext.ExpandableHintText
-                    android:layout_marginTop="32dp"
+                    app:met_primaryColor="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/passwordEditText"
-                    android:layout_below="@id/rollNoEditText"
-                    android:hint="   Password"
-                    android:inputType="textPassword"
-                    android:textColor="@color/custom_blue"
-                    app:textBoxColor="@android:color/white"
-                    app:floatingLabelColor="@color/custom_red"
-                    app:imageColor="@color/custom_red"
-                    app:image="@drawable/ic_vpn_key_black_24dp" />
+                    android:layout_below="@id/login"
+                    app:met_textColor="@color/white"
+                    android:layout_marginTop="16dp"
+                    android:hint="Roll Number"
+                    android:inputType="number"
+                    app:met_iconLeft="@drawable/ic_mail_black_24dp"
+                    app:met_floatingLabel="highlight"
+                    app:met_textColorHint="@color/white" />
 
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/passwordEditText"
+                    app:met_primaryColor="@color/white"
+                    app:met_textColor="@color/white"
+                    app:met_iconLeft="@drawable/ic_vpn_key_black_24dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rollNoEditText"
+                    android:layout_marginTop="32dp"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    app:met_floatingLabel="highlight"
+                    app:met_textColorHint="@color/white" />
 
                 <android.support.v7.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="4dp"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:id="@+id/signIn"
-                    app:cardCornerRadius="4dp"
-                    android:background="@android:color/white"
+                    android:padding="10dp"
+                    app:cardCornerRadius="10dp"
                     android:elevation="10dp">
 
                     <Button
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:text="Sign In"
                         android:onClick="signIn"
+                        android:background="@android:color/white"
                         android:layout_gravity="center"/>
 
                 </android.support.v7.widget.CardView>
@@ -107,7 +99,50 @@
 
         </RelativeLayout>
 
-    </com.github.florent37.shapeofview.shapes.RoundRectView>
+    </android.support.v7.widget.CardView>
 
--->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#175283">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:id="@+id/Made_by"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:text="Made By"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/spiderlogo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toEndOf="@+id/Made_by"
+                    android:padding="6dp"
+                    android:src="@drawable/spiderlogo" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toEndOf="@id/spiderlogo"
+                    android:src="@drawable/spiderlogofull" />
+            </RelativeLayout>
+        </FrameLayout>
+    </RelativeLayout>
+
 </LinearLayout>

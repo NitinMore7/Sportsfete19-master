@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 //import com.tomlonghurst.expandablehinttext.ExpandableHintText;
+
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,18 +29,20 @@ public class LoginActivity extends Activity {
     //login page
 
     //private ExpandableHintText rollNo,password;
-    private EditText rollNo,password;
+    private MaterialEditText rollNo,password;
     private MyDatabase myDatabase = new MyDatabase(this);
     private LoginResponse loginResponse;
     private LoginInterface loginInterface;
+    private ImageView logo;
     private boolean clicked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_temp);
+        setContentView(R.layout.activity_login);
         rollNo = findViewById(R.id.rollNoEditText);
         password = findViewById(R.id.passwordEditText);
+        logo = findViewById(R.id.logo);
     }
 
     private boolean entriesGiven(){
@@ -76,15 +81,18 @@ public class LoginActivity extends Activity {
                                 Log.i("jwt", loginResponse.getToken());
                                 myDatabase.insert(userDetails);
                                 Toast.makeText(LoginActivity.this, "Logged in!", Toast.LENGTH_SHORT).show();
+
                                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(i);
                                 finish();
                             } else {
                                 Toast.makeText(getApplicationContext(), "Error logging in, Please enter correct Roll number and Password", Toast.LENGTH_SHORT).show();
+                                clicked=false;
                             }
                         }
                         else {
                             Toast.makeText(getApplicationContext(), "Error logging in, Please enter correct Roll number and Password", Toast.LENGTH_SHORT).show();
+                            clicked=false;
                         }
                     }
 
@@ -92,10 +100,10 @@ public class LoginActivity extends Activity {
                     public void onFailure(Call<LoginResponse> call, Throwable t) {
                         Toast.makeText(getApplicationContext(), "Error logging in, Please check your Internet Connection", Toast.LENGTH_SHORT).show();
                         Log.d("login failure", t.getMessage());
+                        clicked=false;
                     }
                 });
             }
         }
-
     }
 }
