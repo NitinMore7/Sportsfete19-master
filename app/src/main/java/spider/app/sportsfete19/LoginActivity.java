@@ -54,7 +54,6 @@ public class LoginActivity extends Activity {
                 addListener(findViewById(R.id.root));
             }
         });
-
     }
 
     private void addListener(View root) {

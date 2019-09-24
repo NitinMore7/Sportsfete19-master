@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="spider.app.sportsfete19.LoginActivity"
     android:orientation="vertical"
-    android:background="@drawable/bg3"
+    android:background="@drawable/bg4"
     android:id="@+id/root">
 
     <ImageView
