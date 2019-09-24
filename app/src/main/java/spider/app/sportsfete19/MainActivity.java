@@ -11,8 +11,11 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.os.Bundle;
+
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
