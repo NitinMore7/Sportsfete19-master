@@ -26,6 +26,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 import com.twotoasters.jazzylistview.JazzyHelper;
 import com.twotoasters.jazzylistview.recyclerview.JazzyRecyclerViewScrollListener;
+import com.yalantis.phoenix.PullToRefreshView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class HomeFragment extends Fragment implements Callback<List<StatusEventD
     List<StatusEventDetailsPOJO> temp_filter_eventList;
     StatusEventsDetailRecyclerAdapter eventRecyclerAdapter;
     RecyclerView recyclerView;
-    SwipeRefreshLayout swipeRefreshLayout;
+    PullToRefreshView swipeRefreshLayout;
     Call<List<StatusEventDetailsPOJO>> call;
     ApiInterface apiInterface;
     Context context;
@@ -247,8 +248,19 @@ public class HomeFragment extends Fragment implements Callback<List<StatusEventD
 
         recyclerView.setAdapter(eventRecyclerAdapter);
 
-        swipeRefreshLayout= (SwipeRefreshLayout) view.findViewById(R.id.home_swipe_to_refresh);
-        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout= (PullToRefreshView) view.findViewById(R.id.home_swipe_to_refresh);
+        swipeRefreshLayout.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                call = apiInterface.getEventByStatus(status);
+                call.enqueue(HomeFragment.this);
+                swipeRefreshLayout.setRefreshing(true);
+                FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(context);
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Live events Fetched");
+                mFirebaseAnalytics.logEvent("LiveEvents",bundle);
+            }
+        });
         swipeRefreshLayout.setRefreshing(true);
 
         onRefresh();
@@ -286,7 +298,7 @@ public class HomeFragment extends Fragment implements Callback<List<StatusEventD
 
 
             for (int i = 0; i <responseList.size() ; i++)
-                    eventList.add(responseList.get(i));
+                eventList.add(responseList.get(i));
 
             if(eventList.size()==0 && viewGroup.getContext()!=null){
                 Snackbar.make(viewGroup,"There are currently no "+status+" events!", Snackbar.LENGTH_LONG).show();
