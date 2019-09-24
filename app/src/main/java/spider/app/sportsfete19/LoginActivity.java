@@ -80,6 +80,18 @@ public class LoginActivity extends Activity {
                 }
             });
         }
+        findViewById(R.id.cv1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mExplosionField.explode(view);
+            }
+        });
+        findViewById(R.id.cv2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mExplosionField.explode(view);
+            }
+        });
         spiderlogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
