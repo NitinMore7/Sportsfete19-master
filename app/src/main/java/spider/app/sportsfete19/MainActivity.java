@@ -5,14 +5,22 @@ import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.os.Handler;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.os.Bundle;
+
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,7 +30,9 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -41,13 +51,18 @@ import spider.app.sportsfete19.Home.HomeFragment;
 import spider.app.sportsfete19.Leaderboard.LeaderboardFragment;
 import spider.app.sportsfete19.Marathon.MarathonRegistration;
 import spider.app.sportsfete19.Schedule.DeptSelectionRecyclerAdapter;
-import spider.app.sportsfete19.SportDetails.SportDetailsFragment;
 import spider.app.sportsfete19.Schedule.ScheduleFragment;
+import spider.app.sportsfete19.SportDetails.SportDetailsFragment;
 import spider.app.sportsfete19.Tutorial.TutorialHelper;
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
 import uk.co.deanwild.materialshowcaseview.ShowcaseConfig;
+import yalantis.com.sidemenu.interfaces.Resourceble;
+import yalantis.com.sidemenu.interfaces.ScreenShotable;
+import yalantis.com.sidemenu.model.SlideMenuItem;
+import yalantis.com.sidemenu.util.ViewAnimator;
+import yalantis.com.sidemenu.util.ViewAnimator.ViewAnimatorListener;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,DepartmentUpdateCallback {
+public class MainActivity extends AppCompatActivity implements ViewAnimatorListener,NavigationView.OnNavigationItemSelectedListener {
 
     public static MenuItem prevItem = null;
     ArrayList<View> menuItems;
@@ -61,7 +76,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     RecyclerView dept_recycler, sport_recycler;
     RelativeLayout selection_header;
-
+    RecyclerView mRecyclerView;
+    private RecyclerView.LayoutManager mLayoutManager;
     HomeFragment homeFragment;
     LeaderboardFragment leaderboardFragment;
     ScheduleFragment scheduleFragment;
@@ -78,11 +94,52 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public String selectedDepartment = "ALL";
     public String selectedSport = "ALL";
     private static final String TAG="MainActivity";
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle drawerToggle;
+    private List<SlideMenuItem> list = new ArrayList<>();
+    private MenuList mAdapter;
+    private ViewAnimator viewAnimator;
+    private int res = R.drawable.athletics;
+    private LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ContentFragment contentFragment = ContentFragment.newInstance(R.drawable.athletics);
+        Bundle arguments = new Bundle();
+        arguments.putString("target", "live");
+        HomeFragment homeFragment = new HomeFragment();
+        homeFragment.setArguments(arguments);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, homeFragment)
+                .commit();
+        drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.setScrimColor(Color.TRANSPARENT);
+        linearLayout = findViewById(R.id.left_drawer);
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.closeDrawers();
+            }
+        });
+
+
+
+        setActionBar();
+        createMenuList();
+        /*
+        mRecyclerView = findViewById(R.id.recyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        mAdapter = new MenuList(getApplicationContext(), (ArrayList<SlideMenuItem>) list);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+        */
+
+        viewAnimator = new ViewAnimator<>(this, list, contentFragment, drawerLayout, (ViewAnimatorListener) this);
+        drawerLayout.setStatusBarBackgroundColor(Color.RED);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -104,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
 
-       navigationTabBar = (NavigationTabBar) findViewById(R.id.custom_navigation);
+        navigationTabBar = (NavigationTabBar) findViewById(R.id.custom_navigation);
 
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
         models.add(
@@ -154,17 +211,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.d("pos",""+index);
                 switch (index){
                     case 0: try {
-                            Bundle arguments = new Bundle();
-                            lastViewFragment = 0;
-                            arguments.putString("target", "live");
-                            HomeFragment homeFragment = new HomeFragment();
-                            homeFragment.setArguments(arguments);
-                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                            transaction.replace(R.id.fragment_container, homeFragment,"LIVE");
-                            //TODO:dont call after activity is paused
-                            transaction.commit();
-                            invalidateOptionsMenu();
-                            getSupportActionBar().setTitle("Live");
+                        Bundle arguments = new Bundle();
+                        lastViewFragment = 0;
+                        arguments.putString("target", "live");
+                        HomeFragment homeFragment = new HomeFragment();
+                        homeFragment.setArguments(arguments);
+                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragment_container, homeFragment,"LIVE");
+                        //TODO:dont call after activity is paused
+                        transaction.commit();
+                        invalidateOptionsMenu();
+                        getSupportActionBar().setTitle("Live");
                     }catch(IllegalStateException ignored){
                         ignored.printStackTrace();
                     }
@@ -172,36 +229,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         break;
 
                     case 1:  try {
-                            Bundle arguments2 = new Bundle();
-                            arguments2.putString("target", "upcoming");
-                            lastViewFragment = 0;
-                            HomeFragment homeFragment2 = new HomeFragment();
-                            homeFragment2.setArguments(arguments2);
-                            FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
-                            transaction2.replace(R.id.fragment_container, homeFragment2,"UPCOMING");
-                            transaction2.commit();
-                            invalidateOptionsMenu();
-                            getSupportActionBar().setTitle("Upcoming");
+                        Bundle arguments2 = new Bundle();
+                        arguments2.putString("target", "upcoming");
+                        lastViewFragment = 0;
+                        HomeFragment homeFragment2 = new HomeFragment();
+                        homeFragment2.setArguments(arguments2);
+                        FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
+                        transaction2.replace(R.id.fragment_container, homeFragment2,"UPCOMING");
+                        transaction2.commit();
+                        invalidateOptionsMenu();
+                        getSupportActionBar().setTitle("Upcoming");
                     }catch(IllegalStateException ignored){
                         ignored.printStackTrace();
                     }
-                            break;
+                        break;
 
                     case 2: try {
-                            Bundle arguments3 = new Bundle();
-                            arguments3.putString("target", "completed");
-                            lastViewFragment = 0;
-                            HomeFragment homeFragment3 = new HomeFragment();
-                            homeFragment3.setArguments(arguments3);
-                            FragmentTransaction transaction3 = getSupportFragmentManager().beginTransaction();
-                            transaction3.replace(R.id.fragment_container, homeFragment3,"COMPLETED");
-                            transaction3.commit();
-                            invalidateOptionsMenu();
-                            getSupportActionBar().setTitle("Completed");
+                        Bundle arguments3 = new Bundle();
+                        arguments3.putString("target", "completed");
+                        lastViewFragment = 0;
+                        HomeFragment homeFragment3 = new HomeFragment();
+                        homeFragment3.setArguments(arguments3);
+                        FragmentTransaction transaction3 = getSupportFragmentManager().beginTransaction();
+                        transaction3.replace(R.id.fragment_container, homeFragment3,"COMPLETED");
+                        transaction3.commit();
+                        invalidateOptionsMenu();
+                        getSupportActionBar().setTitle("Completed");
                     }catch(IllegalStateException ignored){
                         ignored.printStackTrace();
                     }
-                            break;
+                        break;
                 }
             }
         });
@@ -232,9 +289,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         sequence.start();
-
+ /*
 
         scalingll = (LinearLayout) findViewById(R.id.scaling_layout);
+
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
@@ -242,9 +300,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.d("menu", navigationView.getMenu().getItem(0).getTitle().toString());
         navigationView.getMenu().getItem(0).setChecked(true);
         onNavigationItemSelected(navigationView.getMenu().getItem(0));
+*/
 
+        //setDrawerTypeface();
 
-        setDrawerTypeface();
 
         //String token = FirebaseInstanceId.getInstance().getToken();
         //if(token!=null)
@@ -384,6 +443,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return super.onOptionsItemSelected(item);
         }
     }
+    /*
 
     @Override
     public boolean onNavigationItemSelected(final MenuItem item) {
@@ -393,116 +453,116 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void run() {
 
-        if (id == R.id.nav_home) {
-            Runtime.getRuntime().gc();
-            try {
-            navigationTabBar.setSelected(true);
-            navigationTabBar.setModelIndex(0);
-            navigationTabBar.setVisibility(View.VISIBLE);
-            lastViewFragment = 0;
-            Bundle arguments = new Bundle();
-            arguments.putString("target", "live");
-            homeFragment = new HomeFragment();
-            homeFragment.setArguments(arguments);
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, homeFragment);
-            fragmentTransaction.commit();
-            //fragmentTransaction.commit();
-            invalidateOptionsMenu();
-            getSupportActionBar().setTitle("Live");
-            selection_header.setVisibility(View.VISIBLE);
-            }catch(IllegalStateException ignored){
-                ignored.printStackTrace();
-            }
+                if (id == R.id.nav_home) {
+                    Runtime.getRuntime().gc();
+                    try {
+                        navigationTabBar.setSelected(true);
+                        navigationTabBar.setModelIndex(0);
+                        navigationTabBar.setVisibility(View.VISIBLE);
+                        lastViewFragment = 0;
+                        Bundle arguments = new Bundle();
+                        arguments.putString("target", "live");
+                        homeFragment = new HomeFragment();
+                        homeFragment.setArguments(arguments);
+                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container, homeFragment);
+                        fragmentTransaction.commit();
+                        //fragmentTransaction.commit();
+                        invalidateOptionsMenu();
+                        getSupportActionBar().setTitle("Live");
+                        selection_header.setVisibility(View.VISIBLE);
+                    }catch(IllegalStateException ignored){
+                        ignored.printStackTrace();
+                    }
 
-        } else if (id == R.id.nav_leaderboard) {
-            Runtime.getRuntime().gc();
-            try {
-            selection_header.setVisibility(View.GONE);
-            navigationTabBar.setVisibility(View.GONE);
-            lastViewFragment = 1;
-            leaderboardFragment = new LeaderboardFragment();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, leaderboardFragment);
-            fragmentTransaction.commit();
-            //fragmentTransaction.commit();
-            invalidateOptionsMenu();
-            getSupportActionBar().setTitle("LeaderBoard");
-            }catch(IllegalStateException ignored){
-                ignored.printStackTrace();
-            }
+                } else if (id == R.id.nav_leaderboard) {
+                    Runtime.getRuntime().gc();
+                    try {
+                        selection_header.setVisibility(View.GONE);
+                        navigationTabBar.setVisibility(View.GONE);
+                        lastViewFragment = 1;
+                        leaderboardFragment = new LeaderboardFragment();
+                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container, leaderboardFragment);
+                        fragmentTransaction.commit();
+                        //fragmentTransaction.commit();
+                        invalidateOptionsMenu();
+                        getSupportActionBar().setTitle("LeaderBoard");
+                    }catch(IllegalStateException ignored){
+                        ignored.printStackTrace();
+                    }
 
-        }else if(id==R.id.nav_schedule){
-            Runtime.getRuntime().gc();
-            try {
-            selection_header.setVisibility(View.GONE);
-            navigationTabBar.setVisibility(View.GONE);
-            lastViewFragment=2;
-            Bundle arguments = new Bundle();
-            arguments.putBoolean("refresh", true);
-            scheduleFragment=new ScheduleFragment();
-            scheduleFragment.setArguments(arguments);
-            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container,scheduleFragment);
-            fragmentTransaction.commit();
-            //fragmentTransaction.commit();
-            invalidateOptionsMenu();
-            getSupportActionBar().setElevation(0);
-            getSupportActionBar().setTitle("Schedule");
-            }catch(IllegalStateException ignored){
-                ignored.printStackTrace();
-            }
-        }
-        else if(id==R.id.nav_following){
-            Runtime.getRuntime().gc();
-            try {
-            selection_header.setVisibility(View.GONE);
-            navigationTabBar.setVisibility(View.GONE);
-            lastViewFragment=3;
-            subscribeFragment =new SubscribeFragment();
-            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, subscribeFragment);
-                fragmentTransaction.commit();
-            //fragmentTransaction.commit();
-            invalidateOptionsMenu();
-            getSupportActionBar().setTitle("Following");
-            }catch(IllegalStateException ignored){
-                ignored.printStackTrace();
-            }
-        }
-        else if(id==R.id.nav_events){
-            Runtime.getRuntime().gc();
-            try {
-            selection_header.setVisibility(View.GONE);
-            navigationTabBar.setVisibility(View.GONE);
-            lastViewFragment=4;
-            sportDetailsFragment = new SportDetailsFragment();
-            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, sportDetailsFragment);
-                fragmentTransaction.commit();
-            //fragmentTransaction.commit();
-            invalidateOptionsMenu();
-            getSupportActionBar().setTitle("Sports");
-            }catch(IllegalStateException ignored){
-                ignored.printStackTrace();
-            }
-        }else if(id == R.id.nav_registration){
-            Runtime.getRuntime().gc();
-            try {
-                selection_header.setVisibility(View.GONE);
-            navigationTabBar.setVisibility(View.GONE);
-            lastViewFragment = 5;
-            marathonRegistration = new MarathonRegistration();
-            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, marathonRegistration);
-                fragmentTransaction.commit();
-            //fragmentTransaction.commit();
-            invalidateOptionsMenu();
-            getSupportActionBar().setTitle("Marathon Registration");
-            }catch(IllegalStateException ignored){
-                ignored.printStackTrace();
-            }
-        }
+                }else if(id==R.id.nav_schedule){
+                    Runtime.getRuntime().gc();
+                    try {
+                        selection_header.setVisibility(View.GONE);
+                        navigationTabBar.setVisibility(View.GONE);
+                        lastViewFragment=2;
+                        Bundle arguments = new Bundle();
+                        arguments.putBoolean("refresh", true);
+                        scheduleFragment=new ScheduleFragment();
+                        scheduleFragment.setArguments(arguments);
+                        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container,scheduleFragment);
+                        fragmentTransaction.commit();
+                        //fragmentTransaction.commit();
+                        invalidateOptionsMenu();
+                        getSupportActionBar().setElevation(0);
+                        getSupportActionBar().setTitle("Schedule");
+                    }catch(IllegalStateException ignored){
+                        ignored.printStackTrace();
+                    }
+                }
+                else if(id==R.id.nav_following){
+                    Runtime.getRuntime().gc();
+                    try {
+                        selection_header.setVisibility(View.GONE);
+                        navigationTabBar.setVisibility(View.GONE);
+                        lastViewFragment=3;
+                        subscribeFragment =new SubscribeFragment();
+                        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container, subscribeFragment);
+                        fragmentTransaction.commit();
+                        //fragmentTransaction.commit();
+                        invalidateOptionsMenu();
+                        getSupportActionBar().setTitle("Following");
+                    }catch(IllegalStateException ignored){
+                        ignored.printStackTrace();
+                    }
+                }
+                else if(id==R.id.nav_events){
+                    Runtime.getRuntime().gc();
+                    try {
+                        selection_header.setVisibility(View.GONE);
+                        navigationTabBar.setVisibility(View.GONE);
+                        lastViewFragment=4;
+                        sportDetailsFragment = new SportDetailsFragment();
+                        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container, sportDetailsFragment);
+                        fragmentTransaction.commit();
+                        //fragmentTransaction.commit();
+                        invalidateOptionsMenu();
+                        getSupportActionBar().setTitle("Sports");
+                    }catch(IllegalStateException ignored){
+                        ignored.printStackTrace();
+                    }
+                }else if(id == R.id.nav_registration){
+                    Runtime.getRuntime().gc();
+                    try {
+                        selection_header.setVisibility(View.GONE);
+                        navigationTabBar.setVisibility(View.GONE);
+                        lastViewFragment = 5;
+                        marathonRegistration = new MarathonRegistration();
+                        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container, marathonRegistration);
+                        fragmentTransaction.commit();
+                        //fragmentTransaction.commit();
+                        invalidateOptionsMenu();
+                        getSupportActionBar().setTitle("Marathon Registration");
+                    }catch(IllegalStateException ignored){
+                        ignored.printStackTrace();
+                    }
+                }
 
                 setDrawerTypeface();
 
@@ -518,9 +578,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         },300);
 
         flowingDrawer.closeDrawer(Gravity.START);
-          return true;
+        return true;
     }
-
+*/
     public void setDrawerTypeface(){
         navigationView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -539,66 +599,68 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    @Override
-    public void updateScheduleFragment() {
-        try {
-        Bundle arguments = new Bundle();
-        arguments.putBoolean("refresh", false);
-        ScheduleFragment scheduleFragment=new ScheduleFragment();
-        scheduleFragment.setArguments(arguments);
-        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container,scheduleFragment);
-            fragmentTransaction.commit();
-        getSupportActionBar().setTitle("Schedule");
-        }catch(IllegalStateException ignored){
-            ignored.printStackTrace();
+    /*
+        @Override
+        public void updateScheduleFragment() {
+            try {
+                Bundle arguments = new Bundle();
+                arguments.putBoolean("refresh", false);
+                ScheduleFragment scheduleFragment=new ScheduleFragment();
+                scheduleFragment.setArguments(arguments);
+                FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container,scheduleFragment);
+                fragmentTransaction.commit();
+                getSupportActionBar().setTitle("Schedule");
+            }catch(IllegalStateException ignored){
+                ignored.printStackTrace();
+            }
         }
-    }
 
-    @Override
-    public void updateHomeFragment(String target) {
-        try {
-            navigationTabBar.setSelected(true);
-        navigationTabBar.setModelIndex(0);
-        navigationTabBar.setVisibility(View.VISIBLE);
-        lastViewFragment = 0;
-        Bundle arguments = new Bundle();
-        arguments.putString("target", target);
-        HomeFragment homeFragment = new HomeFragment();
-        homeFragment.setArguments(arguments);
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, homeFragment);
-            fragmentTransaction.commit();
-        //fragmentTransaction.commit();
-        selection_header.setVisibility(View.VISIBLE);
-        }catch(IllegalStateException ignored){
-            ignored.printStackTrace();
+        @Override
+        public void updateHomeFragment(String target) {
+            try {
+                navigationTabBar.setSelected(true);
+                navigationTabBar.setModelIndex(0);
+                navigationTabBar.setVisibility(View.VISIBLE);
+                lastViewFragment = 0;
+                Bundle arguments = new Bundle();
+                arguments.putString("target", target);
+                HomeFragment homeFragment = new HomeFragment();
+                homeFragment.setArguments(arguments);
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, homeFragment);
+                fragmentTransaction.commit();
+                //fragmentTransaction.commit();
+                selection_header.setVisibility(View.VISIBLE);
+            }catch(IllegalStateException ignored){
+                ignored.printStackTrace();
+            }
         }
-    }
 
-    @Override
-    public void updateLeaderBoardFragment(String target) {
-        Runtime.getRuntime().gc();
-        try {
-            selection_header.setVisibility(View.GONE);
-            navigationTabBar.setVisibility(View.GONE);
-            lastViewFragment = 1;
-            leaderboardFragment = new LeaderboardFragment();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, leaderboardFragment);
-            fragmentTransaction.commit();
-            //fragmentTransaction.commit();
-            invalidateOptionsMenu();
-            getSupportActionBar().setTitle("LeaderBoard");
-        }catch(IllegalStateException ignored){
-            ignored.printStackTrace();
+        @Override
+        public void updateLeaderBoardFragment(String target) {
+            Runtime.getRuntime().gc();
+            try {
+                selection_header.setVisibility(View.GONE);
+                navigationTabBar.setVisibility(View.GONE);
+                lastViewFragment = 1;
+                leaderboardFragment = new LeaderboardFragment();
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, leaderboardFragment);
+                fragmentTransaction.commit();
+                //fragmentTransaction.commit();
+                invalidateOptionsMenu();
+                getSupportActionBar().setTitle("LeaderBoard");
+            }catch(IllegalStateException ignored){
+                ignored.printStackTrace();
+            }
         }
-    }
-
+    */
     @Override
     public void onBackPressed() {
         Log.d("lastviewfragment", "" + (lastViewFragment == 0));
         if(flowingDrawer.isDrawerOpen(GravityCompat.START)) {
+            flowingDrawer.closeDrawer(GravityCompat.START);
             flowingDrawer.closeDrawer(GravityCompat.START);
         }
         else if (lastViewFragment == 0) {
@@ -606,20 +668,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (lastViewFragment != 0) {
             try {
                 lastViewFragment = 0;
-            navigationTabBar.setSelected(true);
-            navigationTabBar.setModelIndex(0);
-            navigationTabBar.setVisibility(View.VISIBLE);
-            Bundle arguments = new Bundle();
-            arguments.putString("target", "live");
-            HomeFragment homeFragment = new HomeFragment();
-            homeFragment.setArguments(arguments);
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, homeFragment);
+                navigationTabBar.setSelected(true);
+                navigationTabBar.setModelIndex(0);
+                navigationTabBar.setVisibility(View.VISIBLE);
+                Bundle arguments = new Bundle();
+                arguments.putString("target", "live");
+                HomeFragment homeFragment = new HomeFragment();
+                homeFragment.setArguments(arguments);
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, homeFragment);
                 fragmentTransaction.commit();
-            //fragmentTransaction.commit();
-            getSupportActionBar().setTitle("Live");
-            navigationView.setCheckedItem(R.id.nav_home);
-            selection_header.setVisibility(View.VISIBLE);
+                //fragmentTransaction.commit();
+                getSupportActionBar().setTitle("Live");
+                navigationView.setCheckedItem(R.id.nav_home);
+                selection_header.setVisibility(View.VISIBLE);
             }catch(IllegalStateException ignored){
                 ignored.printStackTrace();
             }
@@ -642,6 +704,356 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onDestroy();
         Runtime.getRuntime().gc();
     }
+    private void createMenuList() {
+        SlideMenuItem menuItem = new SlideMenuItem(ContentFragment.FIRST,R.drawable.ic_dropdown);
+        list.add(menuItem);
+        SlideMenuItem menuItem0 = new SlideMenuItem(ContentFragment.LIVE,R.drawable.ic_action_live);
+        list.add(menuItem0);
+        SlideMenuItem menuItem1 = new SlideMenuItem(ContentFragment.LEADERBOARD, R.drawable.gold);
+        list.add(menuItem1);
+        SlideMenuItem menuItem2 = new SlideMenuItem(ContentFragment.SCHEDULE,R.drawable.ic_schedule);
+        list.add(menuItem2);
+        SlideMenuItem menuItem3 = new SlideMenuItem(ContentFragment.FOLLOWING, R.drawable.bronze);
+        list.add(menuItem3);
+        SlideMenuItem menuItem4 = new SlideMenuItem(ContentFragment.SPORTS, R.drawable.ic_basketball_img);
+        list.add(menuItem4);
+        SlideMenuItem menuItem5 = new SlideMenuItem(ContentFragment.GAME, R.drawable.ic_game);
+        list.add(menuItem5);
+    }
 
 
+    private void setActionBar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        drawerToggle = new ActionBarDrawerToggle(
+                this,                  /* host Activity */
+                drawerLayout,         /* DrawerLayout object */
+                toolbar,  /* nav drawer icon to replace 'Up' caret */
+                R.string.navigation_drawer_open,  /* "open drawer" description */
+                R.string.navigation_drawer_close  /* "close drawer" description */
+        ) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                linearLayout.removeAllViews();
+                linearLayout.invalidate();
+            }
+
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                super.onDrawerSlide(drawerView, slideOffset);
+                if (slideOffset > 0.6 && linearLayout.getChildCount() == 0)
+                    viewAnimator.showMenuContent();
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+        };
+        drawerLayout.addDrawerListener(drawerToggle);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_main_drawer, menu);
+        return true;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private ScreenShotable replaceLiveFragment(ScreenShotable screenShotable, int topPosition) {
+        View view = findViewById(R.id.content_frame);
+        int finalRadius = Math.max(view.getWidth(), view.getHeight());
+        Animator animator = ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
+        animator.setInterpolator(new AccelerateInterpolator());
+        animator.setDuration(ViewAnimator.CIRCULAR_REVEAL_ANIMATION_DURATION);
+
+        animator.start();
+        Runtime.getRuntime().gc();
+        try {
+            navigationTabBar.setSelected(true);
+            navigationTabBar.setModelIndex(0);
+            navigationTabBar.setVisibility(View.VISIBLE);
+            lastViewFragment = 0;
+            Bundle arguments = new Bundle();
+            arguments.putString("target", "live");
+            homeFragment = new HomeFragment();
+            homeFragment.setArguments(arguments);
+            //FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            //fragmentTransaction.replace(R.id.fragment_container, homeFragment);
+            //fragmentTransaction.commit();
+            //fragmentTransaction.commit();
+            invalidateOptionsMenu();
+            getSupportActionBar().setTitle("Live");
+            selection_header.setVisibility(View.VISIBLE);
+        }catch(IllegalStateException ignored){
+            ignored.printStackTrace();
+        }
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container,homeFragment).commit();
+        return homeFragment;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private ScreenShotable replaceLeaderFragment(ScreenShotable screenShotable, int topPosition) {
+        View view = findViewById(R.id.content_frame);
+        int finalRadius = Math.max(view.getWidth(), view.getHeight());
+        Animator animator = ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
+        animator.setInterpolator(new AccelerateInterpolator());
+        animator.setDuration(ViewAnimator.CIRCULAR_REVEAL_ANIMATION_DURATION);
+
+        animator.start();
+        Runtime.getRuntime().gc();
+        try {
+            selection_header.setVisibility(View.GONE);
+            navigationTabBar.setVisibility(View.GONE);
+            lastViewFragment = 1;
+            leaderboardFragment = new LeaderboardFragment();
+            //FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            //fragmentTransaction.replace(R.id.fragment_container, leaderboardFragment);
+            //fragmentTransaction.commit();
+            //fragmentTransaction.commit();
+            invalidateOptionsMenu();
+            getSupportActionBar().setTitle("LeaderBoard");
+        }catch(IllegalStateException ignored){
+            ignored.printStackTrace();
+        }
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container,leaderboardFragment).commit();
+        return leaderboardFragment;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private ScreenShotable replaceScheduleFragment(ScreenShotable screenShotable, int topPosition) {
+        View view = findViewById(R.id.content_frame);
+        int finalRadius = Math.max(view.getWidth(), view.getHeight());
+        Animator animator = ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
+        animator.setInterpolator(new AccelerateInterpolator());
+        animator.setDuration(ViewAnimator.CIRCULAR_REVEAL_ANIMATION_DURATION);
+
+        animator.start();
+        Runtime.getRuntime().gc();
+        try {
+            selection_header.setVisibility(View.GONE);
+            navigationTabBar.setVisibility(View.GONE);
+            lastViewFragment=2;
+            Bundle arguments = new Bundle();
+            arguments.putBoolean("refresh", true);
+            scheduleFragment=new ScheduleFragment();
+            scheduleFragment.setArguments(arguments);
+         //   FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+          //  fragmentTransaction.replace(R.id.fragment_container,scheduleFragment);
+           // fragmentTransaction.commit();
+            //fragmentTransaction.commit();
+            invalidateOptionsMenu();
+            getSupportActionBar().setElevation(0);
+            getSupportActionBar().setTitle("Schedule");
+        }catch(IllegalStateException ignored){
+            ignored.printStackTrace();
+        }
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, scheduleFragment).commit();
+        return scheduleFragment;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private ScreenShotable replaceFollowFragment(ScreenShotable screenShotable, int topPosition) {
+        View view = findViewById(R.id.content_frame);
+        int finalRadius = Math.max(view.getWidth(), view.getHeight());
+        Animator animator = ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
+        animator.setInterpolator(new AccelerateInterpolator());
+        animator.setDuration(ViewAnimator.CIRCULAR_REVEAL_ANIMATION_DURATION);
+
+        animator.start();
+        Runtime.getRuntime().gc();
+        try {
+            selection_header.setVisibility(View.GONE);
+            navigationTabBar.setVisibility(View.GONE);
+            lastViewFragment=3;
+            subscribeFragment =new SubscribeFragment();
+           // FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+            //fragmentTransaction.replace(R.id.fragment_container, subscribeFragment);
+            //fragmentTransaction.commit();
+            //fragmentTransaction.commit();
+            invalidateOptionsMenu();
+            getSupportActionBar().setTitle("Following");
+        }catch(IllegalStateException ignored){
+            ignored.printStackTrace();
+        }
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container,subscribeFragment).commit();
+        return subscribeFragment;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private ScreenShotable replaceSportsFragment(ScreenShotable screenShotable, int topPosition) {
+        View view = findViewById(R.id.content_frame);
+        int finalRadius = Math.max(view.getWidth(), view.getHeight());
+        Animator animator = ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
+        animator.setInterpolator(new AccelerateInterpolator());
+        animator.setDuration(ViewAnimator.CIRCULAR_REVEAL_ANIMATION_DURATION);
+
+        animator.start();
+        Runtime.getRuntime().gc();
+        try {
+            selection_header.setVisibility(View.GONE);
+            navigationTabBar.setVisibility(View.GONE);
+            lastViewFragment = 4;
+            sportDetailsFragment = new SportDetailsFragment();
+            // FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+            // fragmentTransaction.replace(R.id.fragment_container, sportDetailsFragment);
+            // fragmentTransaction.commit();
+            //fragmentTransaction.commit();
+            invalidateOptionsMenu();
+            getSupportActionBar().setTitle("Sports");
+        } catch (IllegalStateException ignored) {
+            ignored.printStackTrace();
+        }
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, sportDetailsFragment).commit();
+        return sportDetailsFragment;
+    }
+    /*
+    private ScreenShotable replacePartyFragment(ScreenShotable screenShotable, int topPosition) {
+        View view = findViewById(R.id.content_frame);
+        int finalRadius = Math.max(view.getWidth(), view.getHeight());
+        Animator animator = ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
+        animator.setInterpolator(new AccelerateInterpolator());
+        animator.setDuration(ViewAnimator.CIRCULAR_REVEAL_ANIMATION_DURATION);
+        animator.start();
+
+        PartyFragment partyFragment = new PartyFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_frame, partyFragment).commit();
+
+        return partyFragment;
+    }
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private ScreenShotable replaceMovieFragment(ScreenShotable screenShotable, int topPosition) {
+        View view = findViewById(R.id.content_frame);
+        int finalRadius = Math.max(view.getWidth(), view.getHeight());
+        Animator animator = ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
+        animator.setInterpolator(new AccelerateInterpolator());
+        animator.setDuration(ViewAnimator.CIRCULAR_REVEAL_ANIMATION_DURATION);
+
+        animator.start();
+        MovieFragment movieFragment = new MovieFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_frame, movieFragment).commit();
+
+        return movieFragment;
+    }
+    */
+   /*
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public ScreenShotable onSwitch(Resourceble slideMenuItem, ScreenShotable screenShotable, int position) {
+        switch (slideMenuItem.getName()) {
+            case ContentFragment.CLOSE: {
+                Runtime.getRuntime().gc();
+                try {
+                    navigationTabBar.setSelected(true);
+                    navigationTabBar.setModelIndex(0);
+                    navigationTabBar.setVisibility(View.VISIBLE);
+                    lastViewFragment = 0;
+                    Bundle arguments = new Bundle();
+                    arguments.putString("target", "live");
+                    homeFragment = new HomeFragment();
+                    homeFragment.setArguments(arguments);
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container, homeFragment);
+                    fragmentTransaction.commit();
+                    //fragmentTransaction.commit();
+                    invalidateOptionsMenu();
+                    getSupportActionBar().setTitle("Live");
+                    selection_header.setVisibility(View.VISIBLE);
+                    return null;
+                } catch (IllegalStateException ignored) {
+                    ignored.printStackTrace();
+                }
+
+            }
+            case ContentFragment.BUILDING: {
+                Runtime.getRuntime().gc();
+                try {
+                    selection_header.setVisibility(View.GONE);
+                    navigationTabBar.setVisibility(View.GONE);
+                    lastViewFragment = 1;
+                    leaderboardFragment = new LeaderboardFragment();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container, leaderboardFragment);
+                    fragmentTransaction.commit();
+                    //fragmentTransaction.commit();
+                    invalidateOptionsMenu();
+                    getSupportActionBar().setTitle("LeaderBoard");
+                    return null;
+                }catch(IllegalStateException ignored){
+                    ignored.printStackTrace();
+                }
+
+            }
+            }
+            return null;
+        }
+   */
+   @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+   @Override
+    public ScreenShotable onSwitch(Resourceble slideMenuItem, ScreenShotable screenShotable, int position) {
+        switch (slideMenuItem.getName()) {
+            case ContentFragment.FIRST:
+                return screenShotable;
+            case ContentFragment.LIVE:
+                return replaceLiveFragment(screenShotable, position);
+            case ContentFragment.LEADERBOARD:
+                return replaceLeaderFragment(screenShotable, position);
+            case ContentFragment.SCHEDULE:
+                return replaceScheduleFragment(screenShotable, position);
+            case ContentFragment.FOLLOWING:
+                return replaceFollowFragment(screenShotable, position);
+            case ContentFragment.SPORTS:
+                return replaceSportsFragment(screenShotable, position);
+            default:
+                return replaceLiveFragment(screenShotable, position);
+        }
+    }
+    @Override
+    public void disableHomeButton() {
+        getSupportActionBar().setHomeButtonEnabled(false);
+
+    }
+
+    @Override
+    public void enableHomeButton() {
+        getSupportActionBar().setHomeButtonEnabled(true);
+        drawerLayout.closeDrawers();
+
+    }
+
+    @Override
+    public void addViewToContainer(View view) {
+        linearLayout.addView(view);
+    }
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
+    }
 }

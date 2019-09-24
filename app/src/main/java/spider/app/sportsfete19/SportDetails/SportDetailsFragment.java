@@ -3,6 +3,7 @@ package spider.app.sportsfete19.SportDetails;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,11 +21,12 @@ import java.util.HashMap;
 
 import rx.functions.Action1;
 import spider.app.sportsfete19.R;
+import yalantis.com.sidemenu.interfaces.ScreenShotable;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SportDetailsFragment extends Fragment {
+public class SportDetailsFragment extends Fragment implements ScreenShotable {
 
     private static final String TAG="SportDetailsFragment";
     RecyclerView recyclerView;
@@ -116,5 +118,15 @@ public class SportDetailsFragment extends Fragment {
         game_fixture.put("SportsQuiz",0);
 
         return game_fixture;
+    }
+
+    @Override
+    public void takeScreenShot() {
+
+    }
+
+    @Override
+    public Bitmap getBitmap() {
+        return null;
     }
 }

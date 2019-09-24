@@ -3,6 +3,7 @@ package spider.app.sportsfete19.Following;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -19,11 +20,12 @@ import android.widget.TextView;
 import spider.app.sportsfete19.MainActivity;
 import spider.app.sportsfete19.R;
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
+import yalantis.com.sidemenu.interfaces.ScreenShotable;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SubscribeFragment extends Fragment {
+public class SubscribeFragment extends Fragment implements ScreenShotable {
 
 
 
@@ -136,4 +138,13 @@ public class SubscribeFragment extends Fragment {
         super.onDestroyView();
     }
 
+    @Override
+    public void takeScreenShot() {
+
+    }
+
+    @Override
+    public Bitmap getBitmap() {
+        return null;
+    }
 }

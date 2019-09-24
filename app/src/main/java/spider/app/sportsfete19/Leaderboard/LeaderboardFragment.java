@@ -3,6 +3,7 @@ package spider.app.sportsfete19.Leaderboard;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -46,12 +47,13 @@ import spider.app.sportsfete19.API.Leaderboard;
 import spider.app.sportsfete19.DatabaseHelper;
 import spider.app.sportsfete19.DepartmentUpdateCallback;
 import spider.app.sportsfete19.R;
+import yalantis.com.sidemenu.interfaces.ScreenShotable;
 
 /**
  * Created by akashj on 21/1/17.
  */
 
-public class LeaderboardFragment extends Fragment implements Callback<List<Leaderboard>>, SwipeRefreshLayout.OnRefreshListener {
+public class LeaderboardFragment extends Fragment implements Callback<List<Leaderboard>>, SwipeRefreshLayout.OnRefreshListener, ScreenShotable {
 
     private static final String TAG="LeaderBoardFragment";
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -72,7 +74,7 @@ public class LeaderboardFragment extends Fragment implements Callback<List<Leade
     String formattedDate;
     View view;
     ViewGroup viewGroup;
-    DepartmentUpdateCallback departmentUpdateCallback;
+    DepartmentUpdateCallback departmentUpdateCallback = (DepartmentUpdateCallback) getActivity();
 
 
     public LeaderboardFragment() {
@@ -115,7 +117,6 @@ public class LeaderboardFragment extends Fragment implements Callback<List<Leade
         super.onViewCreated(view, savedInstanceState);
         this.view=view;
 
-        departmentUpdateCallback = (DepartmentUpdateCallback) getActivity();
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity().getApplicationContext());
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
 
@@ -271,5 +272,15 @@ public class LeaderboardFragment extends Fragment implements Callback<List<Leade
         leaderboardRecyclerAdapter.notifyDataSetChanged();
         Runtime.getRuntime().gc();
         super.onDestroyView();
+    }
+
+    @Override
+    public void takeScreenShot() {
+
+    }
+
+    @Override
+    public Bitmap getBitmap() {
+        return null;
     }
 }

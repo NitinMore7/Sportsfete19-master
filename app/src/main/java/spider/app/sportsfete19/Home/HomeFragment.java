@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -47,11 +48,12 @@ import spider.app.sportsfete19.MainActivity;
 import spider.app.sportsfete19.R;
 import spider.app.sportsfete19.Schedule.StatusEventsDetailRecyclerAdapter;
 import spider.app.sportsfete19.WrapContentLinearLayoutManager;
+import yalantis.com.sidemenu.interfaces.ScreenShotable;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment implements Callback<List<StatusEventDetailsPOJO>>, SwipeRefreshLayout.OnRefreshListener{
+public class HomeFragment extends Fragment implements Callback<List<StatusEventDetailsPOJO>>, SwipeRefreshLayout.OnRefreshListener, ScreenShotable {
 
     private static final String TAG="HomeFragment";
     List<StatusEventDetailsPOJO> eventList;
@@ -156,6 +158,16 @@ public class HomeFragment extends Fragment implements Callback<List<StatusEventD
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void takeScreenShot() {
+
+    }
+
+    @Override
+    public Bitmap getBitmap() {
+        return null;
     }
 
     private class Filter extends AsyncTask<Void,Void,Void>{

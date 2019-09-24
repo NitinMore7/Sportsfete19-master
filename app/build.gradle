@@ -12,6 +12,8 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         renderscriptTargetApi 25
         renderscriptSupportModeEnabled true
+        multiDexEnabled true
+
     }
     buildTypes {
         release {
@@ -56,6 +58,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:11.8.0'
     implementation 'com.squareup.retrofit2:converter-scalars:2.6.0'
     testCompile 'junit:junit:4.12'
+
+    compile 'com.github.yalantis:Side-Menu.Android:1.0.1'
+
+    implementation 'com.github.ozodrukh:CircularReveal:2.1.0'
+
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     implementation 'com.google.firebase:firebase-crash:11.8.0'
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
