@@ -39,7 +39,7 @@ public class HomeScreen extends AppCompatActivity {
         videoview.setVideoURI(uri);
         videoview.setZOrderOnTop(true);
         videoview.start();
-        Log.d("durtion",""+videoview.getDuration());
+        Log.d("duration",""+videoview.getDuration());
 
         new Handler().postDelayed(new Runnable() {
             @Override
