@@ -136,6 +136,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
         */
 
         viewAnimator = new ViewAnimator<>(this, list, contentFragment, drawerLayout, (ViewAnimatorListener) this);
+        drawerLayout.setStatusBarBackgroundColor(Color.RED);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -657,6 +658,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
         Log.d("lastviewfragment", "" + (lastViewFragment == 0));
         if(flowingDrawer.isDrawerOpen(GravityCompat.START)) {
             flowingDrawer.closeDrawer(GravityCompat.START);
+            flowingDrawer.closeDrawer(GravityCompat.START);
         }
         else if (lastViewFragment == 0) {
             super.onBackPressed();
@@ -708,11 +710,11 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
         list.add(menuItem1);
         SlideMenuItem menuItem2 = new SlideMenuItem(ContentFragment.SCHEDULE,R.drawable.ic_schedule);
         list.add(menuItem2);
-        SlideMenuItem menuItem3 = new SlideMenuItem(ContentFragment.FOLLOWING, R.drawable.silver);
+        SlideMenuItem menuItem3 = new SlideMenuItem(ContentFragment.FOLLOWING, R.drawable.bronze);
         list.add(menuItem3);
-        SlideMenuItem menuItem4 = new SlideMenuItem(ContentFragment.SPORTS, R.drawable.bronze);
+        SlideMenuItem menuItem4 = new SlideMenuItem(ContentFragment.SPORTS, R.drawable.ic_basketball_img);
         list.add(menuItem4);
-        SlideMenuItem menuItem5 = new SlideMenuItem(ContentFragment.GAME, R.drawable.gold);
+        SlideMenuItem menuItem5 = new SlideMenuItem(ContentFragment.GAME, R.drawable.ic_game);
         list.add(menuItem5);
     }
 
@@ -1012,6 +1014,8 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
    @Override
     public ScreenShotable onSwitch(Resourceble slideMenuItem, ScreenShotable screenShotable, int position) {
         switch (slideMenuItem.getName()) {
+            case ContentFragment.FIRST:
+                return screenShotable;
             case ContentFragment.LIVE:
                 return replaceLiveFragment(screenShotable, position);
             case ContentFragment.LEADERBOARD:
