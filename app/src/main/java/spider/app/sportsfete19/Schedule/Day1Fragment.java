@@ -122,7 +122,7 @@ public class Day1Fragment extends Fragment implements Callback<List<EventDetails
 
 
         if(getActivity()!=null) {
-            departmentUpdateCallback = (DepartmentUpdateCallback) getActivity();
+
             prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
             apiInterface = ApiInterface.retrofit.create(ApiInterface.class);
             eventList = new ArrayList<>();

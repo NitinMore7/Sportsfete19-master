@@ -7,6 +7,7 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,11 +38,12 @@ import java.util.List;
 import spider.app.sportsfete19.ButtonBounce;
 import spider.app.sportsfete19.DepartmentUpdateCallback;
 import spider.app.sportsfete19.R;
+import yalantis.com.sidemenu.interfaces.ScreenShotable;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ScheduleFragment extends Fragment{
+public class ScheduleFragment extends Fragment implements ScreenShotable {
 
     private static final String TAG="ScheduleFragment";
     String selectedDept;
@@ -119,7 +121,6 @@ public class ScheduleFragment extends Fragment{
 
         index=selectedDay-1;
 
-        departmentUpdateCallback= (DepartmentUpdateCallback) context;
         dialogItems = getResources().getStringArray(R.array.department_array);
         deptList=new ArrayList();
         deptList= Arrays.asList(dialogItems);
@@ -377,5 +378,15 @@ public class ScheduleFragment extends Fragment{
     public void onDestroy(){
         Runtime.getRuntime().gc();
         super.onDestroy();
+    }
+
+    @Override
+    public void takeScreenShot() {
+
+    }
+
+    @Override
+    public Bitmap getBitmap() {
+        return null;
     }
 }
