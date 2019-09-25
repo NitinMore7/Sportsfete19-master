@@ -704,7 +704,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
         Runtime.getRuntime().gc();
     }
     private void createMenuList() {
-        SlideMenuItem menuItem = new SlideMenuItem(ContentFragment.FIRST,R.drawable.ic_dropdown);
+        SlideMenuItem menuItem = new SlideMenuItem(ContentFragment.FIRST,R.drawable.ic_close);
         list.add(menuItem);
         SlideMenuItem menuItem0 = new SlideMenuItem(ContentFragment.LIVE,R.drawable.ic_action_live);
         list.add(menuItem0);
@@ -714,6 +714,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
         list.add(menuItem2);
         SlideMenuItem menuItem3 = new SlideMenuItem(ContentFragment.FOLLOWING, R.drawable.bronze);
         list.add(menuItem3);
+
         SlideMenuItem menuItem4 = new SlideMenuItem(ContentFragment.SPORTS, R.drawable.ic_basketball_img);
         list.add(menuItem4);
         SlideMenuItem menuItem5 = new SlideMenuItem(ContentFragment.GAME, R.drawable.ic_game);
@@ -1035,6 +1036,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
                 myDatabase.deleteAll();
                 Intent intent = new Intent(MainActivity.this,LoginActivity.class);
                 startActivity(intent);
+                finish();
                 return screenShotable;
             }
             default:
