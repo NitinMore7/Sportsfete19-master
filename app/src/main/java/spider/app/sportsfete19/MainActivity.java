@@ -62,20 +62,16 @@ import yalantis.com.sidemenu.util.ViewAnimator;
 
 public class MainActivity extends AppCompatActivity implements ViewAnimator.ViewAnimatorListener,NavigationView.OnNavigationItemSelectedListener {
 
-    public static MenuItem prevItem = null;
     ArrayList<View> menuItems;
     private DrawerLayout flowingDrawer;
     Menu menu;
     int lastViewFragment=0;
-    LinearLayout scalingll;
     public Toolbar toolbar;
     public View view;
     NavigationTabBar navigationTabBar;
     NavigationView navigationView;
     RecyclerView dept_recycler, sport_recycler;
     RelativeLayout selection_header;
-    RecyclerView mRecyclerView;
-    private RecyclerView.LayoutManager mLayoutManager;
     HomeFragment homeFragment;
     LeaderboardFragment leaderboardFragment;
     ScheduleFragment scheduleFragment;
@@ -94,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private List<SlideMenuItem> list = new ArrayList<>();
-    private MenuList mAdapter;
     private ViewAnimator viewAnimator;
     private int res = R.drawable.athletics;
     private LinearLayout linearLayout;
