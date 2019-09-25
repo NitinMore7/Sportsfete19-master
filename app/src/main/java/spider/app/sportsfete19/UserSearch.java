@@ -2,7 +2,6 @@ package spider.app.sportsfete19;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -18,7 +17,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
@@ -32,10 +30,6 @@ import retrofit2.Response;
 import spider.app.sportsfete19.API.ApiInterface;
 import spider.app.sportsfete19.API.SearchByNamePOJO;
 import spider.app.sportsfete19.API.SearchUserByRollNo.SearchItem;
-import spider.app.sportsfete19.R;
-import spider.app.sportsfete19.RecyclerViewAdapter;
-import spider.app.sportsfete19.UserDetails;
-import spider.app.sportsfete19.UserProfile;
 
 public class UserSearch extends Fragment {
     private RecyclerViewAdapter adapter;
