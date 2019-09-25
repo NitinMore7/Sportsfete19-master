@@ -45,8 +45,7 @@ public class HomeScreen extends AppCompatActivity {
             @Override
             public void run() {
                 if(myDatabase.getDifferentItemsCount()>0){
-                    Intent i = new Intent(HomeScreen.this, LoginActivity.class);
-                    //CHANGE HERE TO MAINACTIVITY
+                    Intent i = new Intent(HomeScreen.this, MainActivity.class);
                     startActivity(i);
                     finish();
                 }
