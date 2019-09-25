@@ -79,10 +79,13 @@ public class UserDetails extends AppCompatActivity {
                     Intent intent = new Intent(UserDetails.this, UserProfile.class);
                     intent.putExtra(Key, query);
                     startActivity(intent);
-                }else if (query.matches("^[a-zA-Z]*$")) {
+                }else if (query.matches("^[ A-Za-z]+$")) {
                     exampleList = new ArrayList<>();
                     numbers = new ArrayList<>();
                     getRollNumber(query);
+                }else if(query.matches("[0-9]+") && query.length() == 9){
+                    Snackbar.make(constraintLayout,"Enter valid roll number", Snackbar.LENGTH_SHORT).show();
+
                 }else{
                     Snackbar.make(constraintLayout,"Enter either a Roll number or a name", Snackbar.LENGTH_SHORT).show();
                 }
