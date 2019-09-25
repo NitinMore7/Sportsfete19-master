@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
     int lastViewFragment=0;
     LinearLayout scalingll;
     public Toolbar toolbar;
-    MyDatabase myDatabase;
+    //MyDatabase myDatabase;
     public View view;
     NavigationTabBar navigationTabBar;
     NavigationView navigationView;
@@ -717,7 +717,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
         list.add(menuItem4);
         SlideMenuItem menuItem5 = new SlideMenuItem(ContentFragment.GAME, R.drawable.ic_game);
         list.add(menuItem5);
-        SlideMenuItem menuItem6 = new SlideMenuItem(ContentFragment.SIGNOUT,R.drawable.ic_logout);
+        SlideMenuItem menuItem6 = new SlideMenuItem(ContentFragment.SIGNOUT,R.drawable.ic_signout3);
         list.add(menuItem6);
     }
 
@@ -1029,7 +1029,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
                 return replaceFollowFragment(screenShotable, position);
             case ContentFragment.SPORTS:
                 return replaceSportsFragment(screenShotable, position);
-
+                /*
             case ContentFragment.SIGNOUT: {
                 myDatabase = new MyDatabase(this);
                 myDatabase.deleteAll();
@@ -1037,6 +1037,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
                 startActivity(intent);
                 return screenShotable;
             }
+            */
             default:
                 return replaceLiveFragment(screenShotable, position);
         }
