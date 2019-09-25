@@ -10,6 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+
+
         <activity android:name=".LoginActivity"
             android:screenOrientation="portrait">
         </activity>
@@ -21,7 +23,6 @@
             android:name=".HomeScreen"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -34,17 +35,10 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".SplashActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".EventInfo.EventInfoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".Marathon.MarathonRegistration"
             android:screenOrientation="portrait"
@@ -58,6 +52,7 @@
             android:name=".Leaderboard.CompareActivity"
             android:label="Compare"
             android:screenOrientation="portrait" />
+
         <service android:name=".FireBaseServices.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
@@ -69,8 +64,10 @@
             </intent-filter>
         </service>
     </application>
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
 </manifest>
