@@ -1,23 +1,20 @@
 package spider.app.sportsfete19;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
@@ -31,9 +28,8 @@ import retrofit2.Response;
 import spider.app.sportsfete19.API.ApiInterface;
 import spider.app.sportsfete19.API.SearchByNamePOJO;
 import spider.app.sportsfete19.API.SearchUserByRollNo.SearchItem;
-import yalantis.com.sidemenu.interfaces.ScreenShotable;
 
-public class UserSearch extends Fragment implements ScreenShotable {
+public class UserDetails extends AppCompatActivity {
     private RecyclerViewAdapter adapter;
     private ConstraintLayout constraintLayout;
     private List<SearchItem> exampleList;
@@ -49,48 +45,45 @@ public class UserSearch extends Fragment implements ScreenShotable {
             RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) view.getTag();
             int position = viewHolder.getAdapterPosition();
             String num = numbers.get(position);
-            Intent intent = new Intent(getActivity(), UserProfile.class);
+            Intent intent = new Intent(UserDetails.this, UserProfile.class);
             intent.putExtra(Key, num);
             startActivity(intent);
         }
     };
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_user_details);
+        constraintLayout = findViewById(R.id.constraintLayout);
 
-        final View view = inflater.inflate(R.layout.activity_user_details, container, false);
-        return view;
+
+        recyclerView = findViewById(R.id.recycler_view);
 
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        constraintLayout =getView().findViewById(R.id.constraintLayout);
-        recyclerView = getView().findViewById(R.id.recycler_view);
-        setHasOptionsMenu(true);
-    }
-    @Override
-    public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) {
 
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.search_menu, menu);
-
         MenuItem searchItem = menu.findItem(R.id.item_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setQueryHint("Roll Number / Name");
-//        super.onCreateOptionsMenu(menu,inflater);
+        searchView.setQueryHint("Enter Roll Number or Name");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
             @Override
             public boolean onQueryTextSubmit(String query){
                 query = query.trim();
 
                 if (query.matches("[0-9]+") && query.length() == 9) {
-                    Intent intent = new Intent(getActivity(), UserProfile.class);
+                    Intent intent = new Intent(UserDetails.this, UserProfile.class);
                     intent.putExtra(Key, query);
                     startActivity(intent);
                 }else if (query.matches("^[ A-Za-z]+$")) {
-                    progressDialog  = new ProgressDialog(getActivity());
+                    progressDialog  = new ProgressDialog(UserDetails.this);
                     progressDialog.setMessage("Searching user");
                     exampleList = new ArrayList<>();
                     numbers = new ArrayList<>();
@@ -114,13 +107,18 @@ public class UserSearch extends Fragment implements ScreenShotable {
                 return false;
             }
         });
-
+        return super.onCreateOptionsMenu(menu);
 
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    private void runLayoutAnimation(final RecyclerView recyclerView) {
+        final Context context = recyclerView.getContext();
+        final LayoutAnimationController controller =
+                AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fall_down);
+
+        recyclerView.setLayoutAnimation(controller);
+        recyclerView.getAdapter().notifyDataSetChanged();
+        recyclerView.scheduleLayoutAnimation();
     }
 
     private void getRollNumber(String name) {
@@ -132,7 +130,7 @@ public class UserSearch extends Fragment implements ScreenShotable {
             public void onResponse(Call<List<SearchByNamePOJO>> call, Response<List<SearchByNamePOJO>> response) {
                 progressDialog.dismiss();
                 if (!response.isSuccessful()) {
-                    Toast.makeText(getActivity(), "Data Not Found!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(UserDetails.this, "Data Not Found!", Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -163,24 +161,15 @@ public class UserSearch extends Fragment implements ScreenShotable {
     private void setUpRecyclerView() {
 
         recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         adapter = new RecyclerViewAdapter(exampleList);
         int resId = R.anim.layout_animation_fall_down;
-        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getActivity(), resId);
+        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(this, resId);
         recyclerView.setLayoutAnimation(animation);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         adapter.setItemClickListener(onItemClickListener);
     }
 
-    @Override
-    public void takeScreenShot() {
-
-    }
-
-    @Override
-    public Bitmap getBitmap() {
-        return null;
-    }
 
 }

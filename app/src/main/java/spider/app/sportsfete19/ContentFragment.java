@@ -19,10 +19,11 @@ public class ContentFragment extends Fragment implements ScreenShotable {
     public static final String LIVE = "Live";
     public static final String LEADERBOARD = "LeaderBoard";
     public static final String SCHEDULE = "Schedule";
-    public static final String FOLLOWING = "Following";
+    public static final String SEARCH = "Search";
     public static final String SPORTS = "Sports";
     public static final String GAME = "Game";
     public static final String FIRST = "First";
+    public static final String SIGNOUT = "SignOut";
 
     private View containerView;
     protected ImageView mImageView,imageView2;
@@ -35,7 +36,6 @@ public class ContentFragment extends Fragment implements ScreenShotable {
         contentFragment.setArguments(bundle);
         return contentFragment;
     }
-
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

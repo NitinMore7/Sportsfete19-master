@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme">
 
 
+
         <activity android:name=".LoginActivity"
             android:screenOrientation="portrait">
         </activity>
@@ -23,7 +24,6 @@
             android:name=".HomeScreen"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -35,16 +35,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
         <activity
             android:name=".EventInfo.EventInfoActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".SportDetails.SportDetailsActivity"
