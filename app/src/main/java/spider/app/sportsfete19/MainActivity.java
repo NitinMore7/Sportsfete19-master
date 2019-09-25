@@ -739,6 +739,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
         list.add(menuItem4);
         SlideMenuItem menuItem5 = new SlideMenuItem(ContentFragment.GAME, R.drawable.ic_game);
         list.add(menuItem5);
+
     }
 
 
