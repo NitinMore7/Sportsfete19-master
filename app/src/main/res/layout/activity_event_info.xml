@@ -38,7 +38,7 @@
 
                 </android.support.design.widget.AppBarLayout>
 
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                <LinearLayout
                     android:id="@+id/scene_transition"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -329,7 +329,46 @@
 
                                 </LinearLayout>
                             </RelativeLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/rel_poll_btn"
+    android:visibility="gone">
 
+    <Button
+        android:id="@+id/btn_team1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="75sp"
+        >
+
+    </Button>
+
+    <Button
+        android:id="@+id/btn_team2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       android:layout_alignParentEnd="true"
+        android:layout_marginEnd="75sp"
+        ></Button>
+</RelativeLayout>
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/vote_count_rel"
+                                android:visibility="gone"
+                                >
+
+                                <ProgressBar
+                                    android:layout_width="300dp"
+                                    android:layout_height="20dp"
+                                    android:id="@+id/vote_count_pbar"
+                                    android:layout_centerInParent="true"
+                                    android:background="@color/blue">
+
+                                </ProgressBar>
+                            </RelativeLayout>
                             <TextView
                                 android:id="@+id/last_updated_timestamp"
                                 android:layout_width="match_parent"

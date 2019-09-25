@@ -29,8 +29,10 @@ public interface ApiInterface {
             .create();
 
     Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://us-central1-sportsfete19-f7729.cloudfunctions.net")
-            .addConverterFactory(GsonConverterFactory.create(gson))
+
+            .baseUrl("https://us-central1-sportsfete19-f7729.cloudfunctions.net")//"https://us-central1-sportsfete-732bf.cloudfunctions.net")
+            .addConverterFactory(GsonConverterFactory.create())
+
             .build();
 
     @GET("/leaderboard")

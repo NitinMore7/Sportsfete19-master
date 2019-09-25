@@ -1,6 +1,7 @@
 package spider.app.sportsfete19.Schedule;
 
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -115,7 +116,7 @@ public class Day3Fragment extends Fragment implements Callback<List<EventDetails
 
         if(getActivity()!=null) {
 
-            departmentUpdateCallback = (DepartmentUpdateCallback) getActivity();
+
             prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
             apiInterface = ApiInterface.retrofit.create(ApiInterface.class);
 
@@ -331,6 +332,7 @@ public class Day3Fragment extends Fragment implements Callback<List<EventDetails
         filterList();
     }
 
+    @SuppressLint("LongLogTag")
     public void filterList(){
 
         getSelectedSport();

@@ -55,7 +55,6 @@ public class SubscribeRecyclerAdapter extends RecyclerView.Adapter<SubscribeView
             R.drawable.kabaddi,
             R.drawable.khokho,
             R.drawable.khokho,
-            R.drawable.marathon,
             R.drawable.powerlifting,
             R.drawable.swimming,
             R.drawable.tabletennis,
