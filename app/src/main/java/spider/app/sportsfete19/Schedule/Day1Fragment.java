@@ -396,7 +396,7 @@ public class Day1Fragment extends Fragment implements Callback<List<EventDetails
 
             cueSize = temp_filter_eventList.size();
 
-            Log.d(TAG+"filtered size",""+prevSize+" "+cueSize);
+            Log.d(TAG+"filter size",""+prevSize+" "+cueSize);
         }
 
         }catch(ConcurrentModificationException e){

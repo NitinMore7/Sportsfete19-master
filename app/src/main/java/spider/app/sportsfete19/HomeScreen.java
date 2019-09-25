@@ -9,13 +9,10 @@ import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.widget.VideoView;
 
-/**
- * Created by AVINASH on 3/1/2018.
- */
-
 public class HomeScreen extends AppCompatActivity {
 
     VideoView videoview;
+    private MyDatabase myDatabase = new MyDatabase(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +39,22 @@ public class HomeScreen extends AppCompatActivity {
         videoview.setVideoURI(uri);
         videoview.setZOrderOnTop(true);
         videoview.start();
-        Log.d("durtion",""+videoview.getDuration());
+        Log.d("duration",""+videoview.getDuration());
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(HomeScreen.this,MainActivity.class));
-                finish();
+                if(myDatabase.getDifferentItemsCount()>0){
+                    Intent i = new Intent(HomeScreen.this, LoginActivity.class);
+                    //CHANGE HERE TO MAINACTIVITY
+                    startActivity(i);
+                    finish();
+                }
+                else {
+                    //this is login activity
+                    startActivity(new Intent(HomeScreen.this, LoginActivity.class));
+                    finish();
+                }
             }
         },3000);
 
