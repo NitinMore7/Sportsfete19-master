@@ -59,7 +59,7 @@
             app:ntb_badge_title_color="@color/colorTabtext"
             app:ntb_badge_use_typeface="true"
             app:ntb_badged="false"
-            app:ntb_bg_color="#fff"
+            app:ntb_bg_color="@android:color/transparent"
             app:ntb_corners_radius="0dp"
             app:ntb_icon_size_fraction="0.5"
             app:ntb_inactive_color="@color/colorTabtext"
@@ -74,7 +74,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="#9e9c9c" />
+            android:background="#1a237e" />
 
         <RelativeLayout
             android:id="@+id/selection_header"
@@ -93,7 +93,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="#9e9c9c" />
+            android:background="#1a237e" />
 
         <RelativeLayout
             android:id="@+id/fragment_container"
@@ -118,7 +118,7 @@
                 android:id="@+id/main_view"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:background="@color/white">
+                android:background="@android:color/transparent">
 
                 <TextView
                     android:id="@+id/selected_sport"

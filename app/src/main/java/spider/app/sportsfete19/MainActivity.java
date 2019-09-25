@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         models.add(
                 new NavigationTabBar.Model.Builder(
                         getResources().getDrawable(R.drawable.live_match),
-                        Color.parseColor("#4ab556"))
+                        Color.parseColor("#000000"))
                         .selectedIcon(getResources().getDrawable(R.drawable.live_matches_unselected))
                         .title("Live")
                         .badgeTitle("NTB")
@@ -121,16 +121,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         models.add(
                 new NavigationTabBar.Model.Builder(
                         getResources().getDrawable(R.drawable.upcoming),
-                        Color.parseColor("#4ab556")
+                        Color.parseColor("#000000")
                 ).title("Upcoming")
                         .selectedIcon(getResources().getDrawable(R.drawable.upcoming_unselected))
                         .badgeTitle("with")
-                        .build()
-        );
+                        .build()  );
         models.add(
                 new NavigationTabBar.Model.Builder(
                         getResources().getDrawable(R.drawable.completed),
-                        Color.parseColor("#4ab556")
+                        Color.parseColor("#000000")
                 ).title("Completed")
                         .selectedIcon(getResources().getDrawable(R.drawable.completedunselected))
                         .badgeTitle("state")
@@ -284,7 +283,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         dept_recycler.setAdapter(recyclerAdapter);
 
         //sport header
-
         sport_recycler = findViewById(R.id.main_sport_recycler);
         sport_recycler.setHasFixedSize(true);
         final LinearLayoutManager layoutManager1=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
@@ -306,7 +304,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         });
         sport_recycler.setAdapter(sportAdapter);
-
     }
 
     public void bounceElement(TextView textView){
