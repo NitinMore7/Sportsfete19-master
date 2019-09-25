@@ -8,7 +8,6 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 
@@ -47,7 +46,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import devlight.io.library.ntb.NavigationTabBar;
-import spider.app.sportsfete19.Following.SubscribeFragment;
 import spider.app.sportsfete19.Home.HomeFragment;
 import spider.app.sportsfete19.Leaderboard.LeaderboardFragment;
 import spider.app.sportsfete19.Schedule.DeptSelectionRecyclerAdapter;
@@ -60,6 +58,7 @@ import yalantis.com.sidemenu.interfaces.Resourceble;
 import yalantis.com.sidemenu.interfaces.ScreenShotable;
 import yalantis.com.sidemenu.model.SlideMenuItem;
 import yalantis.com.sidemenu.util.ViewAnimator;
+import yalantis.com.sidemenu.util.ViewAnimator.ViewAnimatorListener;
 
 
 import static spider.app.sportsfete19.R.array.filter_department_array;
@@ -71,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Menu menu;
     int lastViewFragment=0;
     public Toolbar toolbar;
+    //MyDatabase myDatabase;
     public View view;
     NavigationTabBar navigationTabBar;
     NavigationView navigationView;
@@ -82,8 +82,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     HomeFragment homeFragment;
     LeaderboardFragment leaderboardFragment;
     ScheduleFragment scheduleFragment;
-    SubscribeFragment subscribeFragment;
+    UserSearch searchFragment;
     SportDetailsFragment sportDetailsFragment;
+
+
+    MyDatabase myDatabase;
+    UserSearch userSearch;
+
 
     String[] deptArraySharedPreference=new String[15];
     String[] sportArraySharedPreference=new String[31];
@@ -99,6 +104,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ViewAnimator viewAnimator;
     private int res = R.drawable.athletics;
     private LinearLayout linearLayout;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setActionBar();
         createMenuList();
+
         /*
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
@@ -136,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mRecyclerView.setAdapter(mAdapter);
         */
 
-        viewAnimator = new ViewAnimator<>(this, list, contentFragment, drawerLayout, (ViewAnimator.ViewAnimatorListener) this);
+        viewAnimator = new ViewAnimator<>(this, list, contentFragment, drawerLayout, (ViewAnimatorListener) this);
         drawerLayout.setStatusBarBackgroundColor(Color.RED);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -383,7 +391,232 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return super.onOptionsItemSelected(item);
         }
     }
+    /*
 
+    @Override
+    public boolean onNavigationItemSelected(final MenuItem item) {
+        final int id = item.getItemId();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                if (id == R.id.nav_home) {
+                    Runtime.getRuntime().gc();
+                    try {
+                        navigationTabBar.setSelected(true);
+                        navigationTabBar.setModelIndex(0);
+                        navigationTabBar.setVisibility(View.VISIBLE);
+                        lastViewFragment = 0;
+                        Bundle arguments = new Bundle();
+                        arguments.putString("target", "live");
+                        homeFragment = new HomeFragment();
+                        homeFragment.setArguments(arguments);
+                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container, homeFragment);
+                        fragmentTransaction.commit();
+                        //fragmentTransaction.commit();
+                        invalidateOptionsMenu();
+                        getSupportActionBar().setTitle("Live");
+                        selection_header.setVisibility(View.VISIBLE);
+                    }catch(IllegalStateException ignored){
+                        ignored.printStackTrace();
+                    }
+
+                } else if (id == R.id.nav_leaderboard) {
+                    Runtime.getRuntime().gc();
+                    try {
+                        selection_header.setVisibility(View.GONE);
+                        navigationTabBar.setVisibility(View.GONE);
+                        lastViewFragment = 1;
+                        leaderboardFragment = new LeaderboardFragment();
+                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container, leaderboardFragment);
+                        fragmentTransaction.commit();
+                        //fragmentTransaction.commit();
+                        invalidateOptionsMenu();
+                        getSupportActionBar().setTitle("LeaderBoard");
+                    }catch(IllegalStateException ignored){
+                        ignored.printStackTrace();
+                    }
+
+        }else if(id==R.id.nav_schedule){
+            Runtime.getRuntime().gc();
+            try {
+            selection_header.setVisibility(View.GONE);
+            navigationTabBar.setVisibility(View.GONE);
+            lastViewFragment=2;
+            Bundle arguments = new Bundle();
+            arguments.putBoolean("refresh", true);
+            scheduleFragment=new ScheduleFragment();
+            scheduleFragment.setArguments(arguments);
+            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container,scheduleFragment);
+            fragmentTransaction.commit();
+            //fragmentTransaction.commit();
+            invalidateOptionsMenu();
+            getSupportActionBar().setElevation(0);
+            getSupportActionBar().setTitle("Schedule");
+            }catch(IllegalStateException ignored){
+                ignored.printStackTrace();
+            }
+        }
+        else if(id==R.id.nav_following){
+            Runtime.getRuntime().gc();
+            try {
+            selection_header.setVisibility(View.GONE);
+            navigationTabBar.setVisibility(View.GONE);
+            lastViewFragment=3;
+            subscribeFragment =new SubscribeFragment();
+            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, subscribeFragment);
+                fragmentTransaction.commit();
+            //fragmentTransaction.commit();
+            invalidateOptionsMenu();
+            getSupportActionBar().setTitle("Following");
+            }catch(IllegalStateException ignored){
+                ignored.printStackTrace();
+            }
+        }
+        else if(id==R.id.nav_events){
+            Runtime.getRuntime().gc();
+            try {
+            selection_header.setVisibility(View.GONE);
+            navigationTabBar.setVisibility(View.GONE);
+            lastViewFragment=4;
+            sportDetailsFragment = new SportDetailsFragment();
+            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, sportDetailsFragment);
+                fragmentTransaction.commit();
+            //fragmentTransaction.commit();
+            invalidateOptionsMenu();
+            getSupportActionBar().setTitle("Sports");
+            }catch(IllegalStateException ignored){
+                ignored.printStackTrace();
+            }
+        }else if(id == R.id.nav_registration){
+            Runtime.getRuntime().gc();
+            try {
+                selection_header.setVisibility(View.GONE);
+            navigationTabBar.setVisibility(View.GONE);
+            lastViewFragment = 5;
+            marathonRegistration = new MarathonRegistration();
+            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, marathonRegistration);
+                fragmentTransaction.commit();
+            //fragmentTransaction.commit();
+            invalidateOptionsMenu();
+            getSupportActionBar().setTitle("Marathon Registration");
+            }catch(IllegalStateException ignored){
+                ignored.printStackTrace();
+            }
+        }else if(id == R.id.searchBYroll){
+            Runtime.getRuntime().gc();
+            try {
+                selection_header.setVisibility(View.GONE);
+                navigationTabBar.setVisibility(View.GONE);
+                lastViewFragment = 6;
+                userSearch = new UserSearch();
+                FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, userSearch);
+                fragmentTransaction.commit();
+                //fragmentTransaction.commit();
+                invalidateOptionsMenu();
+                getSupportActionBar().setTitle("Search User");
+            }catch(IllegalStateException ignored){
+                ignored.printStackTrace();
+            }
+        }
+
+                }else if(id==R.id.nav_schedule){
+                    Runtime.getRuntime().gc();
+                    try {
+                        selection_header.setVisibility(View.GONE);
+                        navigationTabBar.setVisibility(View.GONE);
+                        lastViewFragment=2;
+                        Bundle arguments = new Bundle();
+                        arguments.putBoolean("refresh", true);
+                        scheduleFragment=new ScheduleFragment();
+                        scheduleFragment.setArguments(arguments);
+                        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container,scheduleFragment);
+                        fragmentTransaction.commit();
+                        //fragmentTransaction.commit();
+                        invalidateOptionsMenu();
+                        getSupportActionBar().setElevation(0);
+                        getSupportActionBar().setTitle("Schedule");
+                    }catch(IllegalStateException ignored){
+                        ignored.printStackTrace();
+                    }
+                }
+                else if(id==R.id.nav_following){
+                    Runtime.getRuntime().gc();
+                    try {
+                        selection_header.setVisibility(View.GONE);
+                        navigationTabBar.setVisibility(View.GONE);
+                        lastViewFragment=3;
+                        subscribeFragment =new SubscribeFragment();
+                        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container, subscribeFragment);
+                        fragmentTransaction.commit();
+                        //fragmentTransaction.commit();
+                        invalidateOptionsMenu();
+                        getSupportActionBar().setTitle("Following");
+                    }catch(IllegalStateException ignored){
+                        ignored.printStackTrace();
+                    }
+                }
+                else if(id==R.id.nav_events){
+                    Runtime.getRuntime().gc();
+                    try {
+                        selection_header.setVisibility(View.GONE);
+                        navigationTabBar.setVisibility(View.GONE);
+                        lastViewFragment=4;
+                        sportDetailsFragment = new SportDetailsFragment();
+                        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container, sportDetailsFragment);
+                        fragmentTransaction.commit();
+                        //fragmentTransaction.commit();
+                        invalidateOptionsMenu();
+                        getSupportActionBar().setTitle("Sports");
+                    }catch(IllegalStateException ignored){
+                        ignored.printStackTrace();
+                    }
+                }else if(id == R.id.nav_registration){
+                    Runtime.getRuntime().gc();
+                    try {
+                        selection_header.setVisibility(View.GONE);
+                        navigationTabBar.setVisibility(View.GONE);
+                        lastViewFragment = 5;
+                        marathonRegistration = new MarathonRegistration();
+                        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container, marathonRegistration);
+                        fragmentTransaction.commit();
+                        //fragmentTransaction.commit();
+                        invalidateOptionsMenu();
+                        getSupportActionBar().setTitle("Marathon Registration");
+                    }catch(IllegalStateException ignored){
+                        ignored.printStackTrace();
+                    }
+                }
+
+                setDrawerTypeface();
+
+                for(int i = 0; i < toolbar.getChildCount(); i++)
+                { View view = toolbar.getChildAt(i);
+                    if(view instanceof TextView) {
+                        TextView textView = (TextView) view;
+                        textView.setTypeface(Typeface.createFromAsset(getAssets(),  "fonts/HammersmithOneRegular.ttf"));
+                    }
+                }
+
+            }
+        },300);
+
+        flowingDrawer.closeDrawer(Gravity.START);
+        return true;
+    }
+*/
     public void setDrawerTypeface(){
         navigationView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -426,13 +659,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragmentTransaction.commit();
                 //fragmentTransaction.commit();
                 getSupportActionBar().setTitle("Live");
-                navigationView.setCheckedItem(R.id.nav_home);
                 selection_header.setVisibility(View.VISIBLE);
             }catch(IllegalStateException ignored){
                 ignored.printStackTrace();
             }
 
-            setDrawerTypeface();
+            //setDrawerTypeface();
 
             for (int i = 0; i < toolbar.getChildCount(); i++) {
                 View view = toolbar.getChildAt(i);
@@ -451,7 +683,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Runtime.getRuntime().gc();
     }
     private void createMenuList() {
-        SlideMenuItem menuItem = new SlideMenuItem(ContentFragment.FIRST,R.drawable.ic_dropdown);
+        SlideMenuItem menuItem = new SlideMenuItem(ContentFragment.FIRST,R.drawable.ic_close);
         list.add(menuItem);
         SlideMenuItem menuItem0 = new SlideMenuItem(ContentFragment.LIVE,R.drawable.ic_action_live);
         list.add(menuItem0);
@@ -459,12 +691,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         list.add(menuItem1);
         SlideMenuItem menuItem2 = new SlideMenuItem(ContentFragment.SCHEDULE,R.drawable.ic_schedule);
         list.add(menuItem2);
-        SlideMenuItem menuItem3 = new SlideMenuItem(ContentFragment.FOLLOWING, R.drawable.bronze);
+        SlideMenuItem menuItem3 = new SlideMenuItem(ContentFragment.SEARCH, R.drawable.ic_searchuser);
         list.add(menuItem3);
         SlideMenuItem menuItem4 = new SlideMenuItem(ContentFragment.SPORTS, R.drawable.ic_basketball_img);
         list.add(menuItem4);
         SlideMenuItem menuItem5 = new SlideMenuItem(ContentFragment.GAME, R.drawable.ic_game);
         list.add(menuItem5);
+        SlideMenuItem menuItem6 = new SlideMenuItem(ContentFragment.SIGNOUT,R.drawable.ic_signout3);
+        list.add(menuItem6);
     }
 
 
@@ -619,7 +853,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private ScreenShotable replaceFollowFragment(ScreenShotable screenShotable, int topPosition) {
+    private ScreenShotable replaceSearchFragment(ScreenShotable screenShotable, int topPosition) {
         View view = findViewById(R.id.content_frame);
         int finalRadius = Math.max(view.getWidth(), view.getHeight());
         Animator animator = ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
@@ -632,19 +866,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             selection_header.setVisibility(View.GONE);
             navigationTabBar.setVisibility(View.GONE);
             lastViewFragment=3;
-            subscribeFragment =new SubscribeFragment();
+            searchFragment = new UserSearch();
            // FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
             //fragmentTransaction.replace(R.id.fragment_container, subscribeFragment);
             //fragmentTransaction.commit();
             //fragmentTransaction.commit();
             invalidateOptionsMenu();
-            getSupportActionBar().setTitle("Following");
+            getSupportActionBar().setTitle("Search");
         }catch(IllegalStateException ignored){
             ignored.printStackTrace();
         }
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container,subscribeFragment).commit();
-        return subscribeFragment;
+                .replace(R.id.fragment_container,searchFragment).commit();
+        return searchFragment;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -675,89 +909,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .replace(R.id.fragment_container, sportDetailsFragment).commit();
         return sportDetailsFragment;
     }
-    /*
-    private ScreenShotable replacePartyFragment(ScreenShotable screenShotable, int topPosition) {
-        View view = findViewById(R.id.content_frame);
-        int finalRadius = Math.max(view.getWidth(), view.getHeight());
-        Animator animator = ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
-        animator.setInterpolator(new AccelerateInterpolator());
-        animator.setDuration(ViewAnimator.CIRCULAR_REVEAL_ANIMATION_DURATION);
-        animator.start();
 
-        PartyFragment partyFragment = new PartyFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, partyFragment).commit();
-
-        return partyFragment;
-    }
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private ScreenShotable replaceMovieFragment(ScreenShotable screenShotable, int topPosition) {
-        View view = findViewById(R.id.content_frame);
-        int finalRadius = Math.max(view.getWidth(), view.getHeight());
-        Animator animator = ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
-        animator.setInterpolator(new AccelerateInterpolator());
-        animator.setDuration(ViewAnimator.CIRCULAR_REVEAL_ANIMATION_DURATION);
-
-        animator.start();
-        MovieFragment movieFragment = new MovieFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, movieFragment).commit();
-
-        return movieFragment;
-    }
-    */
-   /*
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @Override
-    public ScreenShotable onSwitch(Resourceble slideMenuItem, ScreenShotable screenShotable, int position) {
-        switch (slideMenuItem.getName()) {
-            case ContentFragment.CLOSE: {
-                Runtime.getRuntime().gc();
-                try {
-                    navigationTabBar.setSelected(true);
-                    navigationTabBar.setModelIndex(0);
-                    navigationTabBar.setVisibility(View.VISIBLE);
-                    lastViewFragment = 0;
-                    Bundle arguments = new Bundle();
-                    arguments.putString("target", "live");
-                    homeFragment = new HomeFragment();
-                    homeFragment.setArguments(arguments);
-                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.fragment_container, homeFragment);
-                    fragmentTransaction.commit();
-                    //fragmentTransaction.commit();
-                    invalidateOptionsMenu();
-                    getSupportActionBar().setTitle("Live");
-                    selection_header.setVisibility(View.VISIBLE);
-                    return null;
-                } catch (IllegalStateException ignored) {
-                    ignored.printStackTrace();
-                }
-
-            }
-            case ContentFragment.BUILDING: {
-                Runtime.getRuntime().gc();
-                try {
-                    selection_header.setVisibility(View.GONE);
-                    navigationTabBar.setVisibility(View.GONE);
-                    lastViewFragment = 1;
-                    leaderboardFragment = new LeaderboardFragment();
-                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.fragment_container, leaderboardFragment);
-                    fragmentTransaction.commit();
-                    //fragmentTransaction.commit();
-                    invalidateOptionsMenu();
-                    getSupportActionBar().setTitle("LeaderBoard");
-                    return null;
-                }catch(IllegalStateException ignored){
-                    ignored.printStackTrace();
-                }
-
-            }
-            }
-            return null;
-        }
-   */
    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
    @Override
     public ScreenShotable onSwitch(Resourceble slideMenuItem, ScreenShotable screenShotable, int position) {
@@ -770,10 +922,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return replaceLeaderFragment(screenShotable, position);
             case ContentFragment.SCHEDULE:
                 return replaceScheduleFragment(screenShotable, position);
-            case ContentFragment.FOLLOWING:
-                return replaceFollowFragment(screenShotable, position);
+            case ContentFragment.SEARCH:
+                return replaceSearchFragment(screenShotable, position);
             case ContentFragment.SPORTS:
                 return replaceSportsFragment(screenShotable, position);
+            case ContentFragment.SIGNOUT: {
+                myDatabase = new MyDatabase(this);
+                myDatabase.deleteAll();
+                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
+                finish();
+                return screenShotable;
+            }
             default:
                 return replaceLiveFragment(screenShotable, position);
         }
@@ -831,4 +991,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         return false;
     }
+
 }
