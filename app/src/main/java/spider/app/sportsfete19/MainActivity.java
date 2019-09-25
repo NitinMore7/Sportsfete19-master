@@ -60,9 +60,9 @@ import yalantis.com.sidemenu.interfaces.Resourceble;
 import yalantis.com.sidemenu.interfaces.ScreenShotable;
 import yalantis.com.sidemenu.model.SlideMenuItem;
 import yalantis.com.sidemenu.util.ViewAnimator;
-import yalantis.com.sidemenu.util.ViewAnimator.ViewAnimatorListener;
 
-public class MainActivity extends AppCompatActivity implements ViewAnimatorListener,NavigationView.OnNavigationItemSelectedListener {
+
+public class MainActivity extends AppCompatActivity implements ViewAnimator.ViewAnimatorListener,NavigationView.OnNavigationItemSelectedListener {
 
     public static MenuItem prevItem = null;
     ArrayList<View> menuItems;
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
         mRecyclerView.setAdapter(mAdapter);
         */
 
-        viewAnimator = new ViewAnimator<>(this, list, contentFragment, drawerLayout, (ViewAnimatorListener) this);
+        viewAnimator = new ViewAnimator<>(this, list, contentFragment, drawerLayout, (ViewAnimator.ViewAnimatorListener) this);
         drawerLayout.setStatusBarBackgroundColor(Color.RED);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
