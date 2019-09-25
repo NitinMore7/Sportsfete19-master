@@ -5,7 +5,7 @@
     android:id="@+id/parent_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f1efef"
+    android:background="@drawable/sfbkg"
     android:fitsSystemWindows="true"
     tools:context="spider.app.sportsfete19.MainActivity">
 
@@ -44,25 +44,6 @@
             android:background="#9e9c9c"
             android:visibility="gone" />
 
-        <RelativeLayout
-            android:id="@+id/selection_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/main_dept_recycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp" />
-
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="#9e9c9c" />
 
         <devlight.io.library.ntb.NavigationTabBar
             android:id="@+id/custom_navigation"
@@ -90,6 +71,25 @@
             app:ntb_title_size="12sp"
             app:ntb_titled="true" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#9e9c9c" />
+
+        <RelativeLayout
+            android:id="@+id/selection_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/main_dept_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" />
+
+        </RelativeLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"

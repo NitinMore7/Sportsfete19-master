@@ -4,6 +4,7 @@ package spider.app.sportsfete19;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -44,6 +45,8 @@ import spider.app.sportsfete19.SportDetails.SportDetailsFragment;
 import spider.app.sportsfete19.Tutorial.TutorialHelper;
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
 import uk.co.deanwild.materialshowcaseview.ShowcaseConfig;
+
+import static spider.app.sportsfete19.R.array.filter_department_array;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,DepartmentUpdateCallback {
 
@@ -138,12 +141,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationTabBar.setTypeface(Typeface.createFromAsset(getAssets(),  "fonts/InconsolataBold.ttf"));
         navigationTabBar.setSelected(true);
         navigationTabBar.setModelIndex(0);
-
-
         navigationTabBar.setOnTabBarSelectedIndexListener(new NavigationTabBar.OnTabBarSelectedIndexListener() {
             @Override
             public void onStartTabSelected(NavigationTabBar.Model model, int index) {
-
             }
 
             @Override
@@ -236,7 +236,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.getMenu().getItem(0).setChecked(true);
         onNavigationItemSelected(navigationView.getMenu().getItem(0));
 
-
         setDrawerTypeface();
 
         FirebaseMessaging.getInstance().subscribeToTopic("important");
@@ -247,21 +246,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         sportList = new ArrayList<>();
         recycler_sportList = new ArrayList<>();
 
-        //dept filter list
-        for ( int i = deptArraySharedPreference.length-1; i >=0; i--)
+//dept filter list
+        for ( int i = 0; i <deptArraySharedPreference.length; i++)
             deptlist.add(deptArraySharedPreference[i]);
 
         deptArraySharedPreference=getResources().getStringArray(R.array.department_array);
-        for ( int i = deptArraySharedPreference.length-1; i >=0; i--)
+        for ( int i = 0; i<deptArraySharedPreference.length; i++)
             recycler_deptList.add(deptArraySharedPreference[i]);
 
         //sport filter list
         sportArraySharedPreference=getResources().getStringArray(R.array.filter_sport_array);
-        for ( int i = sportArraySharedPreference.length-1; i >=0; i--)
+        for ( int i = 0; i <sportArraySharedPreference.length; i++)
             sportList.add(sportArraySharedPreference[i]);
 
         sportArraySharedPreference=getResources().getStringArray(R.array.short_sport_array);
-        for ( int i = sportArraySharedPreference.length-1; i >=0; i--)
+        for ( int i = 0; i <sportArraySharedPreference.length; i++)
             recycler_sportList.add(sportArraySharedPreference[i]);
 
         selection_header = findViewById(R.id.selection_header);
@@ -273,49 +272,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 MainActivity.this, new DeptSelectionRecyclerAdapter.MyAdapterListener() {
             @Override
             public void onItemSelected(int position, View view) {
-                bounceElement((TextView)view);
+                bounceElement((TextView) view);
                 selectedDepartment = deptlist.get(position);
                 recyclerAdapter.setSelectedDepartment(deptlist.get(position));
                 Intent intent = new Intent();
                 intent.setAction("update_home_fragment_department");
-                intent.putExtra("selectedDepartment",""+deptlist.get(position));
+                intent.putExtra("selectedDepartment", "" + deptlist.get(position));
                 sendBroadcast(intent);
                 recyclerAdapter.notifyDataSetChanged();
-            }
-        });
-        final int duration = 10;
-        final int pixelsToMove = 30;
-        final Handler mHandler = new Handler(Looper.getMainLooper());
-        final Runnable SCROLLING_RUNNABLE = new Runnable() {
-            @Override
-            public void run() {
-                dept_recycler.smoothScrollBy(pixelsToMove, 0);
-                mHandler.postDelayed(this, duration);
-            }
-        };
-
+            }});
         dept_recycler.setAdapter(recyclerAdapter);
 
-        dept_recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                int lastItem = layoutManager.findLastCompletelyVisibleItemPosition();
-                if(lastItem == layoutManager.getItemCount()-1){
-                    mHandler.removeCallbacks(SCROLLING_RUNNABLE);
-                    Handler postHandler = new Handler();
-                    postHandler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            dept_recycler.setAdapter(null);
-                            dept_recycler.setAdapter(recyclerAdapter);
-                            mHandler.postDelayed(SCROLLING_RUNNABLE, 500);
-                        }
-                    }, 500);
-                }
-            }
-        });
-        mHandler.postDelayed(SCROLLING_RUNNABLE, 2000);
         //sport header
 
         sport_recycler = findViewById(R.id.main_sport_recycler);
@@ -336,48 +303,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 sportSelection.revealMainView();
                 selectedSportView.setText(selectedSport);
             }
+
         });
-        final Handler mHandler1 = new Handler(Looper.getMainLooper());
-        final Runnable SCROLLING_RUNNABLE1 = new Runnable() {
-            @Override
-            public void run() {
-                sport_recycler.smoothScrollBy(pixelsToMove, 0);
-                mHandler1.postDelayed(this, duration);
-            }
-        };
-
-
         sport_recycler.setAdapter(sportAdapter);
 
-        sport_recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                int lastItem = layoutManager1.findLastCompletelyVisibleItemPosition();
-                if(lastItem == layoutManager1.getItemCount()-1){
-                    mHandler1.removeCallbacks(SCROLLING_RUNNABLE1);
-                    Handler postHandler = new Handler();
-                    postHandler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            sport_recycler.setAdapter(null);
-                            sport_recycler.setAdapter(sportAdapter);
-                            mHandler1.postDelayed(SCROLLING_RUNNABLE1, 500);
-                        }
-                    }, 500);
-                }
-            }
-        });
-        mHandler1.postDelayed(SCROLLING_RUNNABLE1, 2000);
-
-      /*  new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                dept_recycler.smoothScrollToPosition(14);
-                sport_recycler.smoothScrollToPosition(0);
-            }
-        },300);
-*/
     }
 
     public void bounceElement(TextView textView){
@@ -392,7 +321,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
             case android.R.id.home:
                 flowingDrawer.openDrawer(Gravity.START);
-
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -438,7 +366,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, leaderboardFragment);
             fragmentTransaction.commit();
-            //fragmentTransaction.commit();
             invalidateOptionsMenu();
             getSupportActionBar().setTitle("LeaderBoard");
             }catch(IllegalStateException ignored){
