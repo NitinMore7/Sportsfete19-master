@@ -25,5 +25,7 @@
     <color name="blue">#1565c0</color>
     <color name="bluedark">#003c8f</color>
     <color name="bluelight">#5e92f3</color>
+    <color name="bg_red">#A40000</color>
+    <color name="translucent_black">#320303</color>
 
 </resources>

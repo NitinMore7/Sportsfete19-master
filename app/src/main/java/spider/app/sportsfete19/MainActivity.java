@@ -82,7 +82,10 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
     SubscribeFragment subscribeFragment;
     SportDetailsFragment sportDetailsFragment;
     MarathonRegistration marathonRegistration;
+
     MyDatabase myDatabase;
+    UserSearch userSearch;
+
 
     String[] deptArraySharedPreference=new String[15];
     String[] sportArraySharedPreference=new String[31];
@@ -491,77 +494,94 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
                         ignored.printStackTrace();
                     }
 
-                }else if(id==R.id.nav_schedule){
-                    Runtime.getRuntime().gc();
-                    try {
-                        selection_header.setVisibility(View.GONE);
-                        navigationTabBar.setVisibility(View.GONE);
-                        lastViewFragment=2;
-                        Bundle arguments = new Bundle();
-                        arguments.putBoolean("refresh", true);
-                        scheduleFragment=new ScheduleFragment();
-                        scheduleFragment.setArguments(arguments);
-                        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment_container,scheduleFragment);
-                        fragmentTransaction.commit();
-                        //fragmentTransaction.commit();
-                        invalidateOptionsMenu();
-                        getSupportActionBar().setElevation(0);
-                        getSupportActionBar().setTitle("Schedule");
-                    }catch(IllegalStateException ignored){
-                        ignored.printStackTrace();
-                    }
-                }
-                else if(id==R.id.nav_following){
-                    Runtime.getRuntime().gc();
-                    try {
-                        selection_header.setVisibility(View.GONE);
-                        navigationTabBar.setVisibility(View.GONE);
-                        lastViewFragment=3;
-                        subscribeFragment =new SubscribeFragment();
-                        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment_container, subscribeFragment);
-                        fragmentTransaction.commit();
-                        //fragmentTransaction.commit();
-                        invalidateOptionsMenu();
-                        getSupportActionBar().setTitle("Following");
-                    }catch(IllegalStateException ignored){
-                        ignored.printStackTrace();
-                    }
-                }
-                else if(id==R.id.nav_events){
-                    Runtime.getRuntime().gc();
-                    try {
-                        selection_header.setVisibility(View.GONE);
-                        navigationTabBar.setVisibility(View.GONE);
-                        lastViewFragment=4;
-                        sportDetailsFragment = new SportDetailsFragment();
-                        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment_container, sportDetailsFragment);
-                        fragmentTransaction.commit();
-                        //fragmentTransaction.commit();
-                        invalidateOptionsMenu();
-                        getSupportActionBar().setTitle("Sports");
-                    }catch(IllegalStateException ignored){
-                        ignored.printStackTrace();
-                    }
-                }else if(id == R.id.nav_registration){
-                    Runtime.getRuntime().gc();
-                    try {
-                        selection_header.setVisibility(View.GONE);
-                        navigationTabBar.setVisibility(View.GONE);
-                        lastViewFragment = 5;
-                        marathonRegistration = new MarathonRegistration();
-                        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment_container, marathonRegistration);
-                        fragmentTransaction.commit();
-                        //fragmentTransaction.commit();
-                        invalidateOptionsMenu();
-                        getSupportActionBar().setTitle("Marathon Registration");
-                    }catch(IllegalStateException ignored){
-                        ignored.printStackTrace();
-                    }
-                }
+        }else if(id==R.id.nav_schedule){
+            Runtime.getRuntime().gc();
+            try {
+            selection_header.setVisibility(View.GONE);
+            navigationTabBar.setVisibility(View.GONE);
+            lastViewFragment=2;
+            Bundle arguments = new Bundle();
+            arguments.putBoolean("refresh", true);
+            scheduleFragment=new ScheduleFragment();
+            scheduleFragment.setArguments(arguments);
+            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container,scheduleFragment);
+            fragmentTransaction.commit();
+            //fragmentTransaction.commit();
+            invalidateOptionsMenu();
+            getSupportActionBar().setElevation(0);
+            getSupportActionBar().setTitle("Schedule");
+            }catch(IllegalStateException ignored){
+                ignored.printStackTrace();
+            }
+        }
+        else if(id==R.id.nav_following){
+            Runtime.getRuntime().gc();
+            try {
+            selection_header.setVisibility(View.GONE);
+            navigationTabBar.setVisibility(View.GONE);
+            lastViewFragment=3;
+            subscribeFragment =new SubscribeFragment();
+            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, subscribeFragment);
+                fragmentTransaction.commit();
+            //fragmentTransaction.commit();
+            invalidateOptionsMenu();
+            getSupportActionBar().setTitle("Following");
+            }catch(IllegalStateException ignored){
+                ignored.printStackTrace();
+            }
+        }
+        else if(id==R.id.nav_events){
+            Runtime.getRuntime().gc();
+            try {
+            selection_header.setVisibility(View.GONE);
+            navigationTabBar.setVisibility(View.GONE);
+            lastViewFragment=4;
+            sportDetailsFragment = new SportDetailsFragment();
+            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, sportDetailsFragment);
+                fragmentTransaction.commit();
+            //fragmentTransaction.commit();
+            invalidateOptionsMenu();
+            getSupportActionBar().setTitle("Sports");
+            }catch(IllegalStateException ignored){
+                ignored.printStackTrace();
+            }
+        }else if(id == R.id.nav_registration){
+            Runtime.getRuntime().gc();
+            try {
+                selection_header.setVisibility(View.GONE);
+            navigationTabBar.setVisibility(View.GONE);
+            lastViewFragment = 5;
+            marathonRegistration = new MarathonRegistration();
+            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, marathonRegistration);
+                fragmentTransaction.commit();
+            //fragmentTransaction.commit();
+            invalidateOptionsMenu();
+            getSupportActionBar().setTitle("Marathon Registration");
+            }catch(IllegalStateException ignored){
+                ignored.printStackTrace();
+            }
+        }else if(id == R.id.searchBYroll){
+            Runtime.getRuntime().gc();
+            try {
+                selection_header.setVisibility(View.GONE);
+                navigationTabBar.setVisibility(View.GONE);
+                lastViewFragment = 6;
+                userSearch = new UserSearch();
+                FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, userSearch);
+                fragmentTransaction.commit();
+                //fragmentTransaction.commit();
+                invalidateOptionsMenu();
+                getSupportActionBar().setTitle("Search User");
+            }catch(IllegalStateException ignored){
+                ignored.printStackTrace();
+            }
+        }
+
 
                 setDrawerTypeface();
 
