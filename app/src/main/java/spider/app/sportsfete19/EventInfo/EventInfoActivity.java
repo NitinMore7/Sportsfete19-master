@@ -99,7 +99,7 @@ public class EventInfoActivity extends AppCompatActivity{
     LinearLayout upper_bound, lower_bound;
     Button Team1,Team2;
     RelativeLayout poll_layout;
-    ProgressBar progressBar;
+
     int upper_bound_val=0, lower_bound_val=0;
     RelativeLayout vote_count_rel;
 
@@ -227,8 +227,7 @@ public class EventInfoActivity extends AppCompatActivity{
         last_updated_timestamp = (TextView) findViewById(R.id.last_updated_timestamp);
         Team1=(Button)findViewById(R.id.btn_team1);
         Team2=(Button)findViewById(R.id.btn_team2);
-        progressBar=(ProgressBar)findViewById(R.id.vote_count_pbar);
-        progressBar.setMax(100);
+
         loaderGIF = (GifTextView)findViewById(R.id.loader);
         noCommentsTv = (TextView)findViewById(R.id.no_comments_prompt);
 
@@ -246,7 +245,7 @@ public class EventInfoActivity extends AppCompatActivity{
         last_updated_timestamp.setTypeface(hammersmithOnefont);
         db=new MyDatabase(getBaseContext());
         poll_layout=findViewById(R.id.rel_poll_btn);
-        vote_count_rel=findViewById(R.id.vote_count_rel);
+
 
         String round = eventInfo.getRound();
 
@@ -667,7 +666,7 @@ public class EventInfoActivity extends AppCompatActivity{
                 .build();
 
         loginInterface=retrofit.create(LoginInterface.class);
-        predict predict1=new predict(event,team);
+        final predict predict1=new predict(event,team);
         Call<String> mCall = loginInterface.votepredictor(db.getJwtToken(),predict1);
         mCall.enqueue(new Callback<String>() {
             @Override
@@ -676,17 +675,19 @@ public class EventInfoActivity extends AppCompatActivity{
                     predictresponse = response.body();
 
                     if (predictresponse.contains("true")) {
-                        progressBar.setSecondaryProgress(50);
-                        String res=response.toString();
+                        try{Log.v("Response",predictresponse.toString());
+                        String res=predictresponse;
                         String[] couple = res.split(",");
-
+                        String A[]=new String[2];
                         for(int i =0; i < couple.length-1 ; i++) {
                             String[] items =couple[i].split(":");
-                            Toast.makeText(getApplicationContext(),items[1]+"",Toast.LENGTH_LONG).show();
+                            Log.v("DeptScore",items[1]+"");
+                            A[i]=items[1];
                         }
-
-                        vote_count_rel.setVisibility(View.VISIBLE);
-                        poll_layout.setVisibility(View.GONE);
+                        Team1.setText(A[0]);
+                        Team2.setText(A[1]);
+                        poll_layout.startLayoutAnimation();
+                        }catch (Exception e){e.printStackTrace();}
 
                     } else {
                         Toast.makeText(getBaseContext(),predictresponse,Toast.LENGTH_LONG).show();
