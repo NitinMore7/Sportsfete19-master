@@ -2,6 +2,7 @@
 <io.codetail.widget.RevealFrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@android:color/white"
     android:layout_height="wrap_content">
 
     <FrameLayout
@@ -14,6 +15,7 @@
             android:scaleType="fitXY"
             android:id="@+id/image_content"
             android:src="@drawable/chess"
+            android:background="@android:color/white"
             android:layout_width="140dp"
             android:layout_height="100dp"/>
 

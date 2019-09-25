@@ -56,8 +56,7 @@ public class MenuList extends RecyclerView.Adapter<MenuList.ExampleViewHolder>  
 
         final SlideMenuItem currentItem = product.get(position);
         Log.d("CUREENT ITEM",currentItem.getName());
-        holder.imageView.setImageResource(currentItem.getImageRes());
-        
+        //holder.imageView.setImageResource(currentItem.getImageRes());
         holder.itemView.setTag(product.get(position));
         holder.itemView.setOnClickListener(mOnClickListener);
 

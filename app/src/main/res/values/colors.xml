@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#16282a</color>
-    <color name="colorPrimaryDark">#274649</color>
+    <color name="colorPrimaryDark">#000</color>
     <color name="colorTabtext">#404f50</color>
     <color name="green_text">#4ab556</color>
     <color name="dept_box_background">#4ab556</color>
@@ -13,6 +13,12 @@
     <color name="fixtureElement">#e5a5e9</color>
     <color name="fixtureElementText">#434242</color>
 
+    <color name="custom_blue">#002C52</color>
+    <color name="custom_red">#960101</color>
+    <color name="transparent_red">#75ff0000</color>
+    <color name="red">#90ff0000</color>
+    <color name="btn_grey">#808080</color>
+
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
 
@@ -20,5 +26,4 @@
     <color name="bluedark">#003c8f</color>
     <color name="bluelight">#5e92f3</color>
 
-    <color name="main_background">#607D8B</color>
 </resources>

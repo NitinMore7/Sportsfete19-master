@@ -1,6 +1,7 @@
 package spider.app.sportsfete19;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,8 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
-import com.squareup.picasso.Picasso;
 
 import yalantis.com.sidemenu.interfaces.ScreenShotable;
 
@@ -24,9 +23,10 @@ public class ContentFragment extends Fragment implements ScreenShotable {
     public static final String SPORTS = "Sports";
     public static final String GAME = "Game";
     public static final String FIRST = "First";
+    public static final String SIGNOUT = "SignOut";
 
     private View containerView;
-    protected ImageView mImageView;
+    protected ImageView mImageView,imageView2;
     protected int res;
 
     public static ContentFragment newInstance(int resId) {
@@ -54,8 +54,10 @@ public class ContentFragment extends Fragment implements ScreenShotable {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
         mImageView = (ImageView) rootView.findViewById(R.id.image_content);
-        Picasso.with(getContext()).load(res).centerCrop().into(mImageView);
+        mImageView.setBackgroundColor(Color.RED);
+        //Picasso.with(getContext()).load(res).centerCrop().into(mImageView);
         mImageView.setClickable(true);
         mImageView.setFocusable(true);
         return rootView;
