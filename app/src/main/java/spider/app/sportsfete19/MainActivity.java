@@ -11,11 +11,8 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.os.Bundle;
-
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -85,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
     SubscribeFragment subscribeFragment;
     SportDetailsFragment sportDetailsFragment;
     MarathonRegistration marathonRegistration;
+    MyDatabase myDatabase;
 
     String[] deptArraySharedPreference=new String[15];
     String[] sportArraySharedPreference=new String[31];
@@ -1032,7 +1030,6 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
                 return replaceFollowFragment(screenShotable, position);
             case ContentFragment.SPORTS:
                 return replaceSportsFragment(screenShotable, position);
-                /*
             case ContentFragment.SIGNOUT: {
                 myDatabase = new MyDatabase(this);
                 myDatabase.deleteAll();
@@ -1040,7 +1037,6 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
                 startActivity(intent);
                 return screenShotable;
             }
-            */
             default:
                 return replaceLiveFragment(screenShotable, position);
         }
