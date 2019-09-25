@@ -57,4 +57,7 @@ public interface ApiInterface {
 
     @GET("/fetch_user")
     Call<SearchByRollNoPOJO> getUserDetails(@Query("roll") String roll_no);
+
+    @GET("/autocomplete")
+    Call<List<SearchByNamePOJO>> getRollNo(@Query("name") String name);
 }

@@ -3,6 +3,8 @@ package spider.app.sportsfete19.API.SearchUserByRollNo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class SearchByRollNoPOJO {
 
     @SerializedName("dept")
@@ -31,12 +33,21 @@ public class SearchByRollNoPOJO {
         this.name = name;
     }
 
-    public Achievements getAchievements() {
-        return achievements;
+    public String[] getAchievements() {
+        String[] arr= new String[2];
+        String info1 = "";
+        String info2 = "";
+
+        info1 +=  achievements.getWinners();
+        info2 +=  achievements.getMvps();
+
+        arr[0] = info1;
+        arr[1] = info2;
+        return arr;
     }
 
-    public void setAchievements(Achievements achievements) {
-        this.achievements = achievements;
-    }
+//    public void setAchievements(Achievements achievements) {
+//        this.achievements = achievements;
+//    }
 
 }
