@@ -14,7 +14,6 @@ import android.os.Handler;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.os.Bundle;
 
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -49,7 +48,6 @@ import devlight.io.library.ntb.NavigationTabBar;
 import spider.app.sportsfete19.Following.SubscribeFragment;
 import spider.app.sportsfete19.Home.HomeFragment;
 import spider.app.sportsfete19.Leaderboard.LeaderboardFragment;
-import spider.app.sportsfete19.Marathon.MarathonRegistration;
 import spider.app.sportsfete19.Schedule.DeptSelectionRecyclerAdapter;
 import spider.app.sportsfete19.Schedule.ScheduleFragment;
 import spider.app.sportsfete19.SportDetails.SportDetailsFragment;
@@ -83,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
     ScheduleFragment scheduleFragment;
     SubscribeFragment subscribeFragment;
     SportDetailsFragment sportDetailsFragment;
-    MarathonRegistration marathonRegistration;
 
     String[] deptArraySharedPreference=new String[15];
     String[] sportArraySharedPreference=new String[31];
@@ -443,144 +440,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
                 return super.onOptionsItemSelected(item);
         }
     }
-    /*
 
-    @Override
-    public boolean onNavigationItemSelected(final MenuItem item) {
-        final int id = item.getItemId();
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                if (id == R.id.nav_home) {
-                    Runtime.getRuntime().gc();
-                    try {
-                        navigationTabBar.setSelected(true);
-                        navigationTabBar.setModelIndex(0);
-                        navigationTabBar.setVisibility(View.VISIBLE);
-                        lastViewFragment = 0;
-                        Bundle arguments = new Bundle();
-                        arguments.putString("target", "live");
-                        homeFragment = new HomeFragment();
-                        homeFragment.setArguments(arguments);
-                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment_container, homeFragment);
-                        fragmentTransaction.commit();
-                        //fragmentTransaction.commit();
-                        invalidateOptionsMenu();
-                        getSupportActionBar().setTitle("Live");
-                        selection_header.setVisibility(View.VISIBLE);
-                    }catch(IllegalStateException ignored){
-                        ignored.printStackTrace();
-                    }
-
-                } else if (id == R.id.nav_leaderboard) {
-                    Runtime.getRuntime().gc();
-                    try {
-                        selection_header.setVisibility(View.GONE);
-                        navigationTabBar.setVisibility(View.GONE);
-                        lastViewFragment = 1;
-                        leaderboardFragment = new LeaderboardFragment();
-                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment_container, leaderboardFragment);
-                        fragmentTransaction.commit();
-                        //fragmentTransaction.commit();
-                        invalidateOptionsMenu();
-                        getSupportActionBar().setTitle("LeaderBoard");
-                    }catch(IllegalStateException ignored){
-                        ignored.printStackTrace();
-                    }
-
-                }else if(id==R.id.nav_schedule){
-                    Runtime.getRuntime().gc();
-                    try {
-                        selection_header.setVisibility(View.GONE);
-                        navigationTabBar.setVisibility(View.GONE);
-                        lastViewFragment=2;
-                        Bundle arguments = new Bundle();
-                        arguments.putBoolean("refresh", true);
-                        scheduleFragment=new ScheduleFragment();
-                        scheduleFragment.setArguments(arguments);
-                        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment_container,scheduleFragment);
-                        fragmentTransaction.commit();
-                        //fragmentTransaction.commit();
-                        invalidateOptionsMenu();
-                        getSupportActionBar().setElevation(0);
-                        getSupportActionBar().setTitle("Schedule");
-                    }catch(IllegalStateException ignored){
-                        ignored.printStackTrace();
-                    }
-                }
-                else if(id==R.id.nav_following){
-                    Runtime.getRuntime().gc();
-                    try {
-                        selection_header.setVisibility(View.GONE);
-                        navigationTabBar.setVisibility(View.GONE);
-                        lastViewFragment=3;
-                        subscribeFragment =new SubscribeFragment();
-                        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment_container, subscribeFragment);
-                        fragmentTransaction.commit();
-                        //fragmentTransaction.commit();
-                        invalidateOptionsMenu();
-                        getSupportActionBar().setTitle("Following");
-                    }catch(IllegalStateException ignored){
-                        ignored.printStackTrace();
-                    }
-                }
-                else if(id==R.id.nav_events){
-                    Runtime.getRuntime().gc();
-                    try {
-                        selection_header.setVisibility(View.GONE);
-                        navigationTabBar.setVisibility(View.GONE);
-                        lastViewFragment=4;
-                        sportDetailsFragment = new SportDetailsFragment();
-                        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment_container, sportDetailsFragment);
-                        fragmentTransaction.commit();
-                        //fragmentTransaction.commit();
-                        invalidateOptionsMenu();
-                        getSupportActionBar().setTitle("Sports");
-                    }catch(IllegalStateException ignored){
-                        ignored.printStackTrace();
-                    }
-                }else if(id == R.id.nav_registration){
-                    Runtime.getRuntime().gc();
-                    try {
-                        selection_header.setVisibility(View.GONE);
-                        navigationTabBar.setVisibility(View.GONE);
-                        lastViewFragment = 5;
-                        marathonRegistration = new MarathonRegistration();
-                        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment_container, marathonRegistration);
-                        fragmentTransaction.commit();
-                        //fragmentTransaction.commit();
-                        invalidateOptionsMenu();
-                        getSupportActionBar().setTitle("Marathon Registration");
-                    }catch(IllegalStateException ignored){
-                        ignored.printStackTrace();
-                    }
-                }
-
-                setDrawerTypeface();
-
-                for(int i = 0; i < toolbar.getChildCount(); i++)
-                { View view = toolbar.getChildAt(i);
-                    if(view instanceof TextView) {
-                        TextView textView = (TextView) view;
-                        textView.setTypeface(Typeface.createFromAsset(getAssets(),  "fonts/HammersmithOneRegular.ttf"));
-                    }
-                }
-
-            }
-        },300);
-
-        flowingDrawer.closeDrawer(Gravity.START);
-        return true;
-    }
-*/
     public void setDrawerTypeface(){
         navigationView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -599,63 +459,6 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
 
     }
 
-    /*
-        @Override
-        public void updateScheduleFragment() {
-            try {
-                Bundle arguments = new Bundle();
-                arguments.putBoolean("refresh", false);
-                ScheduleFragment scheduleFragment=new ScheduleFragment();
-                scheduleFragment.setArguments(arguments);
-                FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container,scheduleFragment);
-                fragmentTransaction.commit();
-                getSupportActionBar().setTitle("Schedule");
-            }catch(IllegalStateException ignored){
-                ignored.printStackTrace();
-            }
-        }
-
-        @Override
-        public void updateHomeFragment(String target) {
-            try {
-                navigationTabBar.setSelected(true);
-                navigationTabBar.setModelIndex(0);
-                navigationTabBar.setVisibility(View.VISIBLE);
-                lastViewFragment = 0;
-                Bundle arguments = new Bundle();
-                arguments.putString("target", target);
-                HomeFragment homeFragment = new HomeFragment();
-                homeFragment.setArguments(arguments);
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, homeFragment);
-                fragmentTransaction.commit();
-                //fragmentTransaction.commit();
-                selection_header.setVisibility(View.VISIBLE);
-            }catch(IllegalStateException ignored){
-                ignored.printStackTrace();
-            }
-        }
-
-        @Override
-        public void updateLeaderBoardFragment(String target) {
-            Runtime.getRuntime().gc();
-            try {
-                selection_header.setVisibility(View.GONE);
-                navigationTabBar.setVisibility(View.GONE);
-                lastViewFragment = 1;
-                leaderboardFragment = new LeaderboardFragment();
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, leaderboardFragment);
-                fragmentTransaction.commit();
-                //fragmentTransaction.commit();
-                invalidateOptionsMenu();
-                getSupportActionBar().setTitle("LeaderBoard");
-            }catch(IllegalStateException ignored){
-                ignored.printStackTrace();
-            }
-        }
-    */
     @Override
     public void onBackPressed() {
         Log.d("lastviewfragment", "" + (lastViewFragment == 0));
