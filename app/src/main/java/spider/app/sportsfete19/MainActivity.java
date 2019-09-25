@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     SubscribeFragment subscribeFragment;
     SportDetailsFragment sportDetailsFragment;
     MarathonRegistration marathonRegistration;
+    UserSearch userSearch;
 
     String[] deptArraySharedPreference=new String[15];
     String[] sportArraySharedPreference=new String[31];
@@ -503,8 +504,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 ignored.printStackTrace();
             }
         }else if(id == R.id.searchBYroll){
-                Intent intent = new Intent(MainActivity.this,UserDetails.class);
-                startActivity(intent);
+            Runtime.getRuntime().gc();
+            try {
+                selection_header.setVisibility(View.GONE);
+                navigationTabBar.setVisibility(View.GONE);
+                lastViewFragment = 6;
+                userSearch = new UserSearch();
+                FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, userSearch);
+                fragmentTransaction.commit();
+                //fragmentTransaction.commit();
+                invalidateOptionsMenu();
+                getSupportActionBar().setTitle("Search User");
+            }catch(IllegalStateException ignored){
+                ignored.printStackTrace();
+            }
         }
 
 
