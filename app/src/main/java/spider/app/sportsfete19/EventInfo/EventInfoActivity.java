@@ -101,6 +101,7 @@ public class EventInfoActivity extends AppCompatActivity{
     RelativeLayout poll_layout;
     ProgressBar progressBar;
     int upper_bound_val=0, lower_bound_val=0;
+    RelativeLayout vote_count_rel;
 
     private static final String FLAG_STATUS_UPCOMING = "upcoming";
     private static final String FLAG_STATUS_LIVE = "live";
@@ -245,6 +246,7 @@ public class EventInfoActivity extends AppCompatActivity{
         last_updated_timestamp.setTypeface(hammersmithOnefont);
         db=new MyDatabase(getBaseContext());
         poll_layout=findViewById(R.id.rel_poll_btn);
+        vote_count_rel=findViewById(R.id.vote_count_rel);
 
         String round = eventInfo.getRound();
 
@@ -673,10 +675,17 @@ public class EventInfoActivity extends AppCompatActivity{
                 if (response.body() != null) {
                     predictresponse = response.body();
 
-                    if (predictresponse.contains("\"success\": true")) {
+                    if (predictresponse.contains("true")) {
                         progressBar.setSecondaryProgress(50);
-                        Toast.makeText(getBaseContext(),predictresponse,Toast.LENGTH_LONG).show();
+                        String res=response.toString();
+                        String[] couple = res.split(",");
 
+                        for(int i =0; i < couple.length-1 ; i++) {
+                            String[] items =couple[i].split(":");
+                            Toast.makeText(getApplicationContext(),items[1]+"",Toast.LENGTH_LONG).show();
+                        }
+
+                        vote_count_rel.setVisibility(View.VISIBLE);
                         poll_layout.setVisibility(View.GONE);
 
                     } else {

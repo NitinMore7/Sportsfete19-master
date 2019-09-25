@@ -357,6 +357,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/vote_count_rel"
+                                android:visibility="gone"
                                 >
 
                                 <ProgressBar
