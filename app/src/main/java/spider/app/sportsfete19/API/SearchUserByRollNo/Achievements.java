@@ -8,25 +8,33 @@ public class Achievements {
 
     @SerializedName("winners")
     @Expose
-    private List<Winner> winners = null;
+    private List<Winner> winners;
     @SerializedName("mvps")
     @Expose
     private List<Mvp> mvps = null;
 
-    public List<Winner> getWinners() {
-        return winners;
+    public String getWinners() {
+        String info = "";
+        int i =1;
+        for (Winner winner : winners){
+            info += i + ". Sport Name : " + winner.getSportName()  + "\n    " + "Position : " + winner.getPosition() + "\n\n";
+        }
+
+        return info;
     }
 
-    public void setWinners(List<Winner> winners) {
-        this.winners = winners;
+
+
+    public String getMvps() {
+        String info = "";
+        int i =1;
+        for (Mvp mvp : mvps){
+            info += i + ".  Match : " + mvp.getDescription()  + "\n    " + "Sport Name : " + mvp.getSportName() + "\n\n";
+        }
+
+        return info;
     }
 
-    public List<Mvp> getMvps() {
-        return mvps;
-    }
 
-    public void setMvps(List<Mvp> mvps) {
-        this.mvps = mvps;
-    }
 
 }

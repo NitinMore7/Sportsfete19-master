@@ -10,11 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+
         <activity android:name=".LoginActivity"
             android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name=".UserDetails"></activity>
+        <activity android:name=".UserProfile" android:screenOrientation="portrait"></activity>
+        <activity android:name=".UserDetails" android:screenOrientation="portrait"/>
 
         <activity
             android:name=".HomeScreen"
