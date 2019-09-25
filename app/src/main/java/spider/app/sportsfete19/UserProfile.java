@@ -3,10 +3,12 @@ package spider.app.sportsfete19;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ public class UserProfile extends AppCompatActivity {
     private TextView name, rollno, winnerText, mvpText;
     private CircleImageView imageView;
     private String query;
+    private RelativeLayout relLayout;
 
     int[] dept_icon = {
             R.drawable.arch1,
@@ -58,6 +61,7 @@ public class UserProfile extends AppCompatActivity {
         winnerText = findViewById(R.id.winnerText);
         mvpText = findViewById(R.id.mvpText);
         imageView = findViewById(R.id.imgView);
+        relLayout = findViewById(R.id.relLayout);
 
 
         getDetails(query);
@@ -67,6 +71,7 @@ public class UserProfile extends AppCompatActivity {
     }
 
     private void getDetails(String roll) {
+        Snackbar.make(relLayout,"Finding details...", Snackbar.LENGTH_SHORT).show();
         apiInterface = ApiInterface.retrofit.create(ApiInterface.class);
         call = apiInterface.getUserDetails(roll);
         call.enqueue(new Callback<SearchByRollNoPOJO>() {
