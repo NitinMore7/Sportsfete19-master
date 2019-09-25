@@ -23,6 +23,7 @@ public class ContentFragment extends Fragment implements ScreenShotable {
     public static final String SPORTS = "Sports";
     public static final String GAME = "Game";
     public static final String FIRST = "First";
+    public static final String SIGNOUT = "SignOut";
 
     private View containerView;
     protected ImageView mImageView,imageView2;
