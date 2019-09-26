@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     int lastViewFragment=0;
     public Toolbar toolbar;
     //MyDatabase myDatabase;
-    public View view;
     NavigationTabBar navigationTabBar;
     NavigationView navigationView;
     RecyclerView dept_recycler, sport_recycler;
@@ -254,8 +253,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
-
-        view =  findViewById(R.id.view_id);
         flowingDrawer = findViewById(R.id.drawer_layout);
         View navButton = TutorialHelper.getNavButtonView(toolbar);
 
