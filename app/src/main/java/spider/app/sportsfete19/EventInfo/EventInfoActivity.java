@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.util.Log;
@@ -73,8 +74,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
+import spider.app.sportsfete19.API.ApiInterface;
 import spider.app.sportsfete19.API.EventDetailsPOJO;
 import spider.app.sportsfete19.API.LoginInterface;
+import spider.app.sportsfete19.API.SearchByNamePOJO;
+import spider.app.sportsfete19.API.SearchUserByRollNo.SearchItem;
+import spider.app.sportsfete19.API.TeamSheet;
 import spider.app.sportsfete19.FireBaseServices.Comment;
 import spider.app.sportsfete19.FireBaseServices.Score;
 
@@ -101,16 +106,21 @@ public class EventInfoActivity extends AppCompatActivity{
     RelativeLayout poll_layout;
 
     int upper_bound_val=0, lower_bound_val=0;
-    RelativeLayout vote_count_rel;
+    RelativeLayout team_sheet_rel;
 
     private static final String FLAG_STATUS_UPCOMING = "upcoming";
     private static final String FLAG_STATUS_LIVE = "live";
     private static final String FLAG_STATUS_COMPLETED = "completed";
     private String status;
     private LoginInterface loginInterface;
+    private ApiInterface apiInterface;
     private String predictresponse;
 
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView_t1,recyclerView_t2,recyclerView;
+    private List<String> teamlist1=new ArrayList<>();
+    private List<String> teamlist2=new ArrayList<>();
+
+    private TeamSheetAdapter teamSheetAdapter1,teamSheetAdapter2;
     CommentRecyclerAdapter commentRecyclerAdapter;
     List<Comment> commentList=new ArrayList<>();
 
@@ -245,12 +255,15 @@ public class EventInfoActivity extends AppCompatActivity{
         last_updated_timestamp.setTypeface(hammersmithOnefont);
         db=new MyDatabase(getBaseContext());
         poll_layout=findViewById(R.id.rel_poll_btn);
+        team_sheet_rel=findViewById(R.id.team_sheet_rec);
 
 
         String round = eventInfo.getRound();
 
         if (eventInfo.getEliminationType().equalsIgnoreCase("single")||
                 eventInfo.getEliminationType().equalsIgnoreCase("double")) {
+
+
             //TODO:
             nonVersusEventLl.setVisibility(View.GONE);
             versusEventLl.setVisibility(View.VISIBLE);
@@ -351,6 +364,9 @@ public class EventInfoActivity extends AppCompatActivity{
             team2Tv.setTypeface(inconsolataBoldFont);
             team2Tv.setSelected(true);
             team2Tv.setSingleLine(true);
+
+                recyclermaker(eventInfo.getFixture());
+
             round = round + " : " + eventInfo.getFixture();
 
 
@@ -425,6 +441,11 @@ public class EventInfoActivity extends AppCompatActivity{
             eventStartTime.setText(getCurrentTime(Long.valueOf(eventInfo.getStartTime())));
         }
 
+
+
+
+
+
         eventstatus.setText(status);
 
         if (eventInfo.getDept1().toLowerCase().contains("m_tech")) {
@@ -468,6 +489,8 @@ public class EventInfoActivity extends AppCompatActivity{
                 //slidingUpPanelLayout.setPanelHeight((int) convertDpToPixel(250,EventInfoActivity.this));
             }
         },500);
+
+
 
     }
 
@@ -705,4 +728,58 @@ public class EventInfoActivity extends AppCompatActivity{
                 Log.d("login failure", t.getMessage());
             }
         });
-    }}
+    }
+
+   public void recyclermaker(String n){
+       Log.v("INTRE",""+n);
+           apiInterface = ApiInterface.retrofit.create(ApiInterface.class);
+           Call<TeamSheet> call = apiInterface.getteamsheet(n);
+
+           call.enqueue(new Callback<TeamSheet>() {
+               @Override
+               public void onResponse(Call<TeamSheet> call, Response<TeamSheet> response) {
+                   if (!response.isSuccessful()) {
+                       Toast.makeText(getBaseContext(), "Data Not Found!", Toast.LENGTH_LONG).show();
+                       return;
+                   }
+                   try{
+                       team_sheet_rel.setVisibility(View.VISIBLE);
+                       Log.v("INTRE",response.toString());
+                       recyclerView_t1=findViewById(R.id.team_sheet_1);
+                       recyclerView_t2=findViewById(R.id.team_sheet_2);
+                        recyclerView_t1.setHasFixedSize(true);
+                       recyclerView_t2.setHasFixedSize(true);
+
+                       RecyclerView.LayoutManager layoutManager1=new LinearLayoutManager(getApplicationContext());
+                       recyclerView_t1.setLayoutManager(layoutManager1);
+                       RecyclerView.LayoutManager layoutManager2=new LinearLayoutManager(getApplicationContext());
+                       recyclerView_t2.setLayoutManager(layoutManager2);
+
+                       teamSheetAdapter1=new TeamSheetAdapter(getBaseContext(),response.body().getTeam1Names());
+                       teamSheetAdapter2=new TeamSheetAdapter(getBaseContext(),response.body().getTeam2Names());
+                       recyclerView_t1.setAdapter(teamSheetAdapter1);
+
+
+                       recyclerView_t2.setAdapter(teamSheetAdapter2);
+
+                       }catch(Exception e){e.printStackTrace();
+                       Log.v("INTRE","ERROR");
+                   }
+
+                   //teamSheetAdapter1.notifyDataSetChanged();
+                   //teamSheetAdapter2.notifyDataSetChanged();
+
+               }
+
+               @Override
+               public void onFailure(Call<TeamSheet> call, Throwable t) {
+
+                   Log.e("TAG", t.toString());
+               }
+           });
+
+
+
+
+   }
+}
