@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -59,6 +58,7 @@ public class DeptSelectionRecyclerAdapter extends RecyclerView.Adapter<DeptSelec
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+
         //Log.d("position",""+position);
         holder.departmentTV.setTypeface(inconsolataBoldFont);
         holder.departmentTV.setText(points.get(position));

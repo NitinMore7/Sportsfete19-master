@@ -1,7 +1,6 @@
 package spider.app.sportsfete19.Schedule;
 
 
-import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -78,7 +77,6 @@ public class Day2Fragment extends Fragment implements Callback<List<EventDetails
     boolean isVisibleToUser=false;
 
     private int prevSize = 0, cueSize = 0;
-    private static int a=0;
 
     private int currentTransitionEffect = JazzyHelper.TILT;
     JazzyRecyclerViewScrollListener jazzyRecyclerViewScrollListener;
@@ -114,7 +112,7 @@ public class Day2Fragment extends Fragment implements Callback<List<EventDetails
         context=getContext();
 
         if(getActivity()!=null) {
-
+            departmentUpdateCallback = (DepartmentUpdateCallback) getActivity();
             prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
             apiInterface = ApiInterface.retrofit.create(ApiInterface.class);
             eventList = new ArrayList<>();
@@ -181,8 +179,6 @@ public class Day2Fragment extends Fragment implements Callback<List<EventDetails
             }
 
             setClickListener();
-            if(a==0)
-            {onRefresh();a++;}
         }
     }
 
@@ -232,7 +228,7 @@ public class Day2Fragment extends Fragment implements Callback<List<EventDetails
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    //putEventsLastUpdate();
+                                    putEventsLastUpdate();
                                     //swipeRefreshLayout.setRefreshing(false);
                                     eventList.clear();
                                     eventList.addAll(response.body());
@@ -327,7 +323,6 @@ public class Day2Fragment extends Fragment implements Callback<List<EventDetails
 
     }
 
-    @SuppressLint("LongLogTag")
     public void filterList(){
 
         getSelectedSport();

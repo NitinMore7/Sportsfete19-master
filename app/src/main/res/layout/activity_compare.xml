@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/sfbkg"
     android:padding="8dp">
 
     <android.support.design.widget.AppBarLayout
@@ -23,8 +22,7 @@
             android:layout_height="match_parent"
             android:layout_weight="6"
             android:layout_marginRight="16dp"
-            android:text="COMPARE"
-            android:textColor="@android:color/white"
+            android:text="SPORT"
             android:textStyle="bold"
             android:textSize="18sp"
             android:gravity="center_vertical|right"/>
@@ -35,7 +33,7 @@
             android:layout_height="match_parent"
             android:layout_marginRight="16dp"
             android:layout_weight="2"
-            android:background="@drawable/transparent_black_withborder"
+            android:background="@drawable/circular_end_border"
             android:padding="2dp"/>
 
         <Spinner
@@ -44,7 +42,7 @@
             android:layout_height="match_parent"
             android:layout_marginRight="16dp"
             android:layout_weight="2"
-            android:background="@drawable/transparent_black_withborder"
+            android:background="@drawable/circular_end_border"
             android:padding="2dp"/>
 
     </LinearLayout>

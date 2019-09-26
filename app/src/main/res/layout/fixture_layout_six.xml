@@ -7,7 +7,7 @@
 
     <ScrollView
         android:layout_height="match_parent"
-        android:background="@drawable/sfbkg"
+        android:background="#f1f1f1"
         android:layout_width="wrap_content">
 
 
@@ -44,7 +44,7 @@
                             android:layout_marginTop="10dp"
                             android:gravity="center_horizontal"
                             android:text="KNOCKOUT"
-                            android:textColor="@color/white"
+                            android:textColor="@color/cardview_dark_background"
                             android:textStyle="bold|italic"
                             android:visibility="invisible" />
 
@@ -331,7 +331,7 @@
                                 android:layout_marginBottom="10dp"
                                 android:layout_marginTop="10dp"
                                 android:text="Quarterfinals"
-                                android:textColor="@color/white"
+                                android:textColor="@color/cardview_dark_background"
                                 android:textStyle="bold|italic"
                                 android:visibility="invisible" />
 

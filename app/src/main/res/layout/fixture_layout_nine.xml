@@ -21,7 +21,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/sfbkg"
+                android:background="#f1f1f1"
                 android:orientation="vertical">
 
                 <!--headers-->
@@ -46,7 +46,7 @@
                             android:layout_marginBottom="10dp"
                             android:layout_marginTop="10dp"
                             android:text="KNOCKOUT"
-                            android:textColor="@color/white"
+                            android:textColor="@color/cardview_dark_background"
                             android:textStyle="bold|italic" />
 
                     </LinearLayout>

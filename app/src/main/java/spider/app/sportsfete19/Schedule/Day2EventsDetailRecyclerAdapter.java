@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import java.util.Date;
@@ -87,10 +86,9 @@ public class Day2EventsDetailRecyclerAdapter extends RecyclerView.Adapter<EventV
         return new EventViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.event_recycler_item, parent, false));
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(final EventViewHolder holder, final int position) {
-        holder.getView().setAnimation(AnimationUtils.loadAnimation(context,R.anim.zoom_in));
+
         if (!eventList.isEmpty()) {
             EventDetailsPOJO event = eventList.get(position);
             String status = "";

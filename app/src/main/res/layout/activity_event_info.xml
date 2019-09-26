@@ -1,6 +1,5 @@
 <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/sliding_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -39,7 +38,7 @@
 
                 </android.support.design.widget.AppBarLayout>
 
-                <LinearLayout
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/scene_transition"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -326,39 +325,9 @@
                                         android:layout_weight="1"
                                         android:gravity="center"
                                         android:text="Timestamp"
-                                        android:textAlignment="textEnd"
-                                        tools:ignore="RtlCompat" />
+                                        android:textAlignment="textEnd" />
 
                                 </LinearLayout>
-                            </RelativeLayout>
-                            <RelativeLayout
-                                android:id="@+id/rel_poll_btn"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:visibility="visible">
-
-                                <Button
-                                    android:id="@+id/btn_team1"
-                                    android:layout_width="60dp"
-                                    android:layout_height="50dp"
-                                    android:layout_alignParentStart="false"
-                                    android:layout_alignParentRight="false"
-                                    android:layout_centerInParent="true"
-                                    android:textSize="10sp">
-
-                                </Button>
-
-                                <Button
-                                    android:id="@+id/btn_team2"
-                                    android:layout_width="60dp"
-                                    android:layout_height="50dp"
-                                    android:layout_alignParentLeft="false"
-                                    android:layout_alignParentEnd="false"
-                                    android:layout_alignParentRight="false"
-                                    android:layout_centerInParent="true"
-                                    android:layout_toRightOf="@id/btn_team1"
-                                    android:textSize="10sp"></Button>
                             </RelativeLayout>
 
                             <TextView
@@ -375,40 +344,7 @@
 
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
-                    <ScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp">
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/team_sheet_rec"
 
-                            android:gravity="center_horizontal"
-                            android:layout_gravity="center_horizontal"
-                            android:visibility="visible"
-                            >
-
-                            <android.support.v7.widget.RecyclerView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/team_sheet_1"
-                                android:paddingHorizontal="30dp"
-                                >
-
-                            </android.support.v7.widget.RecyclerView>
-
-                            <android.support.v7.widget.RecyclerView
-                                android:layout_toRightOf="@+id/team_sheet_1"
-                                android:id="@+id/team_sheet_2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingHorizontal="30dp"
-
-                                >
-
-                            </android.support.v7.widget.RecyclerView>
-                        </RelativeLayout>
-                    </ScrollView>
                 </LinearLayout>
 
             </LinearLayout>

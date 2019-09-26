@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -26,7 +25,6 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 import com.twotoasters.jazzylistview.JazzyHelper;
 import com.twotoasters.jazzylistview.recyclerview.JazzyRecyclerViewScrollListener;
-import com.yalantis.phoenix.PullToRefreshView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -49,12 +47,11 @@ import spider.app.sportsfete19.MainActivity;
 import spider.app.sportsfete19.R;
 import spider.app.sportsfete19.Schedule.StatusEventsDetailRecyclerAdapter;
 import spider.app.sportsfete19.WrapContentLinearLayoutManager;
-import yalantis.com.sidemenu.interfaces.ScreenShotable;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment implements Callback<List<StatusEventDetailsPOJO>>, SwipeRefreshLayout.OnRefreshListener, ScreenShotable {
+public class HomeFragment extends Fragment implements Callback<List<StatusEventDetailsPOJO>>, SwipeRefreshLayout.OnRefreshListener{
 
     private static final String TAG="HomeFragment";
     List<StatusEventDetailsPOJO> eventList;
@@ -62,7 +59,7 @@ public class HomeFragment extends Fragment implements Callback<List<StatusEventD
     List<StatusEventDetailsPOJO> temp_filter_eventList;
     StatusEventsDetailRecyclerAdapter eventRecyclerAdapter;
     RecyclerView recyclerView;
-    PullToRefreshView swipeRefreshLayout;
+    SwipeRefreshLayout swipeRefreshLayout;
     Call<List<StatusEventDetailsPOJO>> call;
     ApiInterface apiInterface;
     Context context;
@@ -161,16 +158,6 @@ public class HomeFragment extends Fragment implements Callback<List<StatusEventD
         }
     }
 
-    @Override
-    public void takeScreenShot() {
-
-    }
-
-    @Override
-    public Bitmap getBitmap() {
-        return null;
-    }
-
     private class Filter extends AsyncTask<Void,Void,Void>{
 
         @Override
@@ -248,19 +235,8 @@ public class HomeFragment extends Fragment implements Callback<List<StatusEventD
 
         recyclerView.setAdapter(eventRecyclerAdapter);
 
-        swipeRefreshLayout= (PullToRefreshView) view.findViewById(R.id.home_swipe_to_refresh);
-        swipeRefreshLayout.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                call = apiInterface.getEventByStatus(status);
-                call.enqueue(HomeFragment.this);
-                swipeRefreshLayout.setRefreshing(true);
-                FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(context);
-                Bundle bundle = new Bundle();
-                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Live events Fetched");
-                mFirebaseAnalytics.logEvent("LiveEvents",bundle);
-            }
-        });
+        swipeRefreshLayout= (SwipeRefreshLayout) view.findViewById(R.id.home_swipe_to_refresh);
+        swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setRefreshing(true);
 
         onRefresh();
@@ -298,7 +274,7 @@ public class HomeFragment extends Fragment implements Callback<List<StatusEventD
 
 
             for (int i = 0; i <responseList.size() ; i++)
-                eventList.add(responseList.get(i));
+                    eventList.add(responseList.get(i));
 
             if(eventList.size()==0 && viewGroup.getContext()!=null){
                 Snackbar.make(viewGroup,"There are currently no "+status+" events!", Snackbar.LENGTH_LONG).show();

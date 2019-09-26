@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="spider.app.sportsfete19">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_sportsfete"
@@ -9,61 +13,59 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
-
-        <activity android:name=".LoginActivity"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <activity android:name=".UserProfile" android:screenOrientation="portrait"></activity>
-      
-        <activity android:name=".UserDetails" android:screenOrientation="portrait"/>
-      
         <activity
-            android:name=".HomeScreen"
+            android:name="spider.app.sportsfete19.HomeScreen"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="spider.app.sportsfete19.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
         </activity>
         <activity
-            android:name=".EventInfo.EventInfoActivity"
+            android:name="spider.app.sportsfete19.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
 
-        <activity
-            android:name=".SportDetails.SportDetailsActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Leaderboard.CompareActivity"
-            android:label="Compare"
-            android:screenOrientation="portrait" />
-
-        <service android:name=".FireBaseServices.MyFirebaseInstanceIDService">
+        <service android:name="spider.app.sportsfete19.FireBaseServices.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".FireBaseServices.MyFirebaseMessagingService">
+        <service android:name="spider.app.sportsfete19.FireBaseServices.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name="spider.app.sportsfete19.EventInfo.EventInfoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="spider.app.sportsfete19.Marathon.MarathonRegistration"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="spider.app.sportsfete19.SportDetails.SportDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="spider.app.sportsfete19.Leaderboard.CompareActivity"
+            android:label="Compare"
+            android:screenOrientation="portrait"/>
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
 
 </manifest>

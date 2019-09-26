@@ -18,9 +18,9 @@
         <item>ECE</item>
         <item>EEE</item>
         <item>ICE</item>
-        <item>CA</item>
         <item>MECH</item>
         <item>META</item>
+        <item>CA</item>
         <item>M.TECH</item>
         <item>PhD/MSc/MS</item>
         <item>PROD</item>
@@ -487,6 +487,7 @@ other side will be with partly shine) for a match based on availability.</li>
    ]]>
     </string>
 
+
     <string name="Cricket_Girls">
             <![CDATA[
 
@@ -540,6 +541,7 @@ other side will be with partly shine) for a match based on availability.</li>
 
    ]]>
     </string>
+
 
     <string name="Football">
             <![CDATA[
@@ -803,7 +805,6 @@ will not be tolerated.</li>
    ]]>
     </string>
 
-
     <string name="KhoKho">
             <![CDATA[
 
@@ -845,7 +846,6 @@ will not be tolerated.</li>
 
    ]]>
     </string>
-
 
     <string name="KhoKho_Girls">
             <![CDATA[
@@ -1092,6 +1092,7 @@ from the quiz.</li>
    ]]>
     </string>
 
+
     <string name="TableTennis">
             <![CDATA[
   <p><b>POINTS:-
@@ -1250,6 +1251,7 @@ from the quiz.</li>
 
    ]]>
     </string>
+
 
     <string name="Volleyball_Girls">
             <![CDATA[
@@ -1432,7 +1434,6 @@ does not.</p>
                 </p>
    ]]>
     </string>
-
 
     <string name="Weightlifting_Boys">
             <![CDATA[

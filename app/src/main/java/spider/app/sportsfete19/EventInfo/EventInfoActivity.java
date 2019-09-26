@@ -1,7 +1,5 @@
 package spider.app.sportsfete19.EventInfo;
 
-import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -21,27 +19,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.util.Log;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -50,43 +31,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
-import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import pl.droidsonroids.gif.GifTextView;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
-import spider.app.sportsfete19.API.ApiInterface;
 import spider.app.sportsfete19.API.EventDetailsPOJO;
-import spider.app.sportsfete19.API.LoginInterface;
-import spider.app.sportsfete19.API.SearchByNamePOJO;
-import spider.app.sportsfete19.API.SearchUserByRollNo.SearchItem;
-import spider.app.sportsfete19.API.TeamSheet;
 import spider.app.sportsfete19.FireBaseServices.Comment;
 import spider.app.sportsfete19.FireBaseServices.Score;
-
-import spider.app.sportsfete19.MyDatabase;
 import spider.app.sportsfete19.R;
-import spider.app.sportsfete19.predict;
-import spider.app.sportsfete19.predictresponse;
 
 public class EventInfoActivity extends AppCompatActivity{
 
@@ -100,27 +57,16 @@ public class EventInfoActivity extends AppCompatActivity{
     LinearLayout versusEventLl,nonVersusEventLl;
     CardView enter_card;
     SlidingUpPanelLayout slidingUpPanelLayout;
-    MyDatabase db;
     LinearLayout upper_bound, lower_bound;
-    Button Team1,Team2;
-    RelativeLayout poll_layout;
 
     int upper_bound_val=0, lower_bound_val=0;
-    RelativeLayout team_sheet_rel;
 
     private static final String FLAG_STATUS_UPCOMING = "upcoming";
     private static final String FLAG_STATUS_LIVE = "live";
     private static final String FLAG_STATUS_COMPLETED = "completed";
     private String status;
-    private LoginInterface loginInterface;
-    private ApiInterface apiInterface;
-    private String predictresponse;
 
-    private RecyclerView recyclerView_t1,recyclerView_t2,recyclerView;
-    private List<String> teamlist1=new ArrayList<>();
-    private List<String> teamlist2=new ArrayList<>();
-
-    private TeamSheetAdapter teamSheetAdapter1,teamSheetAdapter2;
+    RecyclerView recyclerView;
     CommentRecyclerAdapter commentRecyclerAdapter;
     List<Comment> commentList=new ArrayList<>();
 
@@ -209,7 +155,7 @@ public class EventInfoActivity extends AppCompatActivity{
         Typeface inconsolataBoldFont = Typeface.createFromAsset(getAssets(),  "fonts/InconsolataBold.ttf");
         Typeface hammersmithOnefont = Typeface.createFromAsset(getAssets(),  "fonts/HammersmithOneRegular.ttf");
         Typeface francoisOneRegularFont = Typeface.createFromAsset(getAssets(),  "fonts/FrancoisOneRegular.ttf");
-        final EventDetailsPOJO eventInfo = new Gson().fromJson(JsonEventInfo, EventDetailsPOJO.class);
+        EventDetailsPOJO eventInfo = new Gson().fromJson(JsonEventInfo, EventDetailsPOJO.class);
 
         eventNameTv = (TextView)findViewById(R.id.info_event_name);
         team1Tv= (TextView)findViewById(R.id.info_team_1);
@@ -235,8 +181,7 @@ public class EventInfoActivity extends AppCompatActivity{
         upper_bound = (LinearLayout) findViewById(R.id.upper_bound_height);
         lower_bound = (LinearLayout) findViewById(R.id.lower_bound_layout);
         last_updated_timestamp = (TextView) findViewById(R.id.last_updated_timestamp);
-        Team1=(Button)findViewById(R.id.btn_team1);
-        Team2=(Button)findViewById(R.id.btn_team2);
+
 
         loaderGIF = (GifTextView)findViewById(R.id.loader);
         noCommentsTv = (TextView)findViewById(R.id.no_comments_prompt);
@@ -253,22 +198,16 @@ public class EventInfoActivity extends AppCompatActivity{
         score2Tv.setTypeface(hammersmithOnefont);
         eventHintTv.setTypeface(hammersmithOnefont);
         last_updated_timestamp.setTypeface(hammersmithOnefont);
-        db=new MyDatabase(getBaseContext());
-        poll_layout=findViewById(R.id.rel_poll_btn);
-        team_sheet_rel=findViewById(R.id.team_sheet_rec);
+
 
 
         String round = eventInfo.getRound();
 
         if (eventInfo.getEliminationType().equalsIgnoreCase("single")||
                 eventInfo.getEliminationType().equalsIgnoreCase("double")) {
-
-
             //TODO:
             nonVersusEventLl.setVisibility(View.GONE);
             versusEventLl.setVisibility(View.VISIBLE);
-            poll_layout=findViewById(R.id.rel_poll_btn);
-            poll_layout.setVisibility(View.GONE);
             team1Tv.setTypeface(inconsolataBoldFont);
             team1Tv.setText(eventInfo.getDept1());
 
@@ -355,39 +294,18 @@ public class EventInfoActivity extends AppCompatActivity{
             }
 
             setDeptIcon(team_1_icon,eventInfo.getDept1().trim().toUpperCase().replaceAll("\\d", ""));
-            Team1.setText(eventInfo.getDept1().trim().toUpperCase().replaceAll("\\d", ""));
             team1Tv.setSelected(true);
             team1Tv.setSingleLine(true);
             team2Tv.setText(eventInfo.getDept2());
             setDeptIcon(team_2_icon,eventInfo.getDept2().trim().toUpperCase().replaceAll("\\d", ""));
-            Team2.setText(eventInfo.getDept2().trim().toUpperCase().replaceAll("\\d", ""));
             team2Tv.setTypeface(inconsolataBoldFont);
             team2Tv.setSelected(true);
             team2Tv.setSingleLine(true);
-
-                recyclermaker(eventInfo.getFixture());
-
             round = round + " : " + eventInfo.getFixture();
-
-
-
-            Team1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                requester(eventInfo.getFixture().toString(),team1Tv.getText().toString());
-                }
-            });
-            Team2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    requester(eventInfo.getFixture().toString(),team2Tv.getText().toString());
-                }
-            });
 
         } else {
             nonVersusEventLl.setVisibility(View.VISIBLE);
             versusEventLl.setVisibility(View.GONE);
-            poll_layout.setVisibility(View.GONE);
             participantsTv.setText("");
             for(String participants: eventInfo.getParticipatingTeams()){
                 participantsTv.setText(participantsTv.getText()+"  "+participants+"  ");
@@ -413,14 +331,12 @@ public class EventInfoActivity extends AppCompatActivity{
         if (eventInfo.getStatus().equals(FLAG_STATUS_UPCOMING)) {
             eventstatus.setTextColor(Color.parseColor("#009688"));
             status = "UPCOMING";
-            poll_layout.setVisibility(View.VISIBLE);
             team1Tv.setTextColor(getResources().getColor(R.color.colorTabtext));
             team2Tv.setTextColor(getResources().getColor(R.color.colorTabtext));
             eventStartTime.setText(getCurrentTime(Long.valueOf(eventInfo.getStartTime())));
         } else if (eventInfo.getStatus().equals(FLAG_STATUS_LIVE)) {
             eventstatus.setTextColor(Color.parseColor("#FF5722"));
             status = "LIVE";
-            poll_layout.setVisibility(View.GONE);
             eventstatus.startAnimation(blinkAnimation);
             team1Tv.setTextColor(getResources().getColor(R.color.colorTabtext));
             team2Tv.setTextColor(getResources().getColor(R.color.colorTabtext));
@@ -429,7 +345,6 @@ public class EventInfoActivity extends AppCompatActivity{
         } else {
             eventstatus.setTextColor(Color.parseColor("#4CAF50"));
             status = "COMPLETED";
-            poll_layout.setVisibility(View.GONE);
             eventStartTime.setText("");
             String winner = eventInfo.getWinner();
             //setting color
@@ -440,11 +355,6 @@ public class EventInfoActivity extends AppCompatActivity{
             }
             eventStartTime.setText(getCurrentTime(Long.valueOf(eventInfo.getStartTime())));
         }
-
-
-
-
-
 
         eventstatus.setText(status);
 
@@ -490,8 +400,6 @@ public class EventInfoActivity extends AppCompatActivity{
             }
         },500);
 
-
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -499,8 +407,7 @@ public class EventInfoActivity extends AppCompatActivity{
         Log.d("department",dept+"");
         switch(dept){
             case "ARCHI":setImageResource((dept_icon[0]),imageView);
-                imageView.setFillColor(Color.WHITE);
-                break;
+                imageView.setFillColor(Color.WHITE);break;
             case "CHEM":setImageResource((dept_icon[1]),imageView);
                 imageView.setFillColor(Color.WHITE);break;
             case "CIVIL":setImageResource((dept_icon[2]),imageView);
@@ -676,110 +583,4 @@ public class EventInfoActivity extends AppCompatActivity{
         //slideDown(enter_card);
         super.onBackPressed();
     }
-
-    public void requester(String event,String team){
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://us-central1-sportsfete19-f7729.cloudfunctions.net/")
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
-        loginInterface=retrofit.create(LoginInterface.class);
-        final predict predict1=new predict(event,team);
-        Call<String> mCall = loginInterface.votepredictor(db.getJwtToken(),predict1);
-        mCall.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if (response.body() != null) {
-                    predictresponse = response.body();
-
-                    if (predictresponse.contains("true")) {
-                        try{Log.v("Response",predictresponse.toString());
-                        String res=predictresponse;
-                        String[] couple = res.split(",");
-                        String A[]=new String[2];
-                        for(int i =0; i < couple.length-1 ; i++) {
-                            String[] items =couple[i].split(":");
-                            Log.v("DeptScore",items[1]+"");
-                            A[i]=items[1];
-                        }
-                        Team1.setText(A[0]);
-                        Team2.setText(A[1]);
-                        poll_layout.startLayoutAnimation();
-                        }catch (Exception e){e.printStackTrace();}
-
-                    } else {
-                        Toast.makeText(getBaseContext(),predictresponse,Toast.LENGTH_LONG).show();
-                        poll_layout.setVisibility(View.GONE);
-                    }
-                }
-                else {
-                    Toast.makeText(getBaseContext(),response.toString(),Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), t.getMessage()+"", Toast.LENGTH_SHORT).show();
-                Log.d("login failure", t.getMessage());
-            }
-        });
-    }
-
-   public void recyclermaker(String n){
-       Log.v("INTRE",""+n);
-           apiInterface = ApiInterface.retrofit.create(ApiInterface.class);
-           Call<TeamSheet> call = apiInterface.getteamsheet(n);
-
-           call.enqueue(new Callback<TeamSheet>() {
-               @Override
-               public void onResponse(Call<TeamSheet> call, Response<TeamSheet> response) {
-                   if (!response.isSuccessful()) {
-                       Toast.makeText(getBaseContext(), "Data Not Found!", Toast.LENGTH_LONG).show();
-                       return;
-                   }
-                   try{
-                       team_sheet_rel.setVisibility(View.VISIBLE);
-                       Log.v("INTRE",response.toString());
-                       recyclerView_t1=findViewById(R.id.team_sheet_1);
-                       recyclerView_t2=findViewById(R.id.team_sheet_2);
-                        recyclerView_t1.setHasFixedSize(true);
-                       recyclerView_t2.setHasFixedSize(true);
-
-                       RecyclerView.LayoutManager layoutManager1=new LinearLayoutManager(getApplicationContext());
-                       recyclerView_t1.setLayoutManager(layoutManager1);
-                       RecyclerView.LayoutManager layoutManager2=new LinearLayoutManager(getApplicationContext());
-                       recyclerView_t2.setLayoutManager(layoutManager2);
-
-                       teamSheetAdapter1=new TeamSheetAdapter(getBaseContext(),response.body().getTeam1Names());
-                       teamSheetAdapter2=new TeamSheetAdapter(getBaseContext(),response.body().getTeam2Names());
-                       recyclerView_t1.setAdapter(teamSheetAdapter1);
-
-
-                       recyclerView_t2.setAdapter(teamSheetAdapter2);
-
-                       }catch(Exception e){e.printStackTrace();
-                       Log.v("INTRE","ERROR");
-                   }
-
-                   //teamSheetAdapter1.notifyDataSetChanged();
-                   //teamSheetAdapter2.notifyDataSetChanged();
-
-               }
-
-               @Override
-               public void onFailure(Call<TeamSheet> call, Throwable t) {
-
-                   Log.e("TAG", t.toString());
-               }
-           });
-
-
-
-
-   }
 }

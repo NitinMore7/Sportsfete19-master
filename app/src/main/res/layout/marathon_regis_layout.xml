@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/marathonrunners"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="156dp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="100dp"
+                android:layout_marginBottom="24dp"
+                android:src="@drawable/glucond"
+                android:layout_gravity="center_horizontal"/>
+
+            <EditText
+                android:id="@+id/user_rollno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/textbox"
+                android:fontFamily="@font/circularstd"
+                android:textSize="18sp"
+                android:hint="Roll Number"
+                android:inputType="number"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:textColorHint="@color/white" />
+
+
+            <EditText
+                android:id="@+id/user_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/textbox"
+                android:fontFamily="@font/circularstd"
+                android:hint="Webmail Password"
+                android:inputType="textPassword"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:textColorHint="@color/white" />
+
+
+            <EditText
+                android:id="@+id/user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/textbox"
+                android:fontFamily="@font/circularstd"
+                android:hint="Name"
+                android:inputType="textPersonName"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:textColorHint="@color/white" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/male"
+                    android:layout_width="100sp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/gender"
+                    android:text="Male"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/female"
+                    android:layout_width="100sp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/gender"
+                    android:text="Female"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/dept_spinner"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/textbox"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+
+            <Button
+                android:id="@+id/register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/loginbutton"
+                android:fontFamily="@font/circularstd"
+                android:text="Register"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="25dp"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>
