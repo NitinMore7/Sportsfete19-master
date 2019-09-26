@@ -4,7 +4,6 @@
     <color name="colorPrimaryDark">#000</color>
     <color name="colorTabtext">#404f50</color>
     <color name="green_text">#4ab556</color>
-    <color name="dept_box_background">#4ab556</color>
     <color name="colorAccent">#89430d</color>
     <color name="splashColor">#FFFFFF</color>
     <color name="selectedTextColor">#5c5c5c</color>
@@ -21,7 +20,9 @@
 
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
-
+    <color name="trans_black">#CC000000</color>
+    <color name="dept_box_background">#00bcd4</color>
+     <color name="trans_white">#70ffffff</color>
     <color name="blue">#1565c0</color>
     <color name="bluedark">#003c8f</color>
     <color name="bluelight">#5e92f3</color>
