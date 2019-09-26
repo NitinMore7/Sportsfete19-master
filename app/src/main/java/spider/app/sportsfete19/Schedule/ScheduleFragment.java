@@ -59,7 +59,6 @@ public class ScheduleFragment extends Fragment implements ScreenShotable {
     ScheduleViewPagerAdapter scheduleViewPagerAdapter;
     ViewPager viewPager;
     RecyclerView recyclerView, sport_recycler;
-    public ImageView switch_filter;
 
     String[] deptArraySharedPreference=new String[15];
     String[] sportArraySharedPreference=new String[31];
@@ -183,7 +182,6 @@ public class ScheduleFragment extends Fragment implements ScreenShotable {
 
         selectedDept = getSelectedDept();
         selectedSport = getSelectedSport();
-        switch_filter = (ImageView)getActivity().findViewById(R.id.schedule_switch_filter);
 
         //sport filter list
         sportArraySharedPreference=getResources().getStringArray(R.array.filter_sport_array);
@@ -220,7 +218,7 @@ public class ScheduleFragment extends Fragment implements ScreenShotable {
 
         //selectedsport = ids of sports
         //recycler sport= value to be displayed in recyclerview
-        sport_recycler = (RecyclerView) getActivity().findViewById(R.id.sport_recycler);
+        sport_recycler = (RecyclerView) getActivity().findViewById(R.id.main_sport_recycler);
         sport_recycler.setHasFixedSize(true);
         sport_recycler.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,true));
         sportAdapter = new DeptSelectionRecyclerAdapter(recycler_sportList,
@@ -258,17 +256,6 @@ public class ScheduleFragment extends Fragment implements ScreenShotable {
             }
         },300);
 
-        switch_filter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(recyclerView.isShown()){
-                    flipAnimation(recyclerView,sport_recycler);
-                }else if(sport_recycler.isShown()){
-                    flipAnimation(sport_recycler,recyclerView);
-                }
-            }
-        });
-
     }
 
     public void bounceElement(TextView textView){
@@ -278,7 +265,7 @@ public class ScheduleFragment extends Fragment implements ScreenShotable {
         textView.startAnimation(myAnim);
     }
 
-    public void flipAnimation(final RecyclerView VrecyclerView, final RecyclerView INVrecyclerView){
+    /*public void flipAnimation(final RecyclerView VrecyclerView, final RecyclerView INVrecyclerView){
         ObjectAnimator anim = (ObjectAnimator) AnimatorInflater.loadAnimator(getActivity(), R.animator.flipping);
         anim.setTarget(VrecyclerView);
         anim.setDuration(500);
@@ -306,7 +293,7 @@ public class ScheduleFragment extends Fragment implements ScreenShotable {
         });
         anim.start();
     }
-
+*/
 
     public String getSelectedDept(){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());

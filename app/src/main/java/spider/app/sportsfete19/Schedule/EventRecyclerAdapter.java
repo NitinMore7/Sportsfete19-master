@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import java.util.List;
 
@@ -62,6 +63,7 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter<EventViewHolder> 
 
     @Override
     public void onBindViewHolder(EventViewHolder holder, final int position) {
+        holder.getView().setAnimation(AnimationUtils.loadAnimation(context,R.anim.zoom_in));
         Event event=eventList.get(position);
         if(event.getParticipants().size()==0) {
             holder.nonVersusEventLl.setVisibility(View.GONE);

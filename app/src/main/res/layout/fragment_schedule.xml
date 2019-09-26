@@ -26,34 +26,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toStartOf="@+id/schedule_switch_filter"
             android:nestedScrollingEnabled="false"
             android:paddingLeft="10dp"
             android:paddingRight="10dp" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/sport_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:visibility="gone"
-            android:layout_toStartOf="@+id/schedule_switch_filter"
-            android:nestedScrollingEnabled="false"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp" />
-
-        <ImageView
-            android:id="@+id/schedule_switch_filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/ic_filter_switch"
-            android:layout_marginTop="10dp"/>
-
 
     </RelativeLayout>
 

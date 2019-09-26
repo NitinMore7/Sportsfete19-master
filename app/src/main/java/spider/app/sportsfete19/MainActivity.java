@@ -2,18 +2,14 @@ package spider.app.sportsfete19;
 
 
 import android.animation.Animator;
-import android.animation.AnimatorInflater;
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -33,12 +29,12 @@ import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.truizlop.fabreveallayout.FABRevealLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +54,8 @@ import yalantis.com.sidemenu.model.SlideMenuItem;
 import yalantis.com.sidemenu.util.ViewAnimator;
 import yalantis.com.sidemenu.util.ViewAnimator.ViewAnimatorListener;
 
-public class MainActivity extends AppCompatActivity implements ViewAnimatorListener,NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,DepartmentUpdateCallback,ViewAnimatorListener {
+
 
     ArrayList<View> menuItems;
     private DrawerLayout flowingDrawer;
@@ -66,28 +63,28 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
     int lastViewFragment=0;
     public Toolbar toolbar;
     //MyDatabase myDatabase;
-    public View view;
     NavigationTabBar navigationTabBar;
     NavigationView navigationView;
     RecyclerView dept_recycler, sport_recycler;
     RelativeLayout selection_header;
+
+    FABRevealLayout sportSelection;
+    TextView selectedSportView;
+
     HomeFragment homeFragment;
     LeaderboardFragment leaderboardFragment;
     ScheduleFragment scheduleFragment;
     UserSearch searchFragment;
     SportDetailsFragment sportDetailsFragment;
 
-
     MyDatabase myDatabase;
     UserSearch userSearch;
-
 
     String[] deptArraySharedPreference=new String[15];
     String[] sportArraySharedPreference=new String[31];
     List<String> deptlist, recycler_deptList, sportList, recycler_sportList;
     DeptSelectionRecyclerAdapter recyclerAdapter, sportAdapter;
 
-    public ImageView switch_filter;
     public String selectedDepartment = "ALL";
     public String selectedSport = "ALL";
     private static final String TAG="MainActivity";
@@ -97,8 +94,6 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
     private ViewAnimator viewAnimator;
     private int res = R.drawable.athletics;
     private LinearLayout linearLayout;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,10 +136,13 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
         drawerLayout.setStatusBarBackgroundColor(Color.RED);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        sportSelection = findViewById(R.id.fab_reveal_layout);
+        selectedSportView = findViewById(R.id.selected_sport);
+
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_menu_white);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("Live");
 
         lastViewFragment = 0;
 
@@ -153,20 +151,18 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
             Log.d("font set","true"+"");
             if(view instanceof TextView) {
                 TextView textView = (TextView) view;
-
                 textView.setTypeface(Typeface.createFromAsset(getAssets(),  "fonts/HammersmithOneRegular.ttf"));
                 Log.d("font set","true"+"");
             }
         }
 
-
-        navigationTabBar = (NavigationTabBar) findViewById(R.id.custom_navigation);
+        navigationTabBar = findViewById(R.id.custom_navigation);
 
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
         models.add(
                 new NavigationTabBar.Model.Builder(
                         getResources().getDrawable(R.drawable.live_match),
-                        Color.parseColor("#4ab556"))
+                        Color.parseColor("#000000"))
                         .selectedIcon(getResources().getDrawable(R.drawable.live_matches_unselected))
                         .title("Live")
                         .badgeTitle("NTB")
@@ -175,16 +171,15 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
         models.add(
                 new NavigationTabBar.Model.Builder(
                         getResources().getDrawable(R.drawable.upcoming),
-                        Color.parseColor("#4ab556")
+                        Color.parseColor("#000000")
                 ).title("Upcoming")
                         .selectedIcon(getResources().getDrawable(R.drawable.upcoming_unselected))
                         .badgeTitle("with")
-                        .build()
-        );
+                        .build()  );
         models.add(
                 new NavigationTabBar.Model.Builder(
                         getResources().getDrawable(R.drawable.completed),
-                        Color.parseColor("#4ab556")
+                        Color.parseColor("#000000")
                 ).title("Completed")
                         .selectedIcon(getResources().getDrawable(R.drawable.completedunselected))
                         .badgeTitle("state")
@@ -195,14 +190,9 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
         navigationTabBar.setTypeface(Typeface.createFromAsset(getAssets(),  "fonts/InconsolataBold.ttf"));
         navigationTabBar.setSelected(true);
         navigationTabBar.setModelIndex(0);
-
-
-
-
         navigationTabBar.setOnTabBarSelectedIndexListener(new NavigationTabBar.OnTabBarSelectedIndexListener() {
             @Override
             public void onStartTabSelected(NavigationTabBar.Model model, int index) {
-
             }
 
             @Override
@@ -263,10 +253,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
         });
 
 
-
-        view =  findViewById(R.id.view_id);
-        switch_filter = (ImageView)findViewById(R.id.switch_filter);
-        flowingDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        flowingDrawer = findViewById(R.id.drawer_layout);
         View navButton = TutorialHelper.getNavButtonView(toolbar);
 
 
@@ -280,9 +267,6 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
         sequence.addSequenceItem(navigationTabBar,
                 "Switch between Live,Upcoming and Completed events", "NEXT");
 
-        sequence.addSequenceItem(switch_filter,
-                "Switch between Departments and Sports", "NEXT");
-
         sequence.addSequenceItem(navButton,
                 "Touch here to check out other features", "GOT IT");
 
@@ -290,9 +274,9 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
         sequence.start();
  /*
 
-        scalingll = (LinearLayout) findViewById(R.id.scaling_layout);
+        scalingll = findViewById(R.id.scaling_layout);
+        navigationView = findViewById(R.id.nav_view);
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
         menu=navigationView.getMenu();
@@ -300,13 +284,9 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
         navigationView.getMenu().getItem(0).setChecked(true);
         onNavigationItemSelected(navigationView.getMenu().getItem(0));
 */
+       // setDrawerTypeface();
 
-        //setDrawerTypeface();
 
-
-        //String token = FirebaseInstanceId.getInstance().getToken();
-        //if(token!=null)
-        //Log.d("token",token);
         FirebaseMessaging.getInstance().subscribeToTopic("important");
 
         deptArraySharedPreference=getResources().getStringArray(R.array.filter_department_array);
@@ -315,49 +295,48 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
         sportList = new ArrayList<>();
         recycler_sportList = new ArrayList<>();
 
-        //dept filter list
-        for ( int i = deptArraySharedPreference.length-1; i >=0; i--)
+//dept filter list
+        for ( int i = 0; i <deptArraySharedPreference.length; i++)
             deptlist.add(deptArraySharedPreference[i]);
 
         deptArraySharedPreference=getResources().getStringArray(R.array.department_array);
-        for ( int i = deptArraySharedPreference.length-1; i >=0; i--)
+        for ( int i = 0; i<deptArraySharedPreference.length; i++)
             recycler_deptList.add(deptArraySharedPreference[i]);
 
         //sport filter list
         sportArraySharedPreference=getResources().getStringArray(R.array.filter_sport_array);
-        for ( int i = sportArraySharedPreference.length-1; i >=0; i--)
+        for ( int i = 0; i <sportArraySharedPreference.length; i++)
             sportList.add(sportArraySharedPreference[i]);
 
         sportArraySharedPreference=getResources().getStringArray(R.array.short_sport_array);
-        for ( int i = sportArraySharedPreference.length-1; i >=0; i--)
+        for ( int i = 0; i <sportArraySharedPreference.length; i++)
             recycler_sportList.add(sportArraySharedPreference[i]);
 
-        selection_header = (RelativeLayout) findViewById(R.id.selection_header);
-        dept_recycler = (RecyclerView) findViewById(R.id.main_dept_recycler);
+        selection_header = findViewById(R.id.selection_header);
+        dept_recycler = findViewById(R.id.main_dept_recycler);
         dept_recycler.setHasFixedSize(true);
-        dept_recycler.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,true));
+        final LinearLayoutManager layoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        dept_recycler.setLayoutManager(layoutManager);
         recyclerAdapter = new DeptSelectionRecyclerAdapter(recycler_deptList, "ALL",
                 MainActivity.this, new DeptSelectionRecyclerAdapter.MyAdapterListener() {
             @Override
             public void onItemSelected(int position, View view) {
-                bounceElement((TextView)view);
+                bounceElement((TextView) view);
                 selectedDepartment = deptlist.get(position);
                 recyclerAdapter.setSelectedDepartment(deptlist.get(position));
                 Intent intent = new Intent();
                 intent.setAction("update_home_fragment_department");
-                intent.putExtra("selectedDepartment",""+deptlist.get(position));
+                intent.putExtra("selectedDepartment", "" + deptlist.get(position));
                 sendBroadcast(intent);
                 recyclerAdapter.notifyDataSetChanged();
-            }
-        });
-
+            }});
         dept_recycler.setAdapter(recyclerAdapter);
 
         //sport header
-
-        sport_recycler = (RecyclerView) findViewById(R.id.main_sport_recycler);
+        sport_recycler = findViewById(R.id.main_sport_recycler);
         sport_recycler.setHasFixedSize(true);
-        sport_recycler.setLayoutManager(new LinearLayoutManager(MainActivity.this,LinearLayoutManager.HORIZONTAL,true));
+        final LinearLayoutManager layoutManager1=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        sport_recycler.setLayoutManager(layoutManager1);
         sportAdapter = new DeptSelectionRecyclerAdapter(recycler_sportList, "ALL", MainActivity.this, new DeptSelectionRecyclerAdapter.MyAdapterListener() {
             @Override
             public void onItemSelected(int position, View view) {
@@ -369,30 +348,12 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
                 intent.putExtra("selectedSport",""+sportList.get(position).toUpperCase());
                 sendBroadcast(intent);
                 sportAdapter.notifyDataSetChanged();
+                sportSelection.revealMainView();
+                selectedSportView.setText(selectedSport);
             }
-        });
 
+        });
         sport_recycler.setAdapter(sportAdapter);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                dept_recycler.smoothScrollToPosition(14);
-                sport_recycler.smoothScrollToPosition(0);
-            }
-        },300);
-
-        switch_filter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(dept_recycler.isShown()){
-                    flipAnimation(dept_recycler,sport_recycler);
-                }else if(sport_recycler.isShown()){
-                    flipAnimation(sport_recycler,dept_recycler);
-                }
-            }
-        });
-
     }
 
     public void bounceElement(TextView textView){
@@ -402,41 +363,11 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
         textView.startAnimation(myAnim);
     }
 
-    public void flipAnimation(final RecyclerView VrecyclerView, final RecyclerView INVrecyclerView){
-        ObjectAnimator anim = (ObjectAnimator) AnimatorInflater.loadAnimator(MainActivity.this, R.animator.flipping);
-        anim.setTarget(VrecyclerView);
-        anim.setDuration(500);
-        anim.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                VrecyclerView.setVisibility(View.GONE);
-                INVrecyclerView.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {
-
-            }
-        });
-        anim.start();
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 flowingDrawer.openDrawer(Gravity.START);
-
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -490,6 +421,23 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
                     }catch(IllegalStateException ignored){
                         ignored.printStackTrace();
                     }
+
+        } else if (id == R.id.nav_leaderboard) {
+            Runtime.getRuntime().gc();
+            try {
+            selection_header.setVisibility(View.GONE);
+            navigationTabBar.setVisibility(View.GONE);
+            lastViewFragment = 1;
+            leaderboardFragment = new LeaderboardFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, leaderboardFragment);
+            fragmentTransaction.commit();
+            invalidateOptionsMenu();
+            getSupportActionBar().setTitle("LeaderBoard");
+            }catch(IllegalStateException ignored){
+                ignored.printStackTrace();
+            }
+
 
         }else if(id==R.id.nav_schedule){
             Runtime.getRuntime().gc();
@@ -668,7 +616,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
         return true;
     }
 */
-    public void setDrawerTypeface(){
+    /*public void setDrawerTypeface(){
         navigationView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -685,7 +633,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
         });
 
     }
-
+*/
     @Override
     public void onBackPressed() {
         Log.d("lastviewfragment", "" + (lastViewFragment == 0));
@@ -969,14 +917,19 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
             case ContentFragment.FIRST:
                 return screenShotable;
             case ContentFragment.LIVE:
+                sportSelection.setVisibility(View.VISIBLE);
                 return replaceLiveFragment(screenShotable, position);
             case ContentFragment.LEADERBOARD:
+                sportSelection.setVisibility(View.GONE);
                 return replaceLeaderFragment(screenShotable, position);
             case ContentFragment.SCHEDULE:
+                sportSelection.setVisibility(View.VISIBLE);
                 return replaceScheduleFragment(screenShotable, position);
             case ContentFragment.SEARCH:
+                sportSelection.setVisibility(View.GONE);
                 return replaceSearchFragment(screenShotable, position);
             case ContentFragment.SPORTS:
+                sportSelection.setVisibility(View.GONE);
                 return replaceSportsFragment(screenShotable, position);
             case ContentFragment.SIGNOUT: {
                 myDatabase = new MyDatabase(this);
@@ -1014,4 +967,18 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
         return false;
     }
 
+    @Override
+    public void updateScheduleFragment() {
+
+    }
+
+    @Override
+    public void updateHomeFragment(String target) {
+
+    }
+
+    @Override
+    public void updateLeaderBoardFragment(String target) {
+
+    }
 }
