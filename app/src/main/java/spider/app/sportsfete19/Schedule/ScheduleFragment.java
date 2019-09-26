@@ -265,7 +265,7 @@ public class ScheduleFragment extends Fragment implements ScreenShotable {
         textView.startAnimation(myAnim);
     }
 
-    public void flipAnimation(final RecyclerView VrecyclerView, final RecyclerView INVrecyclerView){
+    /*public void flipAnimation(final RecyclerView VrecyclerView, final RecyclerView INVrecyclerView){
         ObjectAnimator anim = (ObjectAnimator) AnimatorInflater.loadAnimator(getActivity(), R.animator.flipping);
         anim.setTarget(VrecyclerView);
         anim.setDuration(500);
@@ -293,7 +293,7 @@ public class ScheduleFragment extends Fragment implements ScreenShotable {
         });
         anim.start();
     }
-
+*/
 
     public String getSelectedDept(){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
