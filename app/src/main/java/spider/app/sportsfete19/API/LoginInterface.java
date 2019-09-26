@@ -1,14 +1,11 @@
 package spider.app.sportsfete19.API;
 
-import com.google.gson.JsonObject;
-
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import spider.app.sportsfete19.predict;
-import spider.app.sportsfete19.predictresponse;
 
 public interface LoginInterface {
 

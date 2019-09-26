@@ -164,6 +164,7 @@ public class HomeFragment extends Fragment implements Callback<List<StatusEventD
     @Override
     public void takeScreenShot() {
 
+
     }
 
     @Override
