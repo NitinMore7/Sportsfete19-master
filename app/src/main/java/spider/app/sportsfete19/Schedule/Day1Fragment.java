@@ -83,6 +83,7 @@ public class Day1Fragment extends Fragment implements Callback<List<EventDetails
     LinearLayout shared_ll;
 
     private int prevSize = 0, cueSize = 0;
+    private static int a=0;
 
     private int currentTransitionEffect = JazzyHelper.TILT;
     JazzyRecyclerViewScrollListener jazzyRecyclerViewScrollListener;
@@ -193,6 +194,8 @@ public class Day1Fragment extends Fragment implements Callback<List<EventDetails
             }
 
             setClickListener();
+            if(a==0)
+            {onRefresh();a++;}
         }
 
     }
@@ -251,7 +254,7 @@ public class Day1Fragment extends Fragment implements Callback<List<EventDetails
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    putEventsLastUpdate();
+                                    //putEventsLastUpdate();
                                     //swipeRefreshLayout.setRefreshing(false);
                                     eventList.clear();
                                     eventList.addAll(response.body());

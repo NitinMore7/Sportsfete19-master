@@ -36,15 +36,6 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <View
-            android:id="@+id/view_id"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/appbar_id"
-            android:background="#9e9c9c"
-            android:visibility="gone" />
-
-
         <devlight.io.library.ntb.NavigationTabBar
             android:id="@+id/custom_navigation"
             android:layout_width="match_parent"
@@ -90,10 +81,6 @@
                 android:paddingRight="10dp" />
 
         </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="#1a237e" />
 
         <RelativeLayout
             android:id="@+id/fragment_container"
