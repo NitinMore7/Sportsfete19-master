@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#efefef">
+    android:background="@android:color/black">
 
         <TextView
             android:id="@+id/sport_name"
@@ -16,7 +16,7 @@
             android:text="DEPT"
             android:textAlignment="center"
             android:textAllCaps="true"
-            android:textColor="@color/colorTabtext"
+            android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
 
