@@ -47,6 +47,7 @@ import spider.app.sportsfete19.Home.HomeFragment;
 import spider.app.sportsfete19.Leaderboard.LeaderboardFragment;
 import spider.app.sportsfete19.Schedule.DeptSelectionRecyclerAdapter;
 import spider.app.sportsfete19.Schedule.ScheduleFragment;
+import spider.app.sportsfete19.Sponsors.SponsorFragment;
 import spider.app.sportsfete19.SportDetails.SportDetailsFragment;
 import spider.app.sportsfete19.Tutorial.TutorialHelper;
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
@@ -79,7 +80,8 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
     ScheduleFragment scheduleFragment;
     UserSearch searchFragment;
     SportDetailsFragment sportDetailsFragment;
-    
+    SponsorFragment sponsorFragment;
+
 
     MyDatabase myDatabase;
     UserSearch userSearch;
@@ -771,12 +773,13 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
                 fragmentTransaction.commit();
                 //fragmentTransaction.commit();
                 getSupportActionBar().setTitle("Live");
+                navigationView.setCheckedItem(R.id.nav_home);
                 selection_header.setVisibility(View.VISIBLE);
             }catch(IllegalStateException ignored){
                 ignored.printStackTrace();
             }
 
-            //setDrawerTypeface();
+            setDrawerTypeface();
 
             for (int i = 0; i < toolbar.getChildCount(); i++) {
                 View view = toolbar.getChildAt(i);
@@ -809,8 +812,10 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
         list.add(menuItem4);
         SlideMenuItem menuItem5 = new SlideMenuItem(ContentFragment.GAME, R.drawable.ic_game);
         list.add(menuItem5);
-        SlideMenuItem menuItem6 = new SlideMenuItem(ContentFragment.SIGNOUT,R.drawable.ic_signout3);
+        SlideMenuItem menuItem6 = new SlideMenuItem(ContentFragment.SPONSOR,R.drawable.gold);
         list.add(menuItem6);
+        SlideMenuItem menuItem7 = new SlideMenuItem(ContentFragment.SIGNOUT,R.drawable.ic_signout3);
+        list.add(menuItem7);
     }
 
 
@@ -1023,6 +1028,104 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
         return sportDetailsFragment;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private ScreenShotable replaceSponsorFragment(ScreenShotable screenShotable, int topPosition) {
+        View view = findViewById(R.id.content_frame);
+        int finalRadius = Math.max(view.getWidth(), view.getHeight());
+        Animator animator = ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
+        animator.setInterpolator(new AccelerateInterpolator());
+        animator.setDuration(ViewAnimator.CIRCULAR_REVEAL_ANIMATION_DURATION);
+        animator.start();
+
+        Runtime.getRuntime().gc();
+        try {
+            selection_header.setVisibility(View.GONE);
+            navigationTabBar.setVisibility(View.GONE);
+            lastViewFragment=3;
+            sponsorFragment =new SponsorFragment();
+           // FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+            //fragmentTransaction.replace(R.id.fragment_container, subscribeFragment);
+            //fragmentTransaction.commit();
+            //fragmentTransaction.commit();
+            invalidateOptionsMenu();
+            getSupportActionBar().setTitle("Sponsors");
+        }catch(IllegalStateException ignored){
+            ignored.printStackTrace();
+        }
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container,sponsorFragment).commit();
+
+        return sponsorFragment;
+    }
+    /*
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private ScreenShotable replaceMovieFragment(ScreenShotable screenShotable, int topPosition) {
+        View view = findViewById(R.id.content_frame);
+        int finalRadius = Math.max(view.getWidth(), view.getHeight());
+        Animator animator = ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
+        animator.setInterpolator(new AccelerateInterpolator());
+        animator.setDuration(ViewAnimator.CIRCULAR_REVEAL_ANIMATION_DURATION);
+
+        animator.start();
+        MovieFragment movieFragment = new MovieFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_frame, movieFragment).commit();
+
+        return movieFragment;
+    }
+    */
+   /*
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public ScreenShotable onSwitch(Resourceble slideMenuItem, ScreenShotable screenShotable, int position) {
+        switch (slideMenuItem.getName()) {
+            case ContentFragment.CLOSE: {
+                Runtime.getRuntime().gc();
+                try {
+                    navigationTabBar.setSelected(true);
+                    navigationTabBar.setModelIndex(0);
+                    navigationTabBar.setVisibility(View.VISIBLE);
+                    lastViewFragment = 0;
+                    Bundle arguments = new Bundle();
+                    arguments.putString("target", "live");
+                    homeFragment = new HomeFragment();
+                    homeFragment.setArguments(arguments);
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container, homeFragment);
+                    fragmentTransaction.commit();
+                    //fragmentTransaction.commit();
+                    invalidateOptionsMenu();
+                    getSupportActionBar().setTitle("Live");
+                    selection_header.setVisibility(View.VISIBLE);
+                    return null;
+                } catch (IllegalStateException ignored) {
+                    ignored.printStackTrace();
+                }
+
+            }
+            case ContentFragment.BUILDING: {
+                Runtime.getRuntime().gc();
+                try {
+                    selection_header.setVisibility(View.GONE);
+                    navigationTabBar.setVisibility(View.GONE);
+                    lastViewFragment = 1;
+                    leaderboardFragment = new LeaderboardFragment();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container, leaderboardFragment);
+                    fragmentTransaction.commit();
+                    //fragmentTransaction.commit();
+                    invalidateOptionsMenu();
+                    getSupportActionBar().setTitle("LeaderBoard");
+                    return null;
+                }catch(IllegalStateException ignored){
+                    ignored.printStackTrace();
+                }
+
+            }
+            }
+            return null;
+        }
+   */
    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
    @Override
     public ScreenShotable onSwitch(Resourceble slideMenuItem, ScreenShotable screenShotable, int position) {
@@ -1039,6 +1142,8 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
                 return replaceSearchFragment(screenShotable, position);
             case ContentFragment.SPORTS:
                 return replaceSportsFragment(screenShotable, position);
+            case ContentFragment.SPONSOR:
+                return replaceSponsorFragment(screenShotable,position);
             case ContentFragment.SIGNOUT: {
                 myDatabase = new MyDatabase(this);
                 myDatabase.deleteAll();
