@@ -104,7 +104,6 @@ public class LeaderboardFragment extends Fragment implements Callback<List<Leade
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
     }
 
     @Override
@@ -196,7 +195,6 @@ public class LeaderboardFragment extends Fragment implements Callback<List<Leade
         call.enqueue(this);
         //loadingView.startAnimation();
         //loadingView.setVisibility(View.VISIBLE);
-
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "LeaderBoard Refresh");
         mFirebaseAnalytics.logEvent("LeaderBoard", bundle);
@@ -206,7 +204,6 @@ public class LeaderboardFragment extends Fragment implements Callback<List<Leade
     @Override
     public void onResponse(Call<List<Leaderboard>> call, Response<List<Leaderboard>> response) {
         final List<Leaderboard> responseList=response.body();
-
         if(responseList!=null){
             standingList.clear();
             leaderboardRecyclerAdapter.notifyDataSetChanged();
@@ -246,23 +243,22 @@ public class LeaderboardFragment extends Fragment implements Callback<List<Leade
         Toast.makeText(context, "Device Offline", Toast.LENGTH_SHORT).show();
         //updateAdapter();
         leaderboardRecyclerAdapter.notifyDataSetChanged();
-
     }
 
     @Override
     public void onRefresh() {
         departmentUpdateCallback.updateLeaderBoardFragment("refresh");
-
-
+        /*
+        swipeRefreshLayout.setRefreshing(false);
         call = apiInterface.getLeaderBoard();
         call.enqueue(this);
         //loadingView.startAnimation();
         //loadingView.setVisibility(View.VISIBLE);
-
+        swipeRefreshLayout.setRefreshing(true);
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "LeaderBoard Refresh");
         mFirebaseAnalytics.logEvent("LeaderBoard", bundle);
-
+        */
     }
 
     @Override

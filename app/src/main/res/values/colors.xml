@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#16282a</color>
-    <color name="colorPrimaryDark">#274649</color>
-    <color name="colorTabtext">#000000</color>
-    <color name="green_text">#00bcd4</color>
+    <color name="colorPrimaryDark">#000</color>
+    <color name="colorTabtext">#404f50</color>
+    <color name="green_text">#4ab556</color>
     <color name="dept_box_background">#00bcd4</color>
     <color name="colorAccent">#89430d</color>
     <color name="splashColor">#FFFFFF</color>
@@ -28,5 +28,6 @@
     <color name="otherblue">#002C52</color>
     <color name="bg_red">#A40000</color>
     <color name="translucent_black">#70000000</color>
+    <color name="trans_white">#30ffffff</color>
 
 </resources>

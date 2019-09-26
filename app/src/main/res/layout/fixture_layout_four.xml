@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="#f1f1f1"
     android:layout_height="match_parent"
     android:id="@+id/parent_view">
 
     <ScrollView
         android:layout_height="match_parent"
-        android:background="#f1f1f1"
+        android:background="@drawable/sfbkg"
         android:layout_width="wrap_content">
 
 
@@ -34,7 +33,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:text="KNOCKOUT"
-                    android:textColor="@color/cardview_dark_background"
+                    android:textColor="@color/white"
                     android:textStyle="bold|italic"
                     android:visibility="invisible" />
 
@@ -184,7 +183,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:text="QUARTERFINAL"
-                    android:textColor="@color/cardview_dark_background"
+                    android:textColor="@color/white"
                     android:textStyle="bold|italic"
                     android:visibility="invisible" />
 
