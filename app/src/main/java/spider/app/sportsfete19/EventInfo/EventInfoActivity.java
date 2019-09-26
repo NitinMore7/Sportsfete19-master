@@ -1,7 +1,5 @@
 package spider.app.sportsfete19.EventInfo;
 
-import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -16,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,24 +22,11 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -53,17 +39,9 @@ import com.google.gson.GsonBuilder;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
-import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import pl.droidsonroids.gif.GifTextView;
@@ -77,11 +55,10 @@ import spider.app.sportsfete19.API.EventDetailsPOJO;
 import spider.app.sportsfete19.API.LoginInterface;
 import spider.app.sportsfete19.FireBaseServices.Comment;
 import spider.app.sportsfete19.FireBaseServices.Score;
-
 import spider.app.sportsfete19.MyDatabase;
+import spider.app.sportsfete19.PredictResponseClass;
 import spider.app.sportsfete19.R;
 import spider.app.sportsfete19.predict;
-import spider.app.sportsfete19.predictresponse;
 
 public class EventInfoActivity extends AppCompatActivity{
 
@@ -108,7 +85,7 @@ public class EventInfoActivity extends AppCompatActivity{
     private String status;
     private LoginInterface loginInterface;
     private String predictresponse;
-
+    List<PredictResponseClass> prc;
     RecyclerView recyclerView;
     CommentRecyclerAdapter commentRecyclerAdapter;
     List<Comment> commentList=new ArrayList<>();
@@ -254,7 +231,7 @@ public class EventInfoActivity extends AppCompatActivity{
             nonVersusEventLl.setVisibility(View.GONE);
             versusEventLl.setVisibility(View.VISIBLE);
             poll_layout=findViewById(R.id.rel_poll_btn);
-            poll_layout.setVisibility(View.GONE);
+            //poll_layout.setVisibility(View.GONE);
             team1Tv.setTypeface(inconsolataBoldFont);
             team1Tv.setText(eventInfo.getDept1());
 
@@ -358,12 +335,14 @@ public class EventInfoActivity extends AppCompatActivity{
                 @Override
                 public void onClick(View v) {
                 requester(eventInfo.getFixture().toString(),team1Tv.getText().toString());
+                poll_layout.setVisibility(View.GONE);
                 }
             });
             Team2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     requester(eventInfo.getFixture().toString(),team2Tv.getText().toString());
+                    poll_layout.setVisibility(View.GONE);
                 }
             });
 
@@ -403,7 +382,7 @@ public class EventInfoActivity extends AppCompatActivity{
         } else if (eventInfo.getStatus().equals(FLAG_STATUS_LIVE)) {
             eventstatus.setTextColor(Color.parseColor("#FF5722"));
             status = "LIVE";
-            poll_layout.setVisibility(View.GONE);
+           // poll_layout.setVisibility(View.GONE);
             eventstatus.startAnimation(blinkAnimation);
             team1Tv.setTextColor(getResources().getColor(R.color.colorTabtext));
             team2Tv.setTextColor(getResources().getColor(R.color.colorTabtext));
@@ -412,7 +391,7 @@ public class EventInfoActivity extends AppCompatActivity{
         } else {
             eventstatus.setTextColor(Color.parseColor("#4CAF50"));
             status = "COMPLETED";
-            poll_layout.setVisibility(View.GONE);
+            //poll_layout.setVisibility(View.GONE);
             eventStartTime.setText("");
             String winner = eventInfo.getWinner();
             //setting color
@@ -665,7 +644,7 @@ public class EventInfoActivity extends AppCompatActivity{
                 .build();
 
         loginInterface=retrofit.create(LoginInterface.class);
-        predict predict1=new predict(event,team);
+        final predict predict1=new predict(event,team);
         Call<String> mCall = loginInterface.votepredictor(db.getJwtToken(),predict1);
         mCall.enqueue(new Callback<String>() {
             @Override
@@ -673,19 +652,32 @@ public class EventInfoActivity extends AppCompatActivity{
                 if (response.body() != null) {
                     predictresponse = response.body();
 
-                    if (predictresponse.contains("\"success\": true")) {
-                        progressBar.setSecondaryProgress(50);
-                        Toast.makeText(getBaseContext(),predictresponse,Toast.LENGTH_LONG).show();
-
-                        poll_layout.setVisibility(View.GONE);
+                    if (predictresponse.contains("true")) {
+                        try{Log.v("Response",predictresponse.toString());
+                            String res=predictresponse;
+                            String[] couple = res.split(",");
+                            String A[]=new String[2];
+                            for(int i =0; i < couple.length-1 ; i++) {
+                                String[] items =couple[i].split(":");
+                                Log.v("DeptScore",items[1]+"");
+                                A[i]=items[1];
+                            }
+                            Team1.setText(A[0]);
+                            Team2.setText(A[1]);
+                            poll_layout.setVisibility(View.VISIBLE);
+                            Toast.makeText(getApplicationContext(),A[0] + "  " + A[1],Toast.LENGTH_SHORT).show();
+                            poll_layout.startLayoutAnimation();
+                        }catch (Exception e){e.printStackTrace();}
 
                     } else {
-                        Toast.makeText(getBaseContext(),predictresponse,Toast.LENGTH_LONG).show();
+                        Log.v("Response","Else tag of success");
+                        Toast.makeText(getApplicationContext(),predictresponse,Toast.LENGTH_LONG).show();
                         poll_layout.setVisibility(View.GONE);
                     }
                 }
                 else {
-                    Toast.makeText(getBaseContext(),response.toString(),Toast.LENGTH_LONG).show();
+                    Log.v("Response",response.toString());
+                    Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
                 }
             }
 
