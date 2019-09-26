@@ -58,8 +58,7 @@ public class ScheduleFragment extends Fragment implements ScreenShotable {
     int index;
     ScheduleViewPagerAdapter scheduleViewPagerAdapter;
     ViewPager viewPager;
-    RecyclerView recyclerView, sport_recycler;
-    public ImageView switch_filter;
+    RecyclerView recyclerView;
 
     String[] deptArraySharedPreference=new String[15];
     String[] sportArraySharedPreference=new String[31];
@@ -183,7 +182,6 @@ public class ScheduleFragment extends Fragment implements ScreenShotable {
 
         selectedDept = getSelectedDept();
         selectedSport = getSelectedSport();
-        switch_filter = (ImageView)getActivity().findViewById(R.id.schedule_switch_filter);
 
         //sport filter list
         sportArraySharedPreference=getResources().getStringArray(R.array.filter_sport_array);
@@ -220,9 +218,6 @@ public class ScheduleFragment extends Fragment implements ScreenShotable {
 
         //selectedsport = ids of sports
         //recycler sport= value to be displayed in recyclerview
-        sport_recycler = (RecyclerView) getActivity().findViewById(R.id.sport_recycler);
-        sport_recycler.setHasFixedSize(true);
-        sport_recycler.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,true));
         sportAdapter = new DeptSelectionRecyclerAdapter(recycler_sportList,
                 recycler_sportList.get(sportList.indexOf(selectedSport)), getActivity(), new DeptSelectionRecyclerAdapter.MyAdapterListener() {
             @Override
@@ -242,9 +237,6 @@ public class ScheduleFragment extends Fragment implements ScreenShotable {
             }
         });
 
-        sport_recycler.setAdapter(sportAdapter);
-
-
         Log.d("selecteddept",""+selectedDept);
 
         new Handler().postDelayed(new Runnable() {
@@ -258,16 +250,6 @@ public class ScheduleFragment extends Fragment implements ScreenShotable {
             }
         },300);
 
-        switch_filter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(recyclerView.isShown()){
-                    flipAnimation(recyclerView,sport_recycler);
-                }else if(sport_recycler.isShown()){
-                    flipAnimation(sport_recycler,recyclerView);
-                }
-            }
-        });
 
     }
 

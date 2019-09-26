@@ -8,13 +8,8 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -58,8 +53,6 @@ import yalantis.com.sidemenu.interfaces.ScreenShotable;
 import yalantis.com.sidemenu.model.SlideMenuItem;
 import yalantis.com.sidemenu.util.ViewAnimator;
 import yalantis.com.sidemenu.util.ViewAnimator.ViewAnimatorListener;
-
-import static spider.app.sportsfete19.R.array.filter_department_array;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,DepartmentUpdateCallback,ViewAnimatorListener {
 
@@ -927,14 +920,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case ContentFragment.FIRST:
                 return screenShotable;
             case ContentFragment.LIVE:
+                sportSelection.setVisibility(View.VISIBLE);
                 return replaceLiveFragment(screenShotable, position);
             case ContentFragment.LEADERBOARD:
+                sportSelection.setVisibility(View.GONE);
                 return replaceLeaderFragment(screenShotable, position);
             case ContentFragment.SCHEDULE:
+                sportSelection.setVisibility(View.VISIBLE);
                 return replaceScheduleFragment(screenShotable, position);
             case ContentFragment.SEARCH:
+                sportSelection.setVisibility(View.GONE);
                 return replaceSearchFragment(screenShotable, position);
             case ContentFragment.SPORTS:
+                sportSelection.setVisibility(View.GONE);
                 return replaceSportsFragment(screenShotable, position);
             case ContentFragment.SIGNOUT: {
                 myDatabase = new MyDatabase(this);
