@@ -44,6 +44,7 @@ import spider.app.sportsfete19.Home.HomeFragment;
 import spider.app.sportsfete19.Leaderboard.LeaderboardFragment;
 import spider.app.sportsfete19.Schedule.DeptSelectionRecyclerAdapter;
 import spider.app.sportsfete19.Schedule.ScheduleFragment;
+import spider.app.sportsfete19.Sponsors.SponsorFragment;
 import spider.app.sportsfete19.SportDetails.SportDetailsFragment;
 import spider.app.sportsfete19.Tutorial.TutorialHelper;
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ViewAnimator viewAnimator;
     private int res = R.drawable.athletics;
     private LinearLayout linearLayout;
+    SponsorFragment sponsorFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -696,8 +698,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         list.add(menuItem4);
         SlideMenuItem menuItem5 = new SlideMenuItem(ContentFragment.GAME, R.drawable.ic_game);
         list.add(menuItem5);
-        SlideMenuItem menuItem6 = new SlideMenuItem(ContentFragment.SIGNOUT,R.drawable.ic_signout3);
+        SlideMenuItem menuItem6 = new SlideMenuItem(ContentFragment.SPONSOR,R.drawable.gold);
         list.add(menuItem6);
+        SlideMenuItem menuItem7 = new SlideMenuItem(ContentFragment.SIGNOUT,R.drawable.ic_signout3);
+        list.add(menuItem7);
     }
 
 
@@ -910,6 +914,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return sportDetailsFragment;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private ScreenShotable replaceSponsorFragment(ScreenShotable screenShotable, int topPosition) {
+        View view = findViewById(R.id.content_frame);
+        int finalRadius = Math.max(view.getWidth(), view.getHeight());
+        Animator animator = ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
+        animator.setInterpolator(new AccelerateInterpolator());
+        animator.setDuration(ViewAnimator.CIRCULAR_REVEAL_ANIMATION_DURATION);
+        animator.start();
+
+        Runtime.getRuntime().gc();
+        try {
+            selection_header.setVisibility(View.GONE);
+            navigationTabBar.setVisibility(View.GONE);
+            lastViewFragment=3;
+            sponsorFragment = new SponsorFragment();
+            // FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+            //fragmentTransaction.replace(R.id.fragment_container, subscribeFragment);
+            //fragmentTransaction.commit();
+            //fragmentTransaction.commit();
+            invalidateOptionsMenu();
+            getSupportActionBar().setTitle("Sponsors");
+        }catch(IllegalStateException ignored){
+            ignored.printStackTrace();
+        }
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container,sponsorFragment).commit();
+
+        return sponsorFragment;
+    }
+
    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
    @Override
     public ScreenShotable onSwitch(Resourceble slideMenuItem, ScreenShotable screenShotable, int position) {
@@ -931,6 +965,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case ContentFragment.SPORTS:
                 sportSelection.setVisibility(View.GONE);
                 return replaceSportsFragment(screenShotable, position);
+            case ContentFragment.SPONSOR:
+                sportSelection.setVisibility(View.GONE);
+                return replaceSponsorFragment(screenShotable,position);
             case ContentFragment.SIGNOUT: {
                 myDatabase = new MyDatabase(this);
                 myDatabase.deleteAll();
