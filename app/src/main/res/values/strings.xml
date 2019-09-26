@@ -8,6 +8,173 @@
 
     <string name="dialog_title">Select Department</string>
 
+    <string-array name="department_array">
+        <item>ALL</item>
+        <item>ARCHI</item>
+        <item>CHEM</item>
+        <item>CIVIL</item>
+        <item>CSE</item>
+        <item>DOMS</item>
+        <item>ECE</item>
+        <item>EEE</item>
+        <item>ICE</item>
+        <item>CA</item>
+        <item>MECH</item>
+        <item>META</item>
+        <item>M.TECH</item>
+        <item>PhD/MSc/MS</item>
+        <item>PROD</item>
+    </string-array>
+
+    <string-array name="departments_array">
+
+        <item>Department</item>
+        <item>CSE</item>
+        <item>ECE</item>
+        <item>EEE</item>
+        <item>MECH</item>
+        <item>PROD</item>
+        <item>ICE</item>
+        <item>CHEM</item>
+        <item>CIVIL</item>
+        <item>META</item>
+        <item>ARCHI</item>
+        <item>PhD/MSc/MS</item>
+        <item>M.DOMS</item>
+        <item>CA</item>
+        <item>MTECH</item>
+
+
+    </string-array>
+
+    <string-array name="filter_department_array">
+        <item>ALL</item>
+        <item>ARCHI</item>
+        <item>CHEM</item>
+        <item>CIVIL</item>
+        <item>CSE</item>
+        <item>DOMS</item>
+        <item>ECE</item>
+        <item>EEE</item>
+        <item>ICE</item>
+        <item>CA</item>
+        <item>MECH</item>
+        <item>META</item>
+        <item>M_TECH</item>
+        <item>PhD_MSc_MS</item>
+        <item>PROD</item>
+    </string-array>
+
+    <string-array name="sport_array">
+        <item>Athletics</item>
+        <item>Badminton(Mixed)</item>
+        <item>Basketball(Boys)</item>
+        <item>Basketball(Girls)</item>
+        <item>Carrom</item>
+        <item>Chess</item>
+        <item>Cricket(Boys)</item>
+        <item>Cricket(Girls)</item>
+        <item>Football(Boys)</item>
+        <item>Handball(Boys)</item>
+        <item>Handball(Girls)</item>
+        <item>Hockey(Boys)</item>
+        <item>Kabbadi</item>
+        <item>Kho Kho(Boys)</item>
+        <item>Kho Kho(Girls)</item>
+        <item>Marathon</item>
+        <item>Powerlifting</item>
+        <item>Swimming</item>
+        <item>Table Tennis(Mixed)</item>
+        <item>Tennis(Boys)</item>
+        <item>Throwball(Girls)</item>
+        <item>Volleyball(Boys)</item>
+        <item>Volleyball(Girls)</item>
+        <item>SportsQuiz</item>
+    </string-array>
+
+    <string-array name="filter_sport_array">
+        <item>ALL</item>
+        <item>ATH</item>
+        <item>BD</item>
+        <item>BKM</item>
+        <item>BG</item>
+        <item>CM</item>
+        <item>CHS</item>
+        <item>CK</item>
+        <item>CG</item>
+        <item>FB</item>
+        <item>FG</item>
+        <item>HB</item>
+        <item>HG</item>
+        <item>HK</item>
+        <item>KB</item>
+        <item>KM</item>
+        <item>KG</item>
+        <item>MRH</item>
+        <item>PL</item>
+        <item>SWM</item>
+        <item>TTB</item>
+        <item>TTG</item>
+        <item>TB</item>
+        <item>TG</item>
+        <item>TBG</item>
+        <item>VB</item>
+        <item>VG</item>
+        <item>WP</item>
+        <item>WL</item>
+        <item>SPZ</item><!--changed id for carrom filtering-->
+    </string-array>
+
+    <string-array name="short_sport_array">
+        <item>ALL</item>
+        <item>ATHL</item>
+        <item>BDM(M)</item>
+        <item>BSKT(B)</item>
+        <item>BSKT(G)</item>
+        <item>CARROM</item>
+        <item>CHESS</item>
+        <item>CKT(B)</item>
+        <item>CKT(G)</item>
+        <item>FTB(B)</item>
+        <item>FTB(G)</item>
+        <item>HNDB(B)</item>
+        <item>HNDB(G)</item>
+        <item>HKY(B)</item>
+        <item>KBD</item>
+        <item>KHOKHO(B)</item>
+        <item>KHOKHO(G)</item>
+        <item>MARATHON</item>
+        <item>PWR LFTNG</item>
+        <item>SWIMMING</item>
+        <item>TT(B)</item>
+        <item>TT(G)</item>
+        <item>TENNIS(B)</item>
+        <item>TENNIS(G)</item>
+        <item>THRB</item>
+        <item>VLB(B)</item>
+        <item>VLB(G)</item>
+        <item>WTR POLO</item>
+        <item>WT LFTNG(B)</item>
+        <item>SPQZ</item>
+    </string-array>
+
+    <string-array name="department_array_shared_preference">
+        <item>ARCHI</item>
+        <item>CHEM</item>
+        <item>CIVIL</item>
+        <item>CSE</item>
+        <item>DOMS</item>
+        <item>ECE</item>
+        <item>EEE</item>
+        <item>ICE</item>
+        <item>CA</item>
+        <item>MECH</item>
+        <item>META</item>
+        <item>M_TECH</item>
+        <item>PHD_MSC_MS</item>
+        <item>PROD</item>
+    </string-array>
+
     <string name="Athletics">
         <![CDATA[
  <b>

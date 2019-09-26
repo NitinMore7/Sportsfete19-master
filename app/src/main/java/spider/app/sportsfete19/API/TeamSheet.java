@@ -1,6 +1,5 @@
 package spider.app.sportsfete19.API;
 
-
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

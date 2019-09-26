@@ -76,7 +76,6 @@ public class Leaderboard implements Parcelable {
         parcel.writeFloat(total);
         parcel.writeList(splitup);
     }
-
     public static final Creator<Leaderboard> CREATOR = new Creator<Leaderboard>() {
         @Override
         public Leaderboard createFromParcel(Parcel in) {
