@@ -329,30 +329,29 @@
 
                                 </LinearLayout>
                             </RelativeLayout>
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/rel_poll_btn"
-    android:visibility="gone">
 
-    <Button
-        android:id="@+id/btn_team1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="75sp"
-        >
+                            <RelativeLayout
+                                android:id="@+id/rel_poll_btn"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="visible">
 
-    </Button>
+                                <Button
+                                    android:id="@+id/btn_team1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_marginStart="75sp">
 
-    <Button
-        android:id="@+id/btn_team2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-       android:layout_alignParentEnd="true"
-        android:layout_marginEnd="75sp"
-        ></Button>
-</RelativeLayout>
+                                </Button>
+
+                                <Button
+                                    android:id="@+id/btn_team2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginEnd="75sp"></Button>
+                            </RelativeLayout>
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

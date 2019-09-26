@@ -809,7 +809,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimatorListe
         list.add(menuItem4);
         SlideMenuItem menuItem5 = new SlideMenuItem(ContentFragment.GAME, R.drawable.ic_game);
         list.add(menuItem5);
-        SlideMenuItem menuItem6 = new SlideMenuItem(ContentFragment.SIGNOUT,R.drawable.ic_signout3);
+        SlideMenuItem menuItem6 = new SlideMenuItem(ContentFragment.SIGNOUT,R.drawable.ic_signouticon);
         list.add(menuItem6);
     }
 
