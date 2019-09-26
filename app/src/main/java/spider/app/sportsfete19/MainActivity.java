@@ -1,6 +1,7 @@
 package spider.app.sportsfete19;
 
 
+import android.animation.Animator;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -60,7 +61,7 @@ import yalantis.com.sidemenu.util.ViewAnimator.ViewAnimatorListener;
 
 import static spider.app.sportsfete19.R.array.filter_department_array;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,DepartmentUpdateCallback {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,DepartmentUpdateCallback,ViewAnimatorListener {
 
 
     ArrayList<View> menuItems;
@@ -149,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_menu_white);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("Live");
 
         lastViewFragment = 0;
 
@@ -164,7 +165,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         navigationTabBar = findViewById(R.id.custom_navigation);
-
 
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
         models.add(
@@ -294,7 +294,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.getMenu().getItem(0).setChecked(true);
         onNavigationItemSelected(navigationView.getMenu().getItem(0));
 */
-        setDrawerTypeface();
+       // setDrawerTypeface();
 
 
         FirebaseMessaging.getInstance().subscribeToTopic("important");
@@ -626,7 +626,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 */
-    public void setDrawerTypeface(){
+    /*public void setDrawerTypeface(){
         navigationView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -643,7 +643,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
     }
-
+*/
     @Override
     public void onBackPressed() {
         Log.d("lastviewfragment", "" + (lastViewFragment == 0));
@@ -972,4 +972,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return false;
     }
 
+    @Override
+    public void updateScheduleFragment() {
+
+    }
+
+    @Override
+    public void updateHomeFragment(String target) {
+
+    }
+
+    @Override
+    public void updateLeaderBoardFragment(String target) {
+
+    }
 }
