@@ -8,7 +8,7 @@
 
     <ScrollView
         android:layout_height="match_parent"
-        android:background="#f1f1f1"
+        android:background="@drawable/sfbkg"
         android:layout_width="wrap_content">
 
         <LinearLayout
@@ -40,7 +40,7 @@
                         android:layout_marginLeft="22dp"
                         android:layout_marginTop="10dp"
                         android:text="KNOCKOUT"
-                        android:textColor="@color/cardview_dark_background"
+                        android:textColor="@color/white"
                         android:textStyle="bold|italic" />
 
                     <LinearLayout
@@ -371,7 +371,7 @@
                         android:layout_marginLeft="22dp"
                         android:layout_marginTop="10dp"
                         android:text="QUARTERFINALS"
-                        android:textColor="@color/cardview_dark_background"
+                        android:textColor="@color/white"
                         android:textStyle="bold|italic" />
 
                     <LinearLayout

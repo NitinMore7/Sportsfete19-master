@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/parent_coordinator"
+    android:id="@+id/parent_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f1efef"
+    android:background="@drawable/sfbkg"
     android:fitsSystemWindows="true"
     tools:context="spider.app.sportsfete19.MainActivity">
 
@@ -36,13 +36,36 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <View
-            android:id="@+id/view_id"
+        <devlight.io.library.ntb.NavigationTabBar
+            android:id="@+id/custom_navigation"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/appbar_id"
-            android:background="#9e9c9c"
-            android:visibility="gone" />
+            android:layout_height="60dp"
+            android:elevation="4dp"
+            app:ntb_active_color="#fff"
+            app:ntb_animation_duration="400"
+            app:ntb_badge_bg_color="#ffff0000"
+            app:ntb_badge_gravity="bottom"
+            app:ntb_badge_position="right"
+            app:ntb_badge_size="5sp"
+            app:ntb_badge_title_color="@color/colorTabtext"
+            app:ntb_badge_use_typeface="true"
+            app:ntb_badged="false"
+            app:ntb_bg_color="@android:color/transparent"
+            app:ntb_corners_radius="0dp"
+            app:ntb_icon_size_fraction="0.5"
+            app:ntb_inactive_color="@color/colorTabtext"
+            app:ntb_preview_colors="@array/colors"
+            app:ntb_scaled="true"
+            app:ntb_swiped="true"
+            app:ntb_tinted="false"
+            app:ntb_title_mode="all"
+            app:ntb_title_size="12sp"
+            app:ntb_titled="true" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#1a237e" />
 
         <RelativeLayout
             android:id="@+id/selection_header"
@@ -54,45 +77,72 @@
                 android:id="@+id/main_dept_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toStartOf="@+id/switch_filter"
-                android:nestedScrollingEnabled="false"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/main_sport_recycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:visibility="gone"
-                android:layout_toStartOf="@+id/switch_filter"
-                android:nestedScrollingEnabled="false"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp" />
-
-            <ImageView
-                android:id="@+id/switch_filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/ic_filter_switch" />
 
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         </RelativeLayout>
 
+        <com.truizlop.fabreveallayout.FABRevealLayout
+            android:id="@+id/fab_reveal_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+
+            <RelativeLayout
+                android:id="@+id/main_view"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@android:color/transparent">
+
+                <TextView
+                    android:id="@+id/selected_sport"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="5dp"
+                    android:padding="10dp"
+                    android:text="Select Sport"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/secondary_view"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@android:color/transparent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/main_sport_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp" />
+
+            </RelativeLayout>
+
+            <android.support.design.widget.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/fab_button"
+                app:backgroundTint="#000" />
+
+        </com.truizlop.fabreveallayout.FABRevealLayout>
+
     </LinearLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
