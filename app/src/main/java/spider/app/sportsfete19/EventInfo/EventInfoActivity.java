@@ -76,6 +76,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 import spider.app.sportsfete19.API.ApiInterface;
 import spider.app.sportsfete19.API.EventDetailsPOJO;
+import spider.app.sportsfete19.API.GetVotes;
 import spider.app.sportsfete19.API.LoginInterface;
 import spider.app.sportsfete19.API.SearchByNamePOJO;
 import spider.app.sportsfete19.API.SearchUserByRollNo.SearchItem;
@@ -113,6 +114,7 @@ public class EventInfoActivity extends AppCompatActivity{
     private static final String FLAG_STATUS_COMPLETED = "completed";
     private String status;
     private LoginInterface loginInterface;
+    private GetVotes getVotes;
     private ApiInterface apiInterface;
     private String predictresponse;
 
@@ -633,7 +635,7 @@ public class EventInfoActivity extends AppCompatActivity{
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Score score = dataSnapshot.getValue(Score.class);
-                Log.d("score",score.getScore_timestamp()+"");
+                //Log.d("score",score.getScore_timestamp()+"");
                 if(score!=null) {
                     try {
                         score1Tv.setText(score.getDept1_score());
@@ -677,8 +679,8 @@ public class EventInfoActivity extends AppCompatActivity{
         super.onBackPressed();
     }
 
-    public void requester(String event,String team){
-        Gson gson = new GsonBuilder()
+    public void requester(final String event, String team){
+        final Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
 
@@ -707,14 +709,140 @@ public class EventInfoActivity extends AppCompatActivity{
                             Log.v("DeptScore",items[1]+"");
                             A[i]=items[1];
                         }
-                        Team1.setText(A[0]);
-                        Team2.setText(A[1]);
-                        poll_layout.startLayoutAnimation();
+                        Team1.setTextSize(15);
+                        Team2.setTextSize(15);
+                        if(Integer.parseInt(A[0])==0 && Integer.parseInt(A[1])==0) {
+                            int w1 = Team1.getWidth();
+                            int h1 = Team1.getHeight();
+                            int h2 = Team2.getHeight();
+                            int w2 = Team2.getWidth();
+                            Team1.setText(A[0]);
+                            Team2.setText(A[1]);
+                            Team1.setEnabled(false);
+                            Team1.setBackgroundColor(Color.CYAN);
+                            Team2.setEnabled(false);
+                            Team2.setBackgroundColor(Color.LTGRAY);
+                            Team1.setHeight(h1/2);
+                            Team2.setHeight(h2/2);
+                            Team1.setWidth(2*w1);
+                            Team2.setWidth(2*w2);
+                            poll_layout.startLayoutAnimation();
+                        } else {
+                            int d1 = Integer.parseInt(A[0]);
+                            int d2 = Integer.parseInt(A[1]);
+                            int w1 = Team1.getWidth();
+                            int h1 = Team1.getHeight();
+                            int h2 = Team2.getHeight();
+                            int w2 = Team2.getWidth();
+                            int p1 = d1 / (d1 + d2);
+                            int p2 = 100 - p1;
+                            Team1.setWidth(2*w1 * (1 + (d1 - d2) / (d1 + d2)));
+                            Team2.setWidth(2*w2 * (1 - (d1 - d2) / (d1 + d2)));
+                            Team1.setHeight(h1/2);
+                            Team2.setHeight(h2/2);
+
+                            Team1.setText(String.valueOf(p1) + "%");
+                            Team2.setText(String.valueOf(p2) + "%");
+
+                            Team1.setEnabled(false);
+                            Team1.setBackgroundColor(Color.CYAN);
+                            Team2.setEnabled(false);
+                            Team2.setBackgroundColor(Color.LTGRAY);
+
+
+                            poll_layout.startLayoutAnimation();
+                        }
+
                         }catch (Exception e){e.printStackTrace();}
 
                     } else {
+
+                        Retrofit retrofit1 = new Retrofit.Builder()
+                                .baseUrl("https://us-central1-sportsfete19-f7729.cloudfunctions.net/")
+                                .addConverterFactory(ScalarsConverterFactory.create())
+                                .addConverterFactory(GsonConverterFactory.create(gson))
+                                .build();
+
+                        getVotes=retrofit1.create(GetVotes.class);
+                        Call<String> mCall1 = getVotes.getvotes(event);
+                        mCall1.enqueue(new Callback<String>() {
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) {
+                                if (response.body() != null) {
+                                    predictresponse = response.body();
+
+                                    if (predictresponse.contains("true")) {
+                                        try {
+                                            Log.v("Response", predictresponse.toString());
+                                            String res = predictresponse;
+                                            String[] couple = res.split(",");
+                                            String A[] = new String[2];
+                                            for (int i = 0; i < couple.length - 1; i++) {
+                                                String[] items = couple[i].split(":");
+                                                Log.v("DeptScore", items[1] + "");
+                                                A[i] = items[1];
+                                            }
+                                            Team1.setTextSize(15);
+                                            Team2.setTextSize(15);
+                                            if (Integer.parseInt(A[0]) == 0 && Integer.parseInt(A[1]) == 0) {
+                                                int w1 = Team1.getWidth();
+                                                int h1 = Team1.getHeight();
+                                                int h2 = Team2.getHeight();
+                                                int w2 = Team2.getWidth();
+                                                Team1.setText(A[0]);
+                                                Team2.setText(A[1]);
+                                                Team1.setEnabled(false);
+                                                Team1.setBackgroundColor(Color.CYAN);
+                                                Team2.setEnabled(false);
+                                                Team2.setBackgroundColor(Color.LTGRAY);
+                                                Team1.setHeight(h1/2);
+                                                Team2.setHeight(h2/2);
+                                                Team1.setWidth(2*w1);
+                                                Team2.setWidth(2*w2);
+                                                poll_layout.startLayoutAnimation();
+                                            } else {
+                                                int d1 = Integer.parseInt(A[0]);
+                                                int d2 = Integer.parseInt(A[1]);
+                                                int w1 = Team1.getWidth();
+                                                int h1 = Team1.getHeight();
+                                                int h2 = Team2.getHeight();
+                                                int w2 = Team2.getWidth();
+                                                int p1 = d1 / (d1 + d2);
+                                                int p2 = 100 - p1;
+                                                Team1.setWidth(2*w1 * (1 + (d1 - d2) / (d1 + d2)));
+                                                Team2.setWidth(2*w2 * (1 - (d1 - d2) / (d1 + d2)));
+                                                Team1.setHeight(h1/2);
+                                                Team2.setHeight(h2/2);
+
+                                                Team1.setText(String.valueOf(p1) + "%");
+                                                Team2.setText(String.valueOf(p2) + "%");
+
+                                                Team1.setEnabled(false);
+                                                Team1.setBackgroundColor(Color.CYAN);
+                                                Team2.setEnabled(false);
+                                                Team2.setBackgroundColor(Color.LTGRAY);
+
+                                                poll_layout.startLayoutAnimation();
+                                            }
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                    }
+
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) {
+                                Toast.makeText(getApplicationContext(), t.getMessage()+"", Toast.LENGTH_SHORT).show();
+                                Log.d("login failure", t.getMessage());
+
+                            }
+                        });
                         Toast.makeText(getBaseContext(),predictresponse,Toast.LENGTH_LONG).show();
-                        poll_layout.setVisibility(View.GONE);
+
                     }
                 }
                 else {

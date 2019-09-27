@@ -340,10 +340,11 @@
 
                                 <Button
                                     android:id="@+id/btn_team1"
-                                    android:layout_width="60dp"
+                                    android:layout_width="65dp"
                                     android:layout_height="50dp"
                                     android:layout_alignParentStart="false"
                                     android:layout_alignParentRight="false"
+                                    android:background="@drawable/mybutton"
                                     android:layout_centerInParent="true"
                                     android:textSize="10sp">
 
@@ -351,12 +352,13 @@
 
                                 <Button
                                     android:id="@+id/btn_team2"
-                                    android:layout_width="60dp"
+                                    android:layout_width="65dp"
                                     android:layout_height="50dp"
                                     android:layout_alignParentLeft="false"
                                     android:layout_alignParentEnd="false"
                                     android:layout_alignParentRight="false"
                                     android:layout_centerInParent="true"
+                                    android:background="@drawable/mybutton"
                                     android:layout_toRightOf="@id/btn_team1"
                                     android:textSize="10sp"></Button>
                             </RelativeLayout>

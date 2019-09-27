@@ -19,4 +19,5 @@ public interface LoginInterface {
     @POST("votepredictor")
     Call<String> votepredictor(@Header("Authorization") String jwt, @Body predict body);
 
+
 }

@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     int lastViewFragment=0;
     public Toolbar toolbar;
     //MyDatabase myDatabase;
+    public View view;
     NavigationTabBar navigationTabBar;
     NavigationView navigationView;
     RecyclerView dept_recycler, sport_recycler;
@@ -255,6 +256,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
+
+
         flowingDrawer = findViewById(R.id.drawer_layout);
         View navButton = TutorialHelper.getNavButtonView(toolbar);
 
@@ -270,7 +273,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 "Switch between Live,Upcoming and Completed events", "NEXT");
 
         sequence.addSequenceItem(navButton,
-                "Touch here to check out other features", "GOT IT");
+                "Touch here to check out other features", "NEXT");
+        sequence.addSequenceItem(sportSelection,"Filter events by sports","GOT IT");
 
 
         sequence.start();
@@ -696,11 +700,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         list.add(menuItem3);
         SlideMenuItem menuItem4 = new SlideMenuItem(ContentFragment.SPORTS, R.drawable.ic_basketball_img);
         list.add(menuItem4);
-        SlideMenuItem menuItem5 = new SlideMenuItem(ContentFragment.GAME, R.drawable.ic_game);
-        list.add(menuItem5);
-        SlideMenuItem menuItem6 = new SlideMenuItem(ContentFragment.SPONSOR,R.drawable.gold);
+
+        SlideMenuItem menuItem6 = new SlideMenuItem(ContentFragment.SPONSOR,R.drawable.ic_sponsor);
         list.add(menuItem6);
-        SlideMenuItem menuItem7 = new SlideMenuItem(ContentFragment.SIGNOUT,R.drawable.ic_signout3);
+        SlideMenuItem menuItem7 = new SlideMenuItem(ContentFragment.SIGNOUT,R.drawable.ic_signouticon);
         list.add(menuItem7);
     }
 
@@ -755,7 +758,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main_drawer, menu);
+        //getMenuInflater().inflate(R.menu.activity_main_drawer, menu);
         return true;
     }
 
