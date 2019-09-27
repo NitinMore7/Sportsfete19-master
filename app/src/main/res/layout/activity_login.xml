@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="spider.app.sportsfete19.LoginActivity"
+    tools:context=".LoginActivity"
     android:orientation="vertical"
     android:background="@drawable/bg4"
     android:id="@+id/root">
+
+
 
     <ImageView
         android:layout_width="match_parent"
@@ -76,6 +78,25 @@
                     android:inputType="textPassword"
                     app:met_floatingLabel="highlight"
                     app:met_textColorHint="@color/white" />
+
+                <TextView
+                    android:id="@+id/t1view"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_below="@id/passwordEditText"
+                    android:visibility="invisible"/>
+
+                <ProgressBar
+                    android:id="@+id/progressBar_cyclic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="50dp"
+                    android:minWidth="50dp"
+                    android:visibility="invisible"
+                    android:layout_below="@+id/t1view"
+                    android:layout_gravity="center"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
 
                 <android.support.v7.widget.CardView
                     android:layout_width="wrap_content"

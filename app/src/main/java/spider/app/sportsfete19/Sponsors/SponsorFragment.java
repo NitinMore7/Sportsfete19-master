@@ -55,7 +55,7 @@ public class SponsorFragment extends Fragment implements ScreenShotable {
         final CarouselLayoutManager layoutManager = new CarouselLayoutManager(CarouselLayoutManager.HORIZONTAL,true);
         recyclerView = (RecyclerView)view.findViewById(R.id.my_recycler_view);
         sponsorlist= new ArrayList<>();
-        sponsorlist.add(new Sponsor("Oneplus",R.drawable.oneplus));
+        sponsorlist.add(new Sponsor("OnePlus",R.drawable.oneplus));
         sponsorlist.add(new Sponsor("Poorvika",R.drawable.poorvika));
         sponsorlist.add(new Sponsor("RedBull",R.drawable.redbull));
         sponsorlist.add(new Sponsor("Indian Overseas Bank",R.drawable.overseasbank));

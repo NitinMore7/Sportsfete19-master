@@ -376,13 +376,13 @@ public class EventInfoActivity extends AppCompatActivity{
             Team1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                requester(eventInfo.getFixture().toString(),team1Tv.getText().toString());
+                requester(eventInfo.getFixture().toString(),"dept1");
                 }
             });
             Team2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    requester(eventInfo.getFixture().toString(),team2Tv.getText().toString());
+                    requester(eventInfo.getFixture().toString(),"dept2");
                 }
             });
 
@@ -517,7 +517,7 @@ public class EventInfoActivity extends AppCompatActivity{
                 imageView.setFillColor(Color.WHITE);break;
             case "ICE":setImageResource((dept_icon[7]),imageView);
                 imageView.setFillColor(Color.parseColor("#16282a"));break;
-            case "CA":setImageResource((dept_icon[8]),imageView);
+            case "MCA":setImageResource((dept_icon[8]),imageView);
                 imageView.setFillColor(Color.WHITE);break;
             case "MECH":setImageResource((dept_icon[9]),imageView);
                 imageView.setFillColor(Color.WHITE);break;
@@ -734,14 +734,16 @@ public class EventInfoActivity extends AppCompatActivity{
                             int h1 = Team1.getHeight();
                             int h2 = Team2.getHeight();
                             int w2 = Team2.getWidth();
-                            int p1 = d1 / (d1 + d2);
-                            int p2 = 100 - p1;
+                            float p1 =( (float)d1 / (d1 + d2))*100;
+                            int p2 = 100 - Math.round(p1);
                             Team1.setWidth(2*w1 * (1 + (d1 - d2) / (d1 + d2)));
                             Team2.setWidth(2*w2 * (1 - (d1 - d2) / (d1 + d2)));
                             Team1.setHeight(h1/2);
                             Team2.setHeight(h2/2);
+                            Team1.setTextColor(Color.BLACK);
+                            Team2.setTextColor(Color.BLACK);
 
-                            Team1.setText(String.valueOf(p1) + "%");
+                            Team1.setText(String.valueOf(Math.round(p1)) + "%");
                             Team2.setText(String.valueOf(p2) + "%");
 
                             Team1.setEnabled(false);
@@ -807,14 +809,16 @@ public class EventInfoActivity extends AppCompatActivity{
                                                 int h1 = Team1.getHeight();
                                                 int h2 = Team2.getHeight();
                                                 int w2 = Team2.getWidth();
-                                                int p1 = d1 / (d1 + d2);
-                                                int p2 = 100 - p1;
+                                                float p1 =( (float)d1 / (d1 + d2))*100;
+                                                int p2 = 100 - Math.round(p1);
                                                 Team1.setWidth(2*w1 * (1 + (d1 - d2) / (d1 + d2)));
                                                 Team2.setWidth(2*w2 * (1 - (d1 - d2) / (d1 + d2)));
                                                 Team1.setHeight(h1/2);
                                                 Team2.setHeight(h2/2);
+                                                Team1.setTextColor(Color.BLACK);
+                                                Team2.setTextColor(Color.BLACK);
 
-                                                Team1.setText(String.valueOf(p1) + "%");
+                                                Team1.setText(String.valueOf(Math.round(p1)) + "%");
                                                 Team2.setText(String.valueOf(p2) + "%");
 
                                                 Team1.setEnabled(false);
@@ -846,7 +850,7 @@ public class EventInfoActivity extends AppCompatActivity{
                     }
                 }
                 else {
-                    Toast.makeText(getBaseContext(),response.toString(),Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getBaseContext(),response.toString(),Toast.LENGTH_LONG).show();
                 }
             }
 
