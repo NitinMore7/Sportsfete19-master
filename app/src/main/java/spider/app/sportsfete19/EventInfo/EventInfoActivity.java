@@ -76,6 +76,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 import spider.app.sportsfete19.API.ApiInterface;
 import spider.app.sportsfete19.API.EventDetailsPOJO;
+import spider.app.sportsfete19.API.GetVotes;
 import spider.app.sportsfete19.API.LoginInterface;
 import spider.app.sportsfete19.API.SearchByNamePOJO;
 import spider.app.sportsfete19.API.SearchUserByRollNo.SearchItem;
@@ -113,6 +114,7 @@ public class EventInfoActivity extends AppCompatActivity{
     private static final String FLAG_STATUS_COMPLETED = "completed";
     private String status;
     private LoginInterface loginInterface;
+    private GetVotes getVotes;
     private ApiInterface apiInterface;
     private String predictresponse;
 
@@ -181,13 +183,13 @@ public class EventInfoActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.arrow_left);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-         @Override
-           public void onClick(View v) {
-                      finish();
-                  }
-           });
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
-         getSupportActionBar().setTitle("Match Info");
+        getSupportActionBar().setTitle("Match Info");
 
         for(int i = 0; i < toolbar.getChildCount(); i++)
 
@@ -312,45 +314,45 @@ public class EventInfoActivity extends AppCompatActivity{
 
             if (eventInfo.getDept1().contains("WINNER OF") || eventInfo.getDept1().contains("LOSER OF")||eventInfo.getDept1().contains("RUNNER OF")) {
                 team_1_icon.setVisibility(View.GONE);
-               undecided_match1.setVisibility(View.VISIBLE);
+                undecided_match1.setVisibility(View.VISIBLE);
                 if (eventInfo.getDept1().contains("WINNER OF")) {
                     if (eventInfo.getDept1().contains("GROUP")) {
-                       undecided_match1.setText("WG-" + eventInfo.getDept1().trim().split(" ")[3]);
+                        undecided_match1.setText("WG-" + eventInfo.getDept1().trim().split(" ")[3]);
                     } else {
-                       undecided_match1.setText("W" + eventInfo.getDept1().trim().split(" ")[2]);
+                        undecided_match1.setText("W" + eventInfo.getDept1().trim().split(" ")[2]);
                     }
-                   undecided_match1.setBackgroundResource(R.drawable.circular_border_winner);
-                   undecided_match1.setTextColor(Color.parseColor("#4ab556"));
+                    undecided_match1.setBackgroundResource(R.drawable.circular_border_winner);
+                    undecided_match1.setTextColor(Color.parseColor("#4ab556"));
                 } else if (eventInfo.getDept1().contains("LOSER OF")) {
-                   undecided_match1.setBackgroundResource(R.drawable.circular_border_loser);
-                   undecided_match1.setText("L" + eventInfo.getDept1().trim().split(" ")[2]);
-                   undecided_match1.setTextColor(Color.RED);
+                    undecided_match1.setBackgroundResource(R.drawable.circular_border_loser);
+                    undecided_match1.setText("L" + eventInfo.getDept1().trim().split(" ")[2]);
+                    undecided_match1.setTextColor(Color.RED);
                 }else if(eventInfo.getDept1().contains("RUNNER OF") ){
-                   undecided_match1.setText("RG-" + eventInfo.getDept1().trim().split(" ")[3]);
-                   undecided_match1.setBackgroundResource(R.drawable.circular_border_winner);
-                   undecided_match1.setTextColor(Color.parseColor("#4ab556"));
+                    undecided_match1.setText("RG-" + eventInfo.getDept1().trim().split(" ")[3]);
+                    undecided_match1.setBackgroundResource(R.drawable.circular_border_winner);
+                    undecided_match1.setTextColor(Color.parseColor("#4ab556"));
                 }
             }
 
             if (eventInfo.getDept2().contains("WINNER OF") || eventInfo.getDept2().contains("LOSER OF")||eventInfo.getDept2().contains("RUNNER OF")) {
                 team_2_icon.setVisibility(View.GONE);
-               undecided_match2.setVisibility(View.VISIBLE);
+                undecided_match2.setVisibility(View.VISIBLE);
                 if (eventInfo.getDept2().contains("WINNER OF")) {
-                   undecided_match2.setBackgroundResource(R.drawable.circular_border_winner);
+                    undecided_match2.setBackgroundResource(R.drawable.circular_border_winner);
                     if (eventInfo.getDept2().contains("GROUP")) {
-                       undecided_match2.setText("WG-" + eventInfo.getDept2().trim().split(" ")[3]);
+                        undecided_match2.setText("WG-" + eventInfo.getDept2().trim().split(" ")[3]);
                     } else {
-                       undecided_match2.setText("W" + eventInfo.getDept2().trim().split(" ")[2]);
+                        undecided_match2.setText("W" + eventInfo.getDept2().trim().split(" ")[2]);
                     }
-                   undecided_match2.setTextColor(Color.parseColor("#4ab556"));
+                    undecided_match2.setTextColor(Color.parseColor("#4ab556"));
                 } else if (eventInfo.getDept2().contains("LOSER OF")) {
-                   undecided_match2.setBackgroundResource(R.drawable.circular_border_loser);
-                   undecided_match2.setText("L" + eventInfo.getDept2().trim().split(" ")[2]);
-                   undecided_match2.setTextColor(Color.RED);
+                    undecided_match2.setBackgroundResource(R.drawable.circular_border_loser);
+                    undecided_match2.setText("L" + eventInfo.getDept2().trim().split(" ")[2]);
+                    undecided_match2.setTextColor(Color.RED);
                 }else if(eventInfo.getDept2().contains("RUNNER OF") ){
-                   undecided_match2.setText("RG-" + eventInfo.getDept1().trim().split(" ")[3]);
-                   undecided_match2.setBackgroundResource(R.drawable.circular_border_winner);
-                   undecided_match2.setTextColor(Color.parseColor("#4ab556"));
+                    undecided_match2.setText("RG-" + eventInfo.getDept1().trim().split(" ")[3]);
+                    undecided_match2.setBackgroundResource(R.drawable.circular_border_winner);
+                    undecided_match2.setTextColor(Color.parseColor("#4ab556"));
                 }
             }
 
@@ -365,7 +367,7 @@ public class EventInfoActivity extends AppCompatActivity{
             team2Tv.setSelected(true);
             team2Tv.setSingleLine(true);
 
-                recyclermaker(eventInfo.getFixture());
+            recyclermaker(eventInfo.getFixture());
 
             round = round + " : " + eventInfo.getFixture();
 
@@ -374,13 +376,13 @@ public class EventInfoActivity extends AppCompatActivity{
             Team1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                requester(eventInfo.getFixture().toString(),team1Tv.getText().toString());
+                    requester(eventInfo.getFixture().toString(),"dept1");
                 }
             });
             Team2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    requester(eventInfo.getFixture().toString(),team2Tv.getText().toString());
+                    requester(eventInfo.getFixture().toString(),"dept2");
                 }
             });
 
@@ -558,8 +560,8 @@ public class EventInfoActivity extends AppCompatActivity{
         protected String doInBackground(String... empty) {
             try
             {
-             if(doinbg)
-                Thread.sleep(15000);
+                if(doinbg)
+                    Thread.sleep(15000);
             }
             catch (InterruptedException i){ }
             return null;
@@ -633,7 +635,7 @@ public class EventInfoActivity extends AppCompatActivity{
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Score score = dataSnapshot.getValue(Score.class);
-                Log.d("score",score.getScore_timestamp()+"");
+                //Log.d("score",score.getScore_timestamp()+"");
                 if(score!=null) {
                     try {
                         score1Tv.setText(score.getDept1_score());
@@ -677,13 +679,13 @@ public class EventInfoActivity extends AppCompatActivity{
         super.onBackPressed();
     }
 
-    public void requester(String event,String team){
-        Gson gson = new GsonBuilder()
+    public void requester(final String event, String team){
+        final Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://us-central1-sportsfete19-f7729.cloudfunctions.net/")
+                .baseUrl("https://us-central1-sportsfete-f7729.cloudfunctions.net/")
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
@@ -699,26 +701,167 @@ public class EventInfoActivity extends AppCompatActivity{
 
                     if (predictresponse.contains("true")) {
                         try{Log.v("Response",predictresponse.toString());
-                        String res=predictresponse;
-                        String[] couple = res.split(",");
-                        String A[]=new String[2];
-                        for(int i =0; i < couple.length-1 ; i++) {
-                            String[] items =couple[i].split(":");
-                            Log.v("DeptScore",items[1]+"");
-                            A[i]=items[1];
-                        }
-                        Team1.setText(A[0]);
-                        Team2.setText(A[1]);
-                        poll_layout.startLayoutAnimation();
+                            String res=predictresponse;
+                            String[] couple = res.split(",");
+                            String A[]=new String[2];
+                            for(int i =0; i < couple.length-1 ; i++) {
+                                String[] items =couple[i].split(":");
+                                Log.v("DeptScore",items[1]+"");
+                                A[i]=items[1];
+                            }
+                            Team1.setTextSize(15);
+                            Team2.setTextSize(15);
+                            if(Integer.parseInt(A[0])==0 && Integer.parseInt(A[1])==0) {
+                                int w1 = Team1.getWidth();
+                                int h1 = Team1.getHeight();
+                                int h2 = Team2.getHeight();
+                                int w2 = Team2.getWidth();
+                                Team1.setTextColor(Color.BLACK);
+                                Team2.setTextColor(Color.BLACK);
+
+                                Team1.setText(A[0]);
+                                Team2.setText(A[1]);
+                                Team1.setEnabled(false);
+                                Team1.setBackgroundColor(Color.CYAN);
+                                Team2.setEnabled(false);
+                                Team2.setBackgroundColor(Color.LTGRAY);
+                                Team1.setHeight(h1/2);
+                                Team2.setHeight(h2/2);
+                                Team1.setWidth(2*w1);
+                                Team2.setWidth(2*w2);
+                                poll_layout.startLayoutAnimation();
+                            } else {
+                                int d1 = Integer.parseInt(A[0]);
+                                int d2 = Integer.parseInt(A[1]);
+                                int w1 = Team1.getWidth();
+                                int h1 = Team1.getHeight();
+                                int h2 = Team2.getHeight();
+                                int w2 = Team2.getWidth();
+                                // Toast.makeText(getApplicationContext(),"Width" + w1,Toast.LENGTH_LONG).show();
+                                Team1.setTextColor(Color.BLACK);
+                                Team2.setTextColor(Color.BLACK);
+                                float p1 = ((float)d1 / (d1 + d2))*100;
+                                float p2 = 100 - Math.round(p1);
+                                float  w11 = 2* w1 * (1 + ((d1 - d2)/(d1 + d2)));
+                                //Toast.makeText(getApplicationContext(),"Width " + w1 + " " + Math.round(w11),Toast.LENGTH_LONG).show();
+                                Team1.setWidth(Math.round(w11));
+                                Team2.setWidth(2*w2 * (1 - ((d1 - d2) / (d1 + d2))));
+                                Team1.setHeight(h1/2);
+                                Team2.setHeight(h2/2);
+
+                                Team1.setText(String.valueOf(Math.round(p1)) + "%");
+                                Team2.setText(String.valueOf(Math.round(p2)) + "%");
+
+                                Team1.setEnabled(false);
+                                Team1.setBackgroundColor(Color.CYAN);
+                                Team2.setEnabled(false);
+                                Team2.setBackgroundColor(Color.LTGRAY);
+
+
+                                poll_layout.startLayoutAnimation();
+                            }
+
                         }catch (Exception e){e.printStackTrace();}
 
                     } else {
+
+                        Retrofit retrofit1 = new Retrofit.Builder()
+                                .baseUrl("https://us-central1-sportsfete-f7729.cloudfunctions.net/")
+                                .addConverterFactory(ScalarsConverterFactory.create())
+                                .addConverterFactory(GsonConverterFactory.create(gson))
+                                .build();
+
+                        getVotes=retrofit1.create(GetVotes.class);
+                        Call<String> mCall1 = getVotes.getvotes(event);
+                        mCall1.enqueue(new Callback<String>() {
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) {
+                                if (response.body() != null) {
+                                    predictresponse = response.body();
+
+                                    if (predictresponse.contains("true")) {
+                                        try {
+                                            Log.v("Response", predictresponse.toString());
+                                            String res = predictresponse;
+                                            String[] couple = res.split(",");
+                                            String A[] = new String[2];
+                                            for (int i = 0; i < couple.length - 1; i++) {
+                                                String[] items = couple[i].split(":");
+                                                Log.v("DeptScore", items[1] + "");
+                                                A[i] = items[1];
+                                            }
+                                            Team1.setTextSize(15);
+                                            Team2.setTextSize(15);
+                                            if (Integer.parseInt(A[0]) == 0 && Integer.parseInt(A[1]) == 0) {
+                                                int w1 = Team1.getWidth();
+                                                int h1 = Team1.getHeight();
+                                                int h2 = Team2.getHeight();
+                                                int w2 = Team2.getWidth();
+                                                //  Toast.makeText(getApplicationContext(),"Width" + w1,Toast.LENGTH_LONG).show();
+                                                Team1.setTextColor(Color.BLACK);
+                                                Team2.setTextColor(Color.BLACK);
+                                                Team1.setEnabled(false);
+                                                Team1.setBackgroundColor(Color.CYAN);
+                                                Team2.setEnabled(false);
+                                                Team2.setBackgroundColor(Color.LTGRAY);
+                                                Team1.setHeight(h1/2);
+                                                Team2.setHeight(h2/2);
+                                                Team1.setWidth(2*w1);
+                                                Team2.setWidth(2*w2);
+                                                Team1.setText(A[0]);
+                                                Team2.setText(A[1]);
+
+                                                poll_layout.startLayoutAnimation();
+                                            } else {
+                                                int d1 = Integer.parseInt(A[0]);
+                                                int d2 = Integer.parseInt(A[1]);
+                                                int w1 = Team1.getWidth();
+                                                int h1 = Team1.getHeight();
+                                                int h2 = Team2.getHeight();
+                                                int w2 = Team2.getWidth();
+                                                float p1 = ((float)d1 / (d1 + d2))*100;
+                                                float p2 = 100 - Math.round(p1);
+                                                Team1.setTextColor(Color.BLACK);
+                                                Team2.setTextColor(Color.BLACK);
+                                                Team1.setWidth(2*w1 * (1 + (d1 - d2) / (d1 + d2)));
+                                                Team2.setWidth(2*w2 * (1 - (d1 - d2) / (d1 + d2)));
+                                                Team1.setHeight(h1/2);
+                                                Team2.setHeight(h2/2);
+
+                                                Team1.setText(String.valueOf(Math.round(p1)) + "%");
+                                                Team2.setText(String.valueOf(Math.round(p2)) + "%");
+
+                                                Team1.setEnabled(false);
+                                                Team1.setBackgroundColor(Color.CYAN);
+                                                Team2.setEnabled(false);
+                                                Team2.setBackgroundColor(Color.LTGRAY);
+
+                                                poll_layout.startLayoutAnimation();
+                                            }
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                    }
+
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) {
+                                Toast.makeText(getApplicationContext(), t.getMessage()+"", Toast.LENGTH_SHORT).show();
+                                Log.d("login failure", t.getMessage());
+
+                            }
+                        });
+
                         Toast.makeText(getBaseContext(),predictresponse,Toast.LENGTH_LONG).show();
-                        poll_layout.setVisibility(View.GONE);
+
                     }
                 }
                 else {
-                    Toast.makeText(getBaseContext(),response.toString(),Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getBaseContext(),response.toString(),Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -730,56 +873,53 @@ public class EventInfoActivity extends AppCompatActivity{
         });
     }
 
-   public void recyclermaker(String n){
-       Log.v("INTRE",""+n);
-           apiInterface = ApiInterface.retrofit.create(ApiInterface.class);
-           Call<TeamSheet> call = apiInterface.getteamsheet(n);
+    public void recyclermaker(String n){
+        Log.v("INTRE",""+n);
+        apiInterface = ApiInterface.retrofit.create(ApiInterface.class);
+        Call<TeamSheet> call = apiInterface.getteamsheet(n);
 
-           call.enqueue(new Callback<TeamSheet>() {
-               @Override
-               public void onResponse(Call<TeamSheet> call, Response<TeamSheet> response) {
-                   if (!response.isSuccessful()) {
-                       Toast.makeText(getBaseContext(), "Data Not Found!", Toast.LENGTH_LONG).show();
-                       return;
-                   }
-                   try{
-                       team_sheet_rel.setVisibility(View.VISIBLE);
-                       Log.v("INTRE",response.toString());
-                       recyclerView_t1=findViewById(R.id.team_sheet_1);
-                       recyclerView_t2=findViewById(R.id.team_sheet_2);
-                        recyclerView_t1.setHasFixedSize(true);
-                       recyclerView_t2.setHasFixedSize(true);
+        call.enqueue(new Callback<TeamSheet>() {
+            @Override
+            public void onResponse(Call<TeamSheet> call, Response<TeamSheet> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(getBaseContext(), "Data Not Found!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                try{
+                    team_sheet_rel.setVisibility(View.VISIBLE);
+                    Log.v("INTRE",response.toString());
+                    recyclerView_t1=findViewById(R.id.team_sheet_1);
+                    recyclerView_t2=findViewById(R.id.team_sheet_2);
+                    recyclerView_t1.setHasFixedSize(true);
+                    recyclerView_t2.setHasFixedSize(true);
 
-                       RecyclerView.LayoutManager layoutManager1=new LinearLayoutManager(getApplicationContext());
-                       recyclerView_t1.setLayoutManager(layoutManager1);
-                       RecyclerView.LayoutManager layoutManager2=new LinearLayoutManager(getApplicationContext());
-                       recyclerView_t2.setLayoutManager(layoutManager2);
+                    RecyclerView.LayoutManager layoutManager1=new LinearLayoutManager(getApplicationContext());
+                    recyclerView_t1.setLayoutManager(layoutManager1);
+                    RecyclerView.LayoutManager layoutManager2=new LinearLayoutManager(getApplicationContext());
+                    recyclerView_t2.setLayoutManager(layoutManager2);
 
-                       teamSheetAdapter1=new TeamSheetAdapter(getBaseContext(),response.body().getTeam1Names());
-                       teamSheetAdapter2=new TeamSheetAdapter(getBaseContext(),response.body().getTeam2Names());
-                       recyclerView_t1.setAdapter(teamSheetAdapter1);
-
-
-                       recyclerView_t2.setAdapter(teamSheetAdapter2);
-
-                       }catch(Exception e){e.printStackTrace();
-                       Log.v("INTRE","ERROR");
-                   }
-
-                   //teamSheetAdapter1.notifyDataSetChanged();
-                   //teamSheetAdapter2.notifyDataSetChanged();
-
-               }
-
-               @Override
-               public void onFailure(Call<TeamSheet> call, Throwable t) {
-
-                   Log.e("TAG", t.toString());
-               }
-           });
+                    teamSheetAdapter1=new TeamSheetAdapter(getBaseContext(),response.body().getTeam1Names());
+                    teamSheetAdapter2=new TeamSheetAdapter(getBaseContext(),response.body().getTeam2Names());
+                    recyclerView_t1.setAdapter(teamSheetAdapter1);
 
 
+                    recyclerView_t2.setAdapter(teamSheetAdapter2);
 
+                }catch(Exception e){e.printStackTrace();
+                    Log.v("INTRE","ERROR");
+                }
 
-   }
+                //teamSheetAdapter1.notifyDataSetChanged();
+                //teamSheetAdapter2.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onFailure(Call<TeamSheet> call, Throwable t) {
+
+                Log.e("TAG", t.toString());
+            }
+        });
+
+    }
 }
