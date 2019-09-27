@@ -301,7 +301,7 @@ public class StatusEventsDetailRecyclerAdapter extends RecyclerView.Adapter<Even
                 imageView.setFillColor(Color.WHITE);break;
             case "ICE":setImageResource((dept_icon[7]),imageView);
                 imageView.setFillColor(Color.parseColor("#16282a"));break;
-            case "CA":setImageResource((dept_icon[8]),imageView);
+            case "MCA":setImageResource((dept_icon[8]),imageView);
                 imageView.setFillColor(Color.WHITE);break;
             case "MECH":setImageResource((dept_icon[9]),imageView);
                 imageView.setFillColor(Color.WHITE);break;

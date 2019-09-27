@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -37,6 +38,7 @@ public class LoginActivity extends Activity {
     private LoginInterface loginInterface;
     private ImageView logo,spiderlogo;
     private boolean clicked = false;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class LoginActivity extends Activity {
         logo = findViewById(R.id.logo);
         mExplosionField = ExplosionField.attach2Window(this);
         spiderlogo = findViewById(R.id.spiderlogo);
+        progressBar = findViewById(R.id.progressBar_cyclic);
         logo.setClickable(true);
         logo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,9 +119,10 @@ public class LoginActivity extends Activity {
     public void signIn(View view) {
         if(!clicked){
             clicked = true;
-            Toast.makeText(this, "Signing in", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Signing in", Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.VISIBLE);
             if(entriesGiven()){
-                Retrofit retrofit = new Retrofit.Builder().baseUrl("https://spider.nitt.edu/")
+                Retrofit retrofit = new Retrofit.Builder().baseUrl("https://org.nitt.edu/")
                         .addConverterFactory(ScalarsConverterFactory.create())
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
@@ -136,17 +140,19 @@ public class LoginActivity extends Activity {
                                 userDetails.setRollNumber(rollNo.getText().toString());
                                 Log.i("jwt", loginResponse.getToken());
                                 myDatabase.insert(userDetails);
-                                Toast.makeText(LoginActivity.this, "Logged in!", Toast.LENGTH_SHORT).show();
-
+                                //Toast.makeText(LoginActivity.this, "Logged in!", Toast.LENGTH_SHORT).show();
+                                progressBar.setVisibility(View.GONE);
                                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(i);
                                 finish();
                             } else {
+                                progressBar.setVisibility(View.GONE);
                                 Toast.makeText(getApplicationContext(), "Error logging in, Please enter correct Roll number and Password", Toast.LENGTH_SHORT).show();
                                 clicked=false;
                             }
                         }
                         else {
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(getApplicationContext(), "Error logging in, Please enter correct Roll number and Password", Toast.LENGTH_SHORT).show();
                             clicked=false;
                         }
@@ -154,6 +160,7 @@ public class LoginActivity extends Activity {
 
                     @Override
                     public void onFailure(Call<LoginResponse> call, Throwable t) {
+                        progressBar.setVisibility(View.GONE);
                         Toast.makeText(getApplicationContext(), "Error logging in, Please check your Internet Connection", Toast.LENGTH_SHORT).show();
                         Log.d("login failure", t.getMessage());
                         clicked=false;

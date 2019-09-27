@@ -290,7 +290,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.getMenu().getItem(0).setChecked(true);
         onNavigationItemSelected(navigationView.getMenu().getItem(0));
 */
-       // setDrawerTypeface();
+        // setDrawerTypeface();
 
 
         FirebaseMessaging.getInstance().subscribeToTopic("important");
@@ -844,9 +844,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             arguments.putBoolean("refresh", true);
             scheduleFragment=new ScheduleFragment();
             scheduleFragment.setArguments(arguments);
-         //   FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-          //  fragmentTransaction.replace(R.id.fragment_container,scheduleFragment);
-           // fragmentTransaction.commit();
+            //   FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+            //  fragmentTransaction.replace(R.id.fragment_container,scheduleFragment);
+            // fragmentTransaction.commit();
             //fragmentTransaction.commit();
             invalidateOptionsMenu();
             getSupportActionBar().setElevation(0);
@@ -874,7 +874,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationTabBar.setVisibility(View.GONE);
             lastViewFragment=3;
             searchFragment = new UserSearch();
-           // FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+            // FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
             //fragmentTransaction.replace(R.id.fragment_container, subscribeFragment);
             //fragmentTransaction.commit();
             //fragmentTransaction.commit();
@@ -947,8 +947,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return sponsorFragment;
     }
 
-   @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-   @Override
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
     public ScreenShotable onSwitch(Resourceble slideMenuItem, ScreenShotable screenShotable, int position) {
         switch (slideMenuItem.getName()) {
             case ContentFragment.FIRST:
