@@ -838,6 +838,7 @@ public class EventInfoActivity extends AppCompatActivity{
                             public void onFailure(Call<String> call, Throwable t) {
                                 Toast.makeText(getApplicationContext(), t.getMessage()+"", Toast.LENGTH_SHORT).show();
                                 Log.d("login failure", t.getMessage());
+                                //fail
 
                             }
                         });
