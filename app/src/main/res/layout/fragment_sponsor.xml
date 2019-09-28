@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg4"
-    tools:context="spider.app.sportsfete19.Sponsors.SponsorFragment">
+    tools:context="org.spider.sportsfete.Sponsors.SponsorFragment">
 
 
     <android.support.v7.widget.RecyclerView

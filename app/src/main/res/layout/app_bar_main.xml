@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/sfbkg"
     android:fitsSystemWindows="true"
-    tools:context="spider.app.sportsfete19.MainActivity">
+    tools:context="org.spider.sportsfete.MainActivity">
 
     <LinearLayout
         android:id="@+id/scaling_layout"

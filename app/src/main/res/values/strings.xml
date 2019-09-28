@@ -75,14 +75,18 @@
         <item>Cricket(Boys)</item>
         <item>Cricket(Girls)</item>
         <item>Football(Boys)</item>
+        <item>Football(Girls)</item>
         <item>Handball(Boys)</item>
         <item>Handball(Girls)</item>
         <item>Hockey(Boys)</item>
-        <item>Kabbadi</item>
+        <item>Hockey(Girls)</item>
+        <item>Kabbadi(Boys)</item>
+        <item>Kabbadi(Girls)</item>
         <item>Kho Kho(Boys)</item>
         <item>Kho Kho(Girls)</item>
         <item>Marathon</item>
-        <item>Powerlifting</item>
+        <item>Powerlifting(Boys)</item>
+        <item>Powerlifting(Girls)</item>
         <item>Swimming</item>
         <item>Table Tennis(Mixed)</item>
         <item>Tennis(Boys)</item>
@@ -107,21 +111,20 @@
         <item>HB</item>
         <item>HG</item>
         <item>HK</item>
+        <item>HKG</item>
         <item>KB</item>
+        <item>KBG</item>
         <item>KM</item>
         <item>KG</item>
         <item>MRH</item>
         <item>PL</item>
+        <item>PLG</item>
         <item>SWM</item>
         <item>TTB</item>
-        <item>TTG</item>
         <item>TB</item>
-        <item>TG</item>
         <item>TBG</item>
         <item>VB</item>
         <item>VG</item>
-        <item>WP</item>
-        <item>WL</item>
         <item>SPZ</item><!--changed id for carrom filtering-->
     </string-array>
 
@@ -140,21 +143,20 @@
         <item>HNDB(B)</item>
         <item>HNDB(G)</item>
         <item>HKY(B)</item>
-        <item>KBD</item>
+        <item>HKY(G)</item>
+        <item>KBD(B)</item>
+        <item>KBD(G)</item>
         <item>KHOKHO(B)</item>
         <item>KHOKHO(G)</item>
         <item>MARATHON</item>
-        <item>PWR LFTNG</item>
+        <item>PWR LFTNG(B)</item>
+        <item>PWR LFTNG(G)</item>
         <item>SWIMMING</item>
-        <item>TT(B)</item>
-        <item>TT(G)</item>
+        <item>TT</item>
         <item>TENNIS(B)</item>
-        <item>TENNIS(G)</item>
         <item>THRB</item>
         <item>VLB(B)</item>
         <item>VLB(G)</item>
-        <item>WTR POLO</item>
-        <item>WT LFTNG(B)</item>
         <item>SPQZ</item>
     </string-array>
 
@@ -708,6 +710,52 @@ will not be tolerated.</li>
 
    ]]>
     </string>
+    <string name="Hockey_Girls">
+            <![CDATA[
+  <p>
+                <b>POINTS:-
+                <br>&emsp;&emsp;&emsp;1st place - 7 points
+                <br>&emsp;&emsp;&emsp;2nd place - 5 points
+                <br>&emsp;&emsp;&emsp;3rd place - 3 points</b>
+            </p>
+
+            <p>
+                TEAM:-<br>
+            A Team consists of maximum 7 players composed of maximum 5
+            players on field and up to 2 substitutes.
+            </p>
+
+            <p>RULES:-
+             <ul class="rules">
+                <li>Match time of 8 mins during the knockout stages for each halves. Half time interval of 3 mins.</li>
+                <li>Match time of 12 mins during the semifinal and final match for each halves.</li>
+                <li>Halftime interval of 5 mins</li>
+                <li>Goals are scored once it clears the goal line and should be inside the “D” line.</li>
+                <li>Centre start at the start of play. And sideline start for foul play.</li>
+                <li>Passes and shots should be strictly either push or tap, other means will be considered as foul.</li>
+                <li>Rolling substitutions are allowed.</li>
+                <li>If a knockout match ends in a draw, match proceeds to Penalties.</li>
+                <li>The Penalty stroke will start from center line.</li>
+            </ul>
+            </p>
+            <p>Fouls and Violations:
+            <ul class="rules">
+                <li>Scoops, Flick and Hit will be considered as foul.</li>
+                <li>Dangerous play can be booked and the player can be seated out up to 2 mins.</li>
+                <li>Other violations in accordance to FIH rules will apply.</li>
+            </ul>
+            </p>
+            <p>Play:
+            <ul class="rules">
+                <li>Matches will be held at Skating Ground behind Tennis Court.</li>
+                <li>Teams are expected to report 10 minutes before the start of each match.</li>
+
+            </ul>
+
+            </p>
+
+   ]]>
+    </string>
 
     <string name="Kabaddi">
             <![CDATA[
@@ -754,7 +802,50 @@ will not be tolerated.</li>
    ]]>
     </string>
 
+    <string name="Kabaddi_Girls">
+            <![CDATA[
+  <p>
+                <p> <b>POINTS:-
+            <br>&emsp;&emsp;&emsp;1st place - 7 points
+            <br>&emsp;&emsp;&emsp;2nd place - 5 points
+            <br>&emsp;&emsp;&emsp;3rd place - 3 points </b>
+            </p>
+            <p>RULES:-
+                <ul class="rules">
+                    <li>Tournament is conducted on a knockout basis.</li>
+                    <li>Each team shall consist of maximum of 12 players and 7 Players shall take the ground at a time and the remaining players are substitutes.</li>
+                    <li>Duration of the match: Match shall be two halves of 15 minutes with 5 minutes interval.</li>
+                    <li>The teams will change court after interval.</li>
+                    <li>Semifinals and Finals will be two halves of 20 minutes with 5 minutes interval.</li>
+                    <li>TThe number of players for each team in the court at the start of second half shall remain the same as it was at the end of first half.
+                    </li>
+                    <li>NOTE: The last raid of each half of the match shall be allowed to be completed even after completion of the scheduled time as mentioned above.</li>
+                    <li>Each team shall score one point for every opponent out or put out. The side, which scores a LONA, shall score two extra points</li>
+                </ul>
+            </p>
+            <p>Time out:
+                <ul class="rules">
+                    <li>Each Team shall be allowed to take Two “Time Outs” of 30 Seconds each in each half; such time out shall be called for by the Captain or any playing member of the team with the permission of referee. The time out time shall be added to match time. </li>
+                    <li>During the time out the teams shall not leave the ground, any violation in this; a technical point shall be awarded to the opponent team
+                    </li>
+                </ul>
+            </p>
+            <p>Bonus Point:
+                <ul class="rules">
+                    <li>One point shall be awarded to the raider when he crosses the bonus line. If the raider after crossing the bonus line is caught, the opponent team is awarded one point.</li>
+                    <li>The Bonus line will be applicable when there are minimum 6 players in the court.</li>
+                </ul>
+            </p>
+            <p>Super Tackle
+                <ul class="rules">
+                    <li>Super tackle is specific scenario where a rider from the opponent team has to be tackled or caught by either 3 or less than 3 players of the defending team. In case of super tackle, the defending team will be awarded with two points.</li>
+                    <li>Referee’s decision is final.</li>
+                    <li>NOTE:  Do - or - Die raids applicable, all other standard rules apply.</li>
+                </ul>
+            </p>
 
+   ]]>
+    </string>
     <string name="KhoKho">
             <![CDATA[
 
@@ -951,6 +1042,71 @@ CHEMICAL DEPT – PD OFFICE.</p>
             <p>General Rules for Bench Press:</p>
             <p>The bar is to be lowered to the chest area until it touches the chest and then raised, failure of which will lead to disqualification.</p>
             <p>General Rules for Deadlift:</p>
+            <p>As soon as you lift the bar, set your shoulders back and ensure your kneesare locked out. Any downward movement of the bar before it reaches thefinal position will lead to disqualification.</p>
+
+   ]]>
+    </string>
+
+    <string name="PowerLifting_girls">
+            <![CDATA[
+   <p><b>POINTS:-
+                <br>&emsp;&emsp;&emsp;1st place - 5 points
+                <br>&emsp;&emsp;&emsp;2nd place - 3 points
+                <br>&emsp;&emsp;&emsp;3rd place - 1 point</b>
+                </p>
+                <p>Six body weight categories :<br>
+                    <ul class="rules">
+                        <li>under 57 kg</li>
+                        <li>Above 57</li>
+
+                    </ul>
+                </p>
+                <p>RULES:-
+                <p>The competition will be held as per the International Powerlifting
+                    Federation Rules unless otherwise modified.</p>
+                <p>The participants are required to register and give their weigh-ins 6 hours prior to the main event.</p>
+                <p>Athletes in the sport are divided in two weight classes and placing is
+                    based on the total weight lifted on the main lifts:</p>
+                <p>&emsp;&emsp;&emsp;1. Deadlift</p>
+
+                <p><b>Two bodyweight categories</b></p>
+                <table>
+                    <tr>
+                        <th>Weight Categories</th>
+                        <th>Women(in kg)</th>
+                    </tr>
+                    <tr>
+                        <th>I</th>
+                        <th>Under 57</th>
+                    </tr>
+                    <tr>
+                        <th>II</th>
+                        <th>Above 57</th>
+                    </tr>
+
+                </table>
+                <ul class="rules">
+                    <li>From each Department Only 2 participants would be allowed per
+                         category.</li>
+                    <li>For an event to take place, minimum 5 different Departments should
+                        register the event.</li>
+                    <li>During the weighing of athlete, he must mention his first lift for squat
+                      (minimum 50kg), bench-press(minimum 40kg) and deadlift(minimum
+                       70kg) to referee.</li>
+                    <li>Each competitor is allowed three attempts on each lift. The lifter’s best
+                        valid attempt on each lift counts toward his competition total.</li>
+                    <li>Once the highest value has been collected for each lift, the total weight
+                       lifted in squat, bench press and deadlift added up. The lifter with the
+                       highest combined weight lifted becomes the champion. In the case of a
+                       tie, the lifter whose body weight is less becomes the champion.</li>
+                    <li>Player must come with proper kit during competition and Gloves are not
+                         allowed.</li>
+                    <li>A player can participate in only one category.</li>
+                    <li>In case of any controversy during competition and weighing, judge’s
+                           decision will consider as final decision.</li>
+                </ul>
+            </p>
+           <p>General Rules for Deadlift:</p>
             <p>As soon as you lift the bar, set your shoulders back and ensure your kneesare locked out. Any downward movement of the bar before it reaches thefinal position will lead to disqualification.</p>
 
    ]]>

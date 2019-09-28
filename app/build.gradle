@@ -3,11 +3,11 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "spider.app.sportsfete18"
+        applicationId "org.spider.sportsfete"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 10
-        versionName "3.3"
+        versionCode 11
+        versionName "2.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         renderscriptTargetApi 25
         renderscriptSupportModeEnabled true

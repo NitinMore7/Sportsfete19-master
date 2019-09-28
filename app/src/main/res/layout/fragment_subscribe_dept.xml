@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="spider.app.sportsfete19.Following.SubscribeFragment">
+    tools:context="org.spider.sportsfete.Following.SubscribeFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/subscribe_recycler_view"
